@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Tooling caches
+.osgrep/
+.ruff_cache/
+
+# Orchestration session state (not part of the kit)
+.sisyphus/
+
+# Per-project runtime artifacts (created by /plan at install target)
+.artifacts/
+
+# Upstream reference (not part of the kit)
+antigravity-kit/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/

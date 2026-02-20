@@ -1,0 +1,231 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# dasa-init — bootstrap per-repo Dasa Sradha scaffolding
+
+SCRIPT_NAME="dasa-init"
+VERSION="v1"
+
+MASTER_WORKFLOWS_DIR="${HOME}/.gemini/scripts/dasa-sradha-kit/workflows"
+WORKFLOW_FILES=(
+  "dasa-init.md"
+  "dasa-plan.md"
+  "dasa-start-work.md"
+  "dasa-status.md"
+  "dasa-uninstall.md"
+)
+
+ROOT=""
+WALK_GIT_ROOT="false"
+DRY_RUN="false"
+FORCE="false"
+
+log_err() {
+  echo "${SCRIPT_NAME}: $*" >&2
+}
+
+usage() {
+  cat <<'EOF'
+Usage: dasa-init [--dry-run] [--force] [--root <path>] [--walk-git-root]
+
+Flags:
+  --help            Show this help and exit 0
+  --dry-run         Print intended actions; perform no writes
+  --force           Overwrite owned files if they already exist
+  --root <path>     Target root directory (default: current working directory)
+  --walk-git-root   Walk upward from PWD to nearest ancestor containing .git/; fallback to PWD
+
+Exit codes: 0=success, 1=user error, 2=system error
+EOF
+}
+
+print_action() {
+  # Stable machine-readable line; human text may follow.
+  echo "ACTION=${1} PATH=${2}"
+}
+
+ensure_dir() {
+  local path="$1"
+  if [ -d "$path" ]; then
+    print_action "skip_existing" "$path"
+    return 0
+  fi
+  if [ "$DRY_RUN" = "true" ]; then
+    print_action "mkdir" "$path"
+  else
+    mkdir -p "$path" || { log_err "failed to create directory: $path"; exit 2; }
+    print_action "mkdir" "$path"
+  fi
+}
+
+copy_file() {
+  local src="$1" dst="$2"
+  if [ ! -f "$src" ]; then
+    log_err "missing source template: $src"
+    exit 2
+  fi
+
+  local existed="false"
+  if [ -f "$dst" ]; then
+    existed="true"
+  fi
+
+  if [ "$existed" = "true" ] && [ "$FORCE" = "false" ]; then
+    print_action "skip_existing" "$dst"
+    return 0
+  fi
+
+  if [ "$DRY_RUN" = "true" ]; then
+    if [ "$existed" = "true" ]; then
+      print_action "overwrite" "$dst"
+    else
+      print_action "create_file" "$dst"
+    fi
+    return 0
+  fi
+
+  if cp "$src" "$dst" 2>/dev/null; then
+    if [ "$existed" = "true" ]; then
+      print_action "overwrite" "$dst"
+    else
+      print_action "create_file" "$dst"
+    fi
+  else
+    log_err "failed to copy to $dst"
+    exit 2
+  fi
+}
+
+create_marker() {
+  local marker_path="$1/.dasa-sradha"
+  local existed="false"
+  if [ -f "$marker_path" ]; then
+    existed="true"
+  fi
+
+  if [ "$existed" = "true" ] && [ "$FORCE" = "false" ]; then
+    print_action "skip_existing" "$marker_path"
+    return 0
+  fi
+
+  if [ "$DRY_RUN" = "true" ]; then
+    if [ "$existed" = "true" ]; then
+      print_action "overwrite" "$marker_path"
+    else
+      print_action "create_file" "$marker_path"
+    fi
+    return 0
+  fi
+
+  : >"$marker_path" || { log_err "failed to write marker"; exit 2; }
+  if [ "$existed" = "true" ]; then
+    print_action "overwrite" "$marker_path"
+  else
+    print_action "create_file" "$marker_path"
+  fi
+}
+
+walk_git_root() {
+  local start="$1" current="$1"
+  while :; do
+    if [ -d "$current/.git" ]; then
+      echo "$current"
+      return 0
+    fi
+    if [ "$current" = "/" ]; then
+      echo "$start"
+      return 0
+    fi
+    current=$(dirname "$current")
+  done
+}
+
+detect_root() {
+  if [ -n "$ROOT" ]; then
+    if [ ! -d "$ROOT" ]; then
+      log_err "--root path does not exist: $ROOT"
+      exit 1
+    fi
+    echo "$ROOT"
+    return 0
+  fi
+
+  local pwd
+  pwd=$(pwd)
+  if [ "$WALK_GIT_ROOT" = "true" ]; then
+    walk_git_root "$pwd"
+  else
+    echo "$pwd"
+  fi
+}
+
+print_gitignore_guidance() {
+  cat <<'EOF'
+ACTION=info PATH=.artifacts/
+ACTION=info PATH=.agent/workflows/
+
+INFO=.artifacts/ contains evidence and plan outputs.
+INFO=Add the above entries to .gitignore if not already ignored.
+EOF
+}
+
+parse_args() {
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --help)
+        usage
+        exit 0
+        ;;
+      --dry-run)
+        DRY_RUN="true"
+        shift
+        ;;
+      --force)
+        FORCE="true"
+        shift
+        ;;
+      --root)
+        if [ $# -lt 2 ]; then
+          log_err "--root requires a path"
+          exit 1
+        fi
+        ROOT="$2"
+        shift 2
+        ;;
+      --walk-git-root)
+        WALK_GIT_ROOT="true"
+        shift
+        ;;
+      --*)
+        log_err "unknown flag: $1"
+        exit 1
+        ;;
+      *)
+        log_err "unexpected argument: $1"
+        exit 1
+        ;;
+    esac
+  done
+}
+
+main() {
+  parse_args "$@"
+
+  local root
+  root=$(detect_root) || exit 2
+
+  local workflows_dir="$root/.agent/workflows"
+
+  ensure_dir "$workflows_dir" || exit $?
+  create_marker "$root" || exit $?
+
+  for wf in "${WORKFLOW_FILES[@]}"; do
+    local src="$MASTER_WORKFLOWS_DIR/$wf"
+    local dst="$workflows_dir/$wf"
+    copy_file "$src" "$dst"
+  done
+
+  print_gitignore_guidance
+}
+
+main "$@"
