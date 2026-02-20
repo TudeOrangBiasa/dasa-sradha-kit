@@ -38,7 +38,7 @@ Multi-agent orchestration framework for [Antigravity Desktop IDE](https://github
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/vudovn/dasa-sradha-kit.git
+   git clone https://github.com/TudeOrangBiasa/dasa-sradha-kit.git
    cd dasa-sradha-kit
    ```
 2. Run the installer:
@@ -86,7 +86,7 @@ Dasa Sradha Kit menggunakan arsitektur *workflows-only* yang terintegrasi langsu
 
 1. Clone repositori:
    ```bash
-   git clone https://github.com/vudovn/dasa-sradha-kit.git
+   git clone https://github.com/TudeOrangBiasa/dasa-sradha-kit.git
    cd dasa-sradha-kit
    ```
 2. Jalankan installer:
