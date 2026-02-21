@@ -96,6 +96,26 @@ You can ask Antigravity (or another advanced agent) to install the kit for you b
 
 ---
 
+## 🤖 Auto-Routing (Zero Learning Curve)
+You do **not** need to manually tag `@dasa-mpu` or `@dasa-nala` if you don't want to!
+Simply use `/dasa-plan` and `/dasa-start-work`. 
+
+**The Orchestrator will automatically:**
+1. Silently analyze your request.
+2. Detect the required domain (frontend, backend, security, testing).
+3. Select the best Dasa Persona for the job.
+4. Auto-route to the correct repository workspace (if using a Meta-Project).
+
+```text
+You: "/dasa-plan Add a Stripe payment gateway"
+AI: 🤖 Applying Dasa Patih (Architecture) + Dasa Mpu (Backend)...
+
+You: "/dasa-start-work"
+AI: 🤖 Routing to ./backend workspace. Executing via Dasa Mpu...
+```
+
+---
+
 ## ⚡ "Vibe Coding" the Architecture (Pro Tip)
 Instead of manually typing out your `dasa.config.toon` file, you can "vibe code" it by asking a fast, cheap model (like Gemini Flash) to interview you. 
 
