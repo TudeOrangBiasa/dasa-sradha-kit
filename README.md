@@ -45,6 +45,12 @@ npm install -g osgrep
 
 ### 2. Install the Dasa Sradha Kit Globally
 
+#### Option A: Native Antigravity Installation (Recommended)
+You can simply ask your Antigravity AI agent to install the kit for you. Just copy and paste this prompt into your IDE:
+> "Please install the Dasa Sradha Kit globally for me. Clone the repository at `https://github.com/TudeOrangBiasa/dasa-sradha-kit.git` into a temporary directory if needed, run the `npm install -g osgrep` prerequisite and the `./install.sh` script, and then initialize the kit in the current repository using the `/home/$USER/.gemini/scripts/dasa-init` script."
+
+#### Option B: Manual Installation
+
 Clone the repository and run the global installer. This will inject the 10 Personas and the global Slash Commands directly into your Antigravity `~/.gemini/` brain.
 
 ```bash
