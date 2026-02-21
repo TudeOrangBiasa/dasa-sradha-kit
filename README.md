@@ -87,6 +87,29 @@ You can ask Antigravity (or another advanced agent) to install the kit for you b
 
 ---
 
+## ⚡ "Vibe Coding" the Architecture (Pro Tip)
+Instead of manually typing out your `dasa.config.yaml` file, you can "vibe code" it by asking a fast, cheap model (like Gemini Flash) to interview you. 
+
+Run `/dasa-init` and then ask your AI:
+> "I want to build a new SaaS app. Ask me questions one-by-one to figure out my ideal frontend/backend stack, and then automatically populate the `.agent/dasa.config.yaml` file for the Dasa Sradha Personas."
+
+## 🧩 Installing Community Awesome Skills
+Dasa Sradha is built to be a zero-dependency powerhouse natively, but you can absolutely augment it with community skills from the [antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) repository!
+
+**How to Integrate:**
+1. Use `npx` or manually clone the `antigravity-awesome-skills` repository into your desired location.
+2. Add the paths of the skills you want to use directly into your `dasa.config.yaml` file under an `external_skills` array.
+3. If Dasa Mpu or Dasa Sastra see those skills defined in your config, they are permitted to read those files before writing their code.
+
+Example `dasa.config.yaml` addition:
+```yaml
+external_skills:
+  - "/path/to/antigravity-awesome-skills/skills/nextjs-expert"
+  - "/path/to/antigravity-awesome-skills/skills/prisma-schema-builder"
+```
+
+---
+
 ### 📖 Full Workflow Example (All 10 Personas)
 
 Here is an advanced end-to-end lifecycle demonstrating how **all 10 personas** seamlessly hand off tasks to one another for a massive feature like a new "Payment Gateway":

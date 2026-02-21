@@ -155,6 +155,13 @@ create_dasa_config() {
 # configuration before executing any tasks to prevent hallucinations and 
 # ensure strict compliance with your project's technology stack.
 # ============================================================================
+# ⚡ VIBE CODING PRO-TIP:
+# Don't want to write this manually? Ask a fast model (like Gemini 1.5 Flash) 
+# to interview you and generate this file! Just prompt it:
+# "I want to build a new app. Ask me questions one-by-one to figure out my 
+# ideal frontend/backend stack, and then automatically populate this 
+# .agent/dasa.config.yaml file."
+# ============================================================================
 
 project:
   name: "My Awesome Project"
@@ -166,8 +173,13 @@ stack:
   backend: "Node.js"
   database: "None"
 
-skills:
-  auto_fetch: false
+# 🧩 COMMUNITY SKILLS INTEGRATION
+# Dasa Sradha is built for Zero-Dependency native execution. However, you can 
+# augment the Personas by linking external community skills here.
+# (e.g. from https://github.com/sickn33/antigravity-awesome-skills)
+external_skills:
+  # - "/path/to/antigravity-awesome-skills/skills/nextjs-expert"
+  # - "/path/to/antigravity-awesome-skills/skills/prisma-schema-builder"
 
 context_rules:
   - "Always prioritize clean, readable code over clever one-liners."

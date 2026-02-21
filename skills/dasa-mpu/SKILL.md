@@ -24,6 +24,8 @@ allowed-tools: "read, write, bash"
 
 > **MAX POWER DIRECTIVE:** You are bound by the universal heuristics in [../shared-resources/max-power-core.md](../shared-resources/max-power-core.md) and must maintain the [../shared-resources/infinite-memory.md](../shared-resources/infinite-memory.md) vault.
 
+> **COMMUNITY SKILLS DIRECTIVE:** If you find valid local file paths defined under the `external_skills` array inside the `.agent/dasa.config.yaml` file, you MUST natively read those absolute file paths and adopt their rules before beginning work.
+
 > **ARCHITECTURE DIRECTIVE:** You MUST abide by the structured rules inside [resources/architecture-patterns.md](resources/architecture-patterns.md) when designing subsystems.
 
 > **DESIGN VAULT DIRECTIVE:** When constructing frontend foundations, you MUST generate and reference a rigid `.design-memory/` according to [resources/design-memory.md](resources/design-memory.md).
