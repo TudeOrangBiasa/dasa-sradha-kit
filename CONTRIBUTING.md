@@ -1,84 +1,106 @@
+---
+title: "Contributing to Dasa Sradha"
+description: "Guidelines and workflows for developing Personas, Slash Commands, and core infrastructure for the Dasa Sradha Kit."
+---
+
 # Contributing to the Dasa Sradha Kit
 
-Welcome! We are thrilled that you want to contribute to the **Dasa Sradha Kit**. This project is built by the community, for the community, to supercharge the Antigravity IDE with Autonomous Agentic Workflows.
+Welcome! The **Dasa Sradha Kit** transforms the Antigravity IDE into a multi-agent orchestrated environment. We welcome community enhancements, provided they adhere to our strict **Zero-Dependency** and **TOON** architectural rules.
 
-Whether you are fixing a typo, adding a new Persona skill, or building a V4 workflow, your contributions are highly valued.
-
----
-
-## 🏗️ Project Structure
-To contribute effectively, you need to understand how the Kit is organized. Everything is built using native Markdown (`.md`) and Shell (`.sh`) scripts to adhere to the **Zero-Dependency** philosophy.
-
-```text
-dasa-sradha-kit/
-│
-├── workflows/                # The Global Slash Commands (e.g., /dasa-plan)
-│   ├── dasa-init.md          # Bootstraps a new repository
-│   ├── dasa-e2e.md           # Native Browser Subagent Testing
-│   └── ...                   
-│
-├── skills/                   # The 10 Personas (Dasa Sradha)
-│   ├── dasa-mpu/             # The Architect
-│   │   ├── SKILL.md          # The core AI system prompt & heuristics
-│   │   ├── resources/        # Static guidelines (e.g., design-memory.md)
-│   │   └── scripts/          # Executable tools for the Persona
-│   ├── dasa-nala/            # The Builder
-│   └── ...                   
-│
-├── install.sh                # The global installer script
-├── HOW_IT_WORKS.md           # The core architecture guide
-└── README.md                 # Public documentation
-```
+This guide traces the actual execution paths (`install.sh`, `scripts/dasa-init`, etc.) so you understand exactly how your contributions wire into the core system.
 
 ---
 
-## 🛠️ How to Contribute
+## 🏗️ 1. Architecture Map
 
-### 1. Fork the Repository
-Click the **Fork** button at the top right of this repository to create your own copy.
+Before writing a new Persona or Workflow, you must understand how Antigravity executes these files.
 
-### 2. Clone Your Fork
-Open your terminal and run:
-```bash
-git clone https://github.com/YOUR_USERNAME/dasa-sradha-kit.git
-cd dasa-sradha-kit
+```mermaid
+graph TD
+    %% Node Styles
+    classDef default fill:#2d333b,stroke:#6d5dfc,stroke-width:2px,color:#e6edf3;
+    classDef sub fill:#161b22,stroke:#30363d,stroke-width:1px,color:#e6edf3;
+
+    subgraph User Workspace
+    U(User Input: /slash-command)
+    end
+    
+    subgraph Dasa Sradha Global (~/.gemini/)
+    W(workflows/dasa-*.md)
+    S(skills/dasa-*/SKILL.md)
+    E(scripts/dasa-init)
+    end
+
+    U -->|1. Triggers| W
+    W -->|2. Assumes Identity| S
+    E -->|3. Bootstraps| U
+
+    %% Apply Subgraph Styles
+    class User Workspace sub;
+    class Dasa Sradha Global sub;
+    
+    linkStyle default stroke:#8b949e,stroke-width:2px;
 ```
 
-### 3. Create a Feature Branch
-Always create a new branch for your changes instead of committing directly to `master`.
-```bash
-git checkout -b feature/my-awesome-new-workflow
-```
-
-### 4. Make Your Changes
-- **Adding a Workflow:** Create a new markdown file in `workflows/` and ensure you update `scripts/dasa-init` so the installer knows to copy your new file into user directories. Update `README.md` to list the new command.
-- **Updating a Persona:** Modify the `SKILL.md` file inside the `skills/` directory. If you add a script (e.g., an OSGrep wrapper), make sure it is actively referenced in the Persona's rules so they know it exists.
-
-### 5. Test Your Changes Locally
-Run `./install.sh` on your local machine to globally install your modified version into Antigravity (`~/.gemini/`). 
-Initialize an empty folder (`/dasa-init`) and test that your new workflow or Persona behaves as expected.
-
-### 6. Commit and Push
-Use Conventional Commits (e.g., `feat:`, `fix:`, `docs:`).
-```bash
-git add .
-git commit -m "feat: added a new automated deployment workflow"
-git push origin feature/my-awesome-new-workflow
-```
-
-### 7. Open a Pull Request (PR)
-Navigate back to the original `TudeOrangBiasa/dasa-sradha-kit` repository on GitHub and click **Compare & pull request**. 
-Provide a detailed description of what you changed, why you changed it, and how you tested it.
-
-*(Fun fact: If you are using the Kit, you can actually run `/dasa-pr` to have Dasa Rsi automatically review your PR before submitting it!)*
+### Component Breakdown
+| Component | Path | Function |
+| :--- | :--- | :--- |
+| **Workflows** | `workflows/` | The global Slash Commands (e.g., `/dasa-e2e`). These tell Antigravity *when* to trigger an action. |
+| **Skills** | `skills/` | The Persona rulesets (e.g., `dasa-mpu/SKILL.md`). These tell Antigravity *how* to behave. |
+| **Bootstrapper** | `scripts/dasa-init` | The local initializer. It copies workflows into the current directory. |
 
 ---
 
-## 📜 Coding Guidelines & Philosophy
+## 🔄 2. The Contribution Lifecycle
 
-When building for Dasa Sradha, please adhere to these core principles:
-1. **Zero-Dependency where possible.** We prefer relying on Antigravity's native tools (like `browser_subagent`) rather than forcing users to install massive NPM packages (like Playwright).
-2. **Token Efficiency (TOON).** If a Persona is generating data, favor compact JSON/YAML (TOON format) over conversational prose to save the user's LLM context window.
-3. **Bahasa Indonesia Outputs.** While the internal `SKILL.md` reasoning and source code should be written in English for the AI, the Personas MUST respond to the user and generate reports (like `walkthrough.md`) in Bahasa Indonesia.
+We enforce a strict Git workflow to ensure changes do not break the 10-Persona orchestration loop.
 
-Thank you for helping us build the ultimate Agentic Framework!
+```mermaid
+sequenceDiagram
+    %% Node Styles
+    autonumber
+    
+    participant C as Contributor
+    participant L as Local Antigravity
+    participant PR as GitHub PR
+    participant Rsi as Dasa Rsi (Reviewer)
+
+    C->>L: Fork & Clone Repository
+    C->>L: Modify SKILL.md or workflow
+    L->>L: Run ./install.sh to apply locally
+    L->>L: Test workflow in dummy project
+    C->>PR: Push branch & Open PR
+    PR->>Rsi: Trigger /dasa-pr Auto-Review
+    Rsi-->>PR: Post Adversarial Security Report
+    Note right of PR: Maintainers merge after Rsi approves
+```
+
+### Step-by-Step Guide
+1. **Fork & Branch**: Create a feature branch (`feature/my-new-persona`).
+2. **Develop**:
+   - If adding a Workflow: Create `workflows/dasa-my-feature.md`. You **must** also add it to the `WORKFLOW_FILES` array in `scripts/dasa-init` so it gets installed for end-users.
+   - If adding a Skill: Create `skills/dasa-my-persona/SKILL.md`. Ensure it defines allowed native tools (e.g., `browser_subagent`).
+3. **Local Testing**:
+   - Run `./install.sh` from your cloned root. This forcefully injects your code into `~/.gemini/skills/` and `~/.gemini/workflows/`.
+   - Open a test folder, run `/dasa-init`, and ensure your changes propagate correctly.
+4. **Pull Request**: Submit to the `master` branch. Dasa Rsi will automatically review it if a maintainer runs `/dasa-pr`.
+
+---
+
+## ⚖️ 3. Core Development Principles (NON-NEGOTIABLE)
+
+1. **Zero-Dependency Native Execution**
+   - **DO NOT** require `npm install -g something` unless explicitly approved (e.g., `osgrep`).
+   - Use Antigravity's built-in APIs (`browser_subagent`, `run_command`, `grep_search`).
+   - *(Citation: See `/dasa-e2e` for how we use native browsers instead of Playwright)*.
+
+2. **TOON (Token Optimized Object Notation)**
+   - When generating internal state data, output raw JSON/YAML blocks.
+   - **DO NOT** use conversational filler ("Here is your data:"). It wastes expensive LLM context tokens.
+   - *(Citation: See `dasa.config.toon` generation in `/dasa-init`)*.
+
+3. **Bahasa Indonesia Final Output**
+   - The internal reasoning in your `SKILL.md` must be written in English for maximum LLM comprehension.
+   - The final output presented to the user (e.g., updates in `.artifacts/walkthrough.md`) MUST instruct the Persona to reply in Bahasa Indonesia.
+
+Thank you for contributing to the native Antigravity ecosystem!

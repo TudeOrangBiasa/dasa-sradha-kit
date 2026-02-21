@@ -1,102 +1,105 @@
-# Dasa Sradha Kit
+# Dasa Sradha Kit for Antigravity
 
-Multi-agent orchestration framework Uses a workflows-only architecture for task planning, strict continuation, and Indonesian persona-based skill routing.
+The **Dasa Sradha Kit** is a native, Zero-Dependency Agentic Framework designed exclusively for the **Antigravity IDE**. It splits complex software workflows into 10 distinct AI Personas, allowing you to orchestrate massive full-stack builds without exploding your LLM context window.
 
----
+## Key Features
 
-## 📦 What Dasa Installs
-
-Dasa Sradha supports two initialization models: Global Installation and Local Repository Bootstrapping.
-
-<details>
-<summary><strong>Global Installation (<code>~/.gemini/</code>)</strong></summary>
-
-Running `./install.sh` from this repository installs these tools globally to your environment:
-- `~/.gemini/scripts/dasa-init`: Bootstrap script for initializing new repositories.
-- `~/.gemini/scripts/dasa-uninstall`: Global kit uninstaller script.
-- `~/.gemini/antigravity/workflows/dasa-sradha-kit/`: Master workflow templates that power the `/dasa-` slash commands natively in the IDE.
-- `~/.gemini/antigravity/skills/`: The 10 distinct persona skill definitions, mapped as `dasa-*/SKILL.md` folders.
-</details>
-
-<details>
-<summary><strong>Local Project Bootstrapping (<code>/dasa-init</code>)</strong></summary>
-
-Running the `/dasa-init` slash command inside a repository creates the local framework state:
-- `.dasa-sradha`: Activation guard marker file to prevent accidental runs elsewhere.
-- `.agent/workflows/`: Local copies of the workflow templates.
-- `.artifacts/`: The designated directory for state management, task evidence files, and output logs.
-- `.artifacts/plans/`: Generates structured markdown execution plans.
-- `boulder.json`: Sets the default system prompts and operational configurations for the IDE.
-</details>
+- **Persona-Based Orchestration**: 10 distinct AI agents (The Scout, The Architect, The Builder, etc.) that natively hand off tasks to one another.
+- **Zero-Dependency Native Execution**: Uses Antigravity's built-in `browser_subagent` for E2E testing and `run_command` for execution. No Playwright or massive NPM packages required.
+- **Token Optimized Object Notation (TOON)**: Strips conversational filler from configurations to maximize context window usage.
+- **Semantic Code Sight**: Deep, local vector embedding searches via `osgrep` to stop hallucinated grep requests.
+- **Infinite Compaction Memory**: Condenses entire conversations into the `.agent/memory/architecture-state.md` vault.
 
 ---
 
-## ⚙️ How Dasa Works
+## Tech Stack
 
-Dasa Sradha uses a **Persona-based Orchestration** model natively integrated with Antigravity IDE. It splits complex software workflows into 10 distinct personas (e.g., Architect, Implementer, Debugger, Reviewer) and defines clear, phase-gated slash commands governed by a strict `dasa.config.toon` file.
-
-👉 **[Read the Full Documentation & View the Flowchart in HOW_IT_WORKS.md](HOW_IT_WORKS.md)**
-
-<details open>
-<summary><strong>🧠 The "Max Power" Architecture (V3)</strong></summary>
-
-Dasa Sradha is built on advanced heuristic principles to prevent AI hallucination and "slop":
-
-*   **Adaptive Thinking:** Personas scale their effort. Simple tasks are executed instantly; complex tasks require deep planning and adversarial self-review.
-*   **Design Memory:** Dasa Nala cannot hallucinate UI. It strictly reads a `.design-memory/` dictionary established by Dasa Mpu to ensure premium layout consistency.
-*   **Infinite Memory:** Cross-session architecture decisions are permanently stored in an `.agent/memory/` version-controlled vault, preventing LLM amnesia.
-*   **Context Compaction:** Long-running sessions are automatically condensed into dense summaries by native scripts to prevent token overflow.
-*   **Native Tools:** Personas possess direct, executable scripts (e.g., semantic web searchers, static vulnerability scanners, and workspace mappers).
-
-</details>
+- **Platform**: Antigravity IDE
+- **Core Engine**: Built-in LLM Prompt Engineering (`SKILL.md` format)
+- **Workflows**: Global Action Definitions (`workflows/*.md`)
+- **Semantic Engine**: `osgrep` (Vector embeddings over local code)
+- **Execution Environment**: Native Bash (`.sh`)
 
 ---
 
-## 🔄 Available Workflows
+## Prerequisites
 
-| Slash Command | File | Description |
-|---------------|------|-------------|
-| `/dasa-init` | `dasa-init.md` | Bootstraps the current repository with `.artifacts/`, `.agent/`, and `dasa.config.toon`. |
-| `/dasa-plan` | `dasa-plan.md` | Generates a structured `.artifacts/implementation_plan.md` and pauses for user review. |
-| `/dasa-start-work` | `dasa-start-work.md` | **The Auto-Routing Orchestrator**: Automatically reads the plan, breaks it into tasks, assumes the correct Persona (Nala, Mpu, Indra, etc.) based on the domain, reads their native rules, and executes the code autonomously. |
-| `/dasa-status` | `dasa-status.md` | Displays the current progress and active task state from the plan. |
-| `/dasa-assimilate` | `dasa-assimilate.md` | **The Assimilation Protocol**: Run this on forked or undocumented codebases. It automatically detects your tech stack (including DDEV containers vs native NPM) and rewrites `dasa.config.toon` to perfectly match the environment. |
-| `/dasa-docs` | `dasa-docs.md` | **The API Documentator**: Collaboratively invokes Dwipa (Scout), Mpu (Architect), and Sastra (Writer) to scan your defined backend workspace and autonomously generate Postman Collections or OpenAPI/Swagger `.json/.yaml` specs. |
-| `/dasa-e2e` | `dasa-e2e.md` | **Native Browser Automation**: Commands Dasa Indra to natively hook into Antigravity's `browser_subagent`. He will autonomously click through your UI, verify text, and record `.webp` videos of the test directly to `.artifacts/`. |
-| `/dasa-seed` | `dasa-seed.md` | **Database Fixture Generation**: Dwipa reads your database schema, Mpu generates a massive payload of highly realistic JSON data, and Nala injects it natively into your local development server. |
-| `/dasa-pr` | `dasa-pr.md` | **GitHub Auto-Reviewer**: Integrates natively with `gh pr diff`. Dasa Rsi scans your active branch for security vulnerabilities and architectural flaws, then automatically posts a markdown code review to GitHub. |
-| `/dasa-fix` | `dasa-fix.md` | **The Auto-Heal Orchestrator**: Accepts compiler or terminal errors (`/dasa-fix "error text"`) and autonomously dispatches Dasa Rsi to surgically patch the code without breaking the main plan. |
-| `/dasa-sync` | `dasa-sync.md` | **Infinite Memory Session Compaction**: Aggressively compresses today's `.artifacts/` and chats into a dense `.agent/memory/architecture-state.md` vault, allowing you to close your IDE and safely restore 100% project context in a fresh chat tomorrow. |
-| `/dasa-commit` | `dasa-commit.md` | **Atomic Checkpoints & QA**: Triggers Dasa Dwipa & Dharma to pre-scan the `git diff` for AI slop and leaked secrets before autonomously executing a Conventional Git Commit. |
-| `/dasa-uninstall` | `dasa-uninstall.md` | Removes all local marker files, configuration, and workflows from the repository. |
+Before installing the Dasa Sradha Kit, ensure your environment meets these requirements:
+
+- **Antigravity IDE**: You must be running the Antigravity editor.
+- **Node.js**: Version 18 or higher (required by `osgrep`).
+- **NPM/Bun/Yarn**: A JavaScript package manager.
+- **Git**: Required for version control and the Dasa Rsi Checkpoint / PR workflows.
 
 ---
 
-## 🚀 How to Use It
+## Getting Started
 
-### Option A: Manual Installation
+### 1. Install Prerequisites
 
-1. **Install Globally:**
-   ```bash
-   git clone https://github.com/TudeOrangBiasa/dasa-sradha-kit.git
-   cd dasa-sradha-kit
-   npm install -g osgrep # Pre-requisite for the Semantic Engine
-   ./install.sh
-   ```
-2. **Initialize Your Project:** Open your target project in Antigravity IDE and run:
-   ```text
-   /dasa-init
-   ```
+First, install the Semantic Engine (`osgrep`) so Dasa Dwipa (The Scout) has semantic vision:
 
-### Option B: AI Agent Installation (Recommended)
+```bash
+npm install -g osgrep
+```
 
-You can ask Antigravity (or another advanced agent) to install the kit for you by copying and pasting this prompt:
+### 2. Install the Dasa Sradha Kit Globally
 
-> "Please install the Dasa Sradha Kit globally for me. Clone the repository at `https://github.com/TudeOrangBiasa/dasa-sradha-kit.git` into a temporary directory if needed, run the `npm install -g osgrep` prerequisite and the `./install.sh` script, and then initialize the kit in the current repository using the `/home/$USER/.gemini/scripts/dasa-init` script."
+Clone the repository and run the global installer. This will inject the 10 Personas and the global Slash Commands directly into your Antigravity `~/.gemini/` brain.
+
+```bash
+# Clone the repo locally
+git clone https://github.com/TudeOrangBiasa/dasa-sradha-kit.git
+cd dasa-sradha-kit
+
+# Run the installer
+chmod +x install.sh
+./install.sh
+```
+
+### 3. Initialize Your Project Workspace
+
+Navigate to the project directory you actually want to work on (e.g., your SaaS app, your game, your website) and orchestrate the kit:
+
+```bash
+cd /path/to/your/actual/project
+/home/$USER/.gemini/scripts/dasa-init
+```
+
+This generates your `dasa.config.toon` file and builds the `.artifacts/` folder.
 
 ---
 
-## 🤖 Auto-Routing (Zero Learning Curve)
+## Architecture Overview
+
+### Directory Structure (Inside Antigravity `~/.gemini/`)
+
+```
+├── workflows/                # Global Slash Commands
+│   ├── dasa-init.md          # Project initialization
+│   ├── dasa-e2e.md           # Automated Browser Testing
+│   └── dasa-pr.md            # Auto-PR review
+├── skills/                   # The 10 Personas
+│   ├── dasa-dwipa/           # The Scout (Semantic Search / Context Gathering)
+│   ├── dasa-patih/           # The Mastermind (Task Planning)
+│   ├── dasa-mpu/             # The Architect (Backend / Data Modeling)
+│   ├── dasa-nala/            # The Builder (Frontend / UI / Styling)
+│   ├── dasa-rsi/             # The Analyst (Security / PR Reviews)
+│   ├── dasa-indra/           # The QA Investigator (E2E Testing / Automation)
+│   ├── dasa-dharma/          # The Maintainer (CI/CD / Package Management)
+│   ├── dasa-widya/           # The Researcher (Docs / Exploration)
+│   ├── dasa-sastra/          # The Writer (API Specs / Copywriting)
+│   └── dasa-brahma/          # The Vanguard (Blue-Sky Prototyping)
+```
+
+### The Orchestration Lifecycle
+
+1. **Initialization (`/dasa-init`)**: The user defines their tech-stack and repositories in `dasa.config.toon`.
+2. **Analysis (`/dasa-plan`)**: The User requests a feature. Dasa Patih drafts a comprehensive execution plan in `.artifacts/task.md`.
+3. **Execution (`/dasa-start-work`)**: The Orchestrator reads `task.md`. It automatically selects the correct Persona (Auto-Routing), routes them to the correct workspace (e.g., frontend vs backend), and executes the code block.
+4. **Validation (`/dasa-status`)**: The AI updates `task.md` until the feature is complete.
+
+### 🤖 Auto-Routing (Zero Learning Curve)
 You do **not** need to manually tag `@dasa-mpu` or `@dasa-nala` if you don't want to!
 Simply use `/dasa-plan` and `/dasa-start-work`. 
 
@@ -104,89 +107,58 @@ Simply use `/dasa-plan` and `/dasa-start-work`.
 1. Silently analyze your request.
 2. Detect the required domain (frontend, backend, security, testing).
 3. Select the best Dasa Persona for the job.
-4. Auto-route to the correct repository workspace (if using a Meta-Project).
-
-```text
-You: "/dasa-plan Add a Stripe payment gateway"
-AI: 🤖 Applying Dasa Patih (Architecture) + Dasa Mpu (Backend)...
-
-You: "/dasa-start-work"
-AI: 🤖 Routing to ./backend workspace. Executing via Dasa Mpu...
-```
+4. Auto-route to the correct repository workspace.
 
 ---
 
-## ⚡ "Vibe Coding" the Architecture (Pro Tip)
-Instead of manually typing out your `dasa.config.toon` file, you can "vibe code" it by asking a fast, cheap model (like Gemini Flash) to interview you. 
+## Available Commands
 
-Run `/dasa-init` and then ask your AI:
-> "I want to build a new SaaS app. Ask me questions one-by-one to figure out my ideal frontend/backend stack, and then automatically populate the `.agent/dasa.config.toon` file for the Dasa Sradha Personas."
+Once installed, use these Global Slash Commands anywhere in Antigravity:
 
-## 🧩 Installing Community Awesome Skills
-Dasa Sradha is built to be a zero-dependency powerhouse natively, but you can absolutely augment it with community skills from the [antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) repository!
+| Command | Description |
+| :--- | :--- |
+| `/dasa-plan` | **The Architect**: Reads your config and breaks down massive user requests into strict phase-gated tasks natively saved to `.artifacts/task.md`. |
+| `/dasa-start-work` | **The Orchestrator**: The engine. It autonomously loops through `task.md`, selects the correct Persona, and executes the native IDE tools to write your code. |
+| `/dasa-status` | Displays the current progress and active task state from the plan. |
+| `/dasa-docs` | **The API Documentator**: Collaboratively invokes Dwipa, Mpu, and Sastra to generate Postman Collections or OpenAPI/Swagger specs. |
+| `/dasa-e2e` | **Native Browser Automation**: Commands Dasa Indra to natively hook into Antigravity's `browser_subagent` and record `.webp` videos of the test. |
+| `/dasa-seed` | **Database Fixtures**: Dwipa reads schemas, Mpu generates a massive payload of highly realistic JSON data, and Nala injects it. |
+| `/dasa-pr` | **GitHub Auto-Reviewer**: Integrates natively with `gh pr diff`. Dasa Rsi executes adversarial security heuristics on your PR. |
+| `/dasa-sync` | **Infinite Memory Session Compaction**: Aggressively compresses today's work into a dense `architecture-state.md` vault for tomorrow. |
 
-**How to Integrate:**
-1. Use `npx` or manually clone the `antigravity-awesome-skills` repository into your desired location.
-2. Add the paths of the skills you want to use directly into your `dasa.config.toon` file under an `external_skills` array.
-3. If Dasa Mpu or Dasa Sastra see those skills defined in your config, they are permitted to read those files before writing their code.
+---
 
-Example `dasa.config.toon` addition:
+## Testing & Quality Assurance
+
+Dasa Sradha natively implements End-to-End browser testing without third-party tools like Puppeteer or Playwright. 
+
+To run E2E visual tests:
+1. Spin up your local development server (e.g., `npm run dev` running on `localhost:3000`).
+2. Run `/dasa-e2e`.
+3. Tell Dasa Indra what to do: *"Go to localhost:3000, wait for the red div to appear, type 'admin' in the username box, and click Submit."*
+
+The native `browser_subagent` will autonomously execute these instructions, verify the DOM, and save a full `.webp` recording directly to your `.artifacts/` folder.
+
+---
+
+## Extensibility
+
+### 🧩 Integrating Community "Awesome Skills"
+Dasa Sradha maps external community skills directly into the orchestrator. If you want to use the [antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) package:
+
+1. Clone `antigravity-awesome-skills` onto your local machine.
+2. Add the absolute paths to your `dasa.config.toon`:
 ```yaml
 external_skills:
   - "/path/to/antigravity-awesome-skills/skills/nextjs-expert"
   - "/path/to/antigravity-awesome-skills/skills/prisma-schema-builder"
 ```
+3. When `/dasa-start-work` triggers, the assigned Persona will organically read and obey these external guidelines before executing their task.
 
 ---
 
-## 🎨 Free Figma Alternative (Batch Mockups)
-If you have a massive Figma file (e.g., a 30-page dashboard) but don't want to pay for external Figma MCP tools, Dasa Sradha has a **zero-cost native alternative**.
+## Deep Dives
 
-**How to use Visual Mockups:**
-1. Export your Figma screens as high-resolution `.png` or `.jpg` files.
-2. Drop them all into the `.design-memory/mockups/` folder inside your project.
-3. Automatically, **Dasa Nala (The Builder)** will use Antigravity's native Vision capabilities to "look" at those images before writing any UI code. It will perfectly replicate the layout, padding, and visual hierarchy directly from your images.
-
----
-
-### 📖 Full Workflow Example (All 10 Personas)
-
-Here is an advanced end-to-end lifecycle demonstrating how **all 10 personas** seamlessly hand off tasks to one another for a massive feature like a new "Payment Gateway":
-
-<details>
-<summary><strong>1. Investigation & Discovery (Indra)</strong></summary>
-
-Before anything begins, ask the Investigator to map the current codebase and find where the payment system should integrate:
-```text
-@dasa-indra review the codebase and find all touchpoints for user billing.
-```
-</details>
-
-<details>
-With research complete, ask the Architect to draft the technical plan:
-```text
-/dasa-plan "Create a new Payment Gateway module using Stripe, considering Indra and Widya's findings."
-```
-*Once the plan is generated, the workflow halts.*
-</details>
-
-
-
-
-## 🎭 The 10 Personas (Dasa Sradha)
-
-The framework is divided into 10 domains of expertise. Mentioning them with `@dasa-<name>` triggers their unique skill logic:
-
-1. **Patih**: High-level system architect.
-2. **Mpu**: Core feature implementer and coder.
-3. **Nala**: Orchestrator and delegation manager.
-4. **Rsi**: Deep debugger and root-cause analyst.
-5. **Sastra**: Librarian, documentation, and research.
-6. **Widya**: Risk analyst and edge-case specialist.
-7. **Indra**: Investigator and system explorer.
-8. **Dharma**: Guardian of ethics, security, and standards.
-9. **Kala**: Time, dependency, and priority manager.
-10. **Dwipa**: Code reviewer and QA validator.
-
----
-*License: MIT*
+*   Read [HOW_IT_WORKS.md](HOW_IT_WORKS.md) for the complete Architectural Manual.
+*   Read [CONTRIBUTING.md](CONTRIBUTING.md) to learn how to forge new Personas and Workflows.
+*   See the [CHANGELOG.md](CHANGELOG.md) for the latest updates.
