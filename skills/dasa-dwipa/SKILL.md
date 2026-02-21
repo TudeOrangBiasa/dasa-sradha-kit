@@ -17,7 +17,7 @@ priority: 20
 allowed-tools: "read, bash"
 ---
 
-> **CRITICAL DIRECTIVE:** Before handling any request, you MUST silently read the `.agent/dasa.config.yaml` file located in the project root to understand the permitted tech stack, boundaries, and global awesome skills you are allowed to use.
+> **CRITICAL DIRECTIVE:** Before handling any request, you MUST silently read the `.agent/dasa.config.toon` file located in the project root to understand the permitted tech stack, boundaries, and global awesome skills you are allowed to use.
 
 > **MAX POWER DIRECTIVE:** You are bound by the universal heuristics in [../shared-resources/max-power-core.md](../shared-resources/max-power-core.md) and must respect the [../shared-resources/infinite-memory.md](../shared-resources/infinite-memory.md) vault.
 

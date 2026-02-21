@@ -19,7 +19,7 @@ fi
   Assume the identity of **Dasa Dharma** (The Security Guardian).
   Silently scan the diff specifically looking for:
   - Accidentally committed `.env` files or API secrets.
-  - "AI Slop": UI components with random undocumented hex colors, inline styles, or poorly typed variables that violate the project's `dasa.config.yaml`.
+  - "AI Slop": UI components with random undocumented hex colors, inline styles, or poorly typed variables that violate the project's `dasa.config.toon`.
   
   If you find severe violations, **STOP THE WORKFLOW** and inform the user of the error. Force them to run `/dasa-fix` before proceeding.
 

@@ -22,14 +22,14 @@ fi
 
 - **Step 3: Configuration Injection**
   Assume the identity of **Dasa Nala** (The Builder).
-  Use the `write_to_file` tool to overwrite the `.agent/dasa.config.yaml` file (or create it if it doesn't exist). 
+  Use the `write_to_file` tool to overwrite the `.agent/dasa.config.toon` file (or create it if it doesn't exist). 
   Update the `project`, `stack`, and `context_rules` sections to perfectly match what Dwipa discovered.
   Ensure the DDEV vs Native execution rule from Step 2 is explicitly written into the `context_rules` array.
 
 - **Step 4: Memory Initialization**
   Assume the identity of **Dasa Sastra** (The Writer).
   Generate a high-level summary of the repository's architecture, key folders, and state.
-  Save this summary strictly to `.agent/memory/architecture-state.md`.
+  Save this summary strictly to `.agent/memory/architecture-state.toon`.
 
 - **Step 5: Initialization Complete**
-  Stop and notify the user: "Assimilation complete. I have automatically configured `.agent/dasa.config.yaml` to match this project's native stack, and established the `.agent/memory/architecture-state.md` vault. You may now run `/dasa-start-work` or `/dasa-plan`."
+  Stop and notify the user: "Assimilation complete. I have automatically configured `.agent/dasa.config.toon` to match this project's native stack, and established the `.agent/memory/architecture-state.toon` vault. You may now run `/dasa-start-work` or `/dasa-plan`."

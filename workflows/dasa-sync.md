@@ -19,11 +19,12 @@ fi
   Read `.artifacts/implementation_plan.md` and `.artifacts/task.md`.
   Identify what was accomplished in this current continuous session.
 
-- **Step 3: Vault Compaction**
-  Use the `write_to_file` tool to create or update `.agent/memory/architecture-state.md`.
-  You must aggressively compress the current state into this file. 
-  - **Include:** High-level architectural decisions made today, newly added stack dependencies, and exactly what `[ ]` task needs to be picked up next.
+- **Step 3: Vault Compaction (TOON Architecture)**
+  Use the `write_to_file` tool to create or update `.agent/memory/architecture-state.toon`.
+  You must aggressively compress the current state into this file using **Token Optimized Object Notation (TOON)** to save LLM context window space.
+  - **CRITICAL TOON RULES:** Do not use conversational markdown, `# headers`, paragraphs, or fluff. Represent the entire daily memory as a dense JSON-like structure.
+  - **Include Keys:** `decisions` (array of core architecture choices), `stack_changes` (new deps), and `next_task` (the exact ID to resume tomorrow).
   - **Exclude:** Raw code blocks, minor bug histories, or conversational fluff.
 
 - **Step 4: Inform User**
-  **STOP**. Tell the user: "Memory Compaction Complete. The `.agent/memory/architecture-state.md` vault has been updated. You may now safely close this chat session. Tomorrow, simply type `/dasa-start-work` in a new window and I will natively read the vault to instantly regain my memory."
+  **STOP**. Tell the user: "Memory Compaction Complete. The `.agent/memory/architecture-state.toon` vault has been updated. You may now safely close this chat session. Tomorrow, simply type `/dasa-start-work` in a new window and I will natively read the vault to instantly regain my memory."

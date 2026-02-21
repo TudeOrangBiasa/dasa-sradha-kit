@@ -130,9 +130,11 @@ create_marker() {
 }
 
 create_dasa_config() {
-  local agent_dir="$1/.agent"
-  local marker_path="$agent_dir/dasa.config.yaml"
+  local project_root="$1"
+  local marker_dir="$project_root/.agent"
+  local marker_path="$marker_dir/dasa.config.toon"
   local existed="false"
+
   if [ -f "$marker_path" ]; then
     existed="true"
   fi
@@ -152,43 +154,18 @@ create_dasa_config() {
   fi
 
   cat <<'EOF' > "$marker_path"
-# ============================================================================
-# Dasa Sradha Master Project Configuration
-# ============================================================================
-# This file is mandatory for Dasa Sradha Personas. They will read this 
-# configuration before executing any tasks to prevent hallucinations and 
-# ensure strict compliance with your project's technology stack.
-# ============================================================================
-# ⚡ VIBE CODING PRO-TIP:
-# Don't want to write this manually? Ask a fast model (like Gemini 1.5 Flash) 
-# to interview you and generate this file! Just prompt it:
-# "I want to build a new app. Ask me questions one-by-one to figure out my 
-# ideal frontend/backend stack, and then automatically populate this 
-# .agent/dasa.config.yaml file."
-# ============================================================================
-
-project:
-  name: "My Awesome Project"
-  domain: "Web Application"
-  strict_mode: true
-
-stack:
-  frontend: "HTML, Vanilla CSS, JS"
-  backend: "Node.js"
-  database: "None"
-
-# 🧩 COMMUNITY SKILLS INTEGRATION
-# Dasa Sradha is built for Zero-Dependency native execution. However, you can 
-# augment the Personas by linking external community skills here.
-# (e.g. from https://github.com/sickn33/antigravity-awesome-skills)
-external_skills:
-  # - "/path/to/antigravity-awesome-skills/skills/nextjs-expert"
-  # - "/path/to/antigravity-awesome-skills/skills/prisma-schema-builder"
-
-context_rules:
-  - "Always prioritize clean, readable code over clever one-liners."
-  - "Prevent AI slop: enforce strict typing, component-based UI, and layered BE architecture."
-  - "Do not hallucinate third-party libraries not defined in the stack."
+{
+  "project": { "name": "App", "domain": "Web", "strict": true },
+  "stack": { "fe": ["HTML", "CSS", "JS"], "be": ["Node"], "db": [] },
+  "skills": [],
+  "rules": [
+    "clean_code>clever",
+    "strict_types=true",
+    "no_hallucinations",
+    "ui=component_based",
+    "be=layered"
+  ]
+}
 EOF
   if [ "$existed" = "true" ]; then
     print_action "overwrite" "$marker_path"

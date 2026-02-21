@@ -19,12 +19,13 @@ fi
   Read the user's prompt provided in `$ARGUMENTS`. If `$ARGUMENTS` is empty, ask the user what they want to plan.
   
   Create a new detailed plan using explicitly the `write_to_file` tool with the `IsArtifact` flag set to `true`.
-  The file MUST be named `.artifacts/implementation_plan.md`.
+  The file MUST be named `.artifacts/implementation_plan.toon` (or `.md` containing purely TOON syntax if extension is rejected).
   
-  Use the standard Antigravity plan format:
-  1. **Background/Context:** Why are we doing this?
-  2. **Scope/Steps:** What exactly needs to be done?
-  3. **Verification Plan:** A checklist of what defines done.
+  **CRITICAL TOON FORMATTING RULE (Token Optimization):**
+  Do NOT use conversational markdown, `# headers`, or paragraphs.
+  Compress the entire plan into minimal Key-Value structures and arrays.
+  Valid keys: `goal`, `tasks` (array of objects with `id`, `desc`, `domain_persona`), `verification_tests`.
+  Every word must carry meaning. No fluff.
 
 - **Step 3: Auto-Routing Handover**
   **STOP IMMEDIATELY POST-PLANNING**. Present the plan to the user for review. 

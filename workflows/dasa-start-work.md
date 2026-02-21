@@ -15,10 +15,10 @@ fi
   Verify that `.dasa-sradha` exists in the repository root.
   If it's missing, **STOP IMMEDIATELY** and tell the user: "This repository is not initialized. Run `/dasa-init` first."
 - **Step 2: Auto-Routing Session**
-  Review the active planning document at `.artifacts/implementation_plan.md`. 
-  If `.artifacts/task.md` does not exist, use the `write_to_file` tool (with `IsArtifact: true`) to generate it, breaking the plan down into granular `[ ]` subtasks.
+  Review the active planning document at `.artifacts/implementation_plan.toon` (or `.md`). 
+  If `.artifacts/task.toon` does not exist, use the `write_to_file` tool to generate it, breaking the plan down into granular TOON syntax subtasks. Do not use conversational markdown or checkboxes.
   
-  Read the next uncompleted `[ ]` task in `task.md`. Based on the task's domain, you MUST automatically assume the identity of the most relevant Persona:
+  Read the next uncompleted task in `task.toon`. Based on the task's domain, you MUST automatically assume the identity of the most relevant Persona:
   - **Frontend / UI / Styling:** Assume **Dasa Nala**.
   - **Architecture / Backend / Complex Logic:** Assume **Dasa Mpu**.
   - **Testing / QA / CI:** Assume **Dasa Indra**.
