@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.1.0] - 2026-02-21
+## [2.0.0] - 2026-02-21
+
+### Added
+- **The Semantic Engine (OSGrep Integration)**: Dasa Sradha now requires `npm install -g osgrep`. This grants Dasa Dwipa (The Scout) native embedding-based semantic sight to discover abstract concepts across massive repositories without exploding LLM context limits.
+- **Native Semantic Wrapper**: Introduced `skills/dasa-dwipa/scripts/semantic-scan.sh` to seamlessly bridge Dwipa's `osgrep search` requests into his cognitive loop.
 
 ### Added
 - **V3 Max Power Architecture**: Introduced Minimax-inspired heuristics for Adaptive Thinking, Adversarial Self-Review, and Intellectual Honesty.

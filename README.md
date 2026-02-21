@@ -77,6 +77,7 @@ Dasa Sradha is built on advanced heuristic principles to prevent AI hallucinatio
    ```bash
    git clone https://github.com/TudeOrangBiasa/dasa-sradha-kit.git
    cd dasa-sradha-kit
+   npm install -g osgrep # Pre-requisite for the Semantic Engine
    ./install.sh
    ```
 2. **Initialize Your Project:** Open your target project in Antigravity IDE and run:
@@ -88,7 +89,7 @@ Dasa Sradha is built on advanced heuristic principles to prevent AI hallucinatio
 
 You can ask Antigravity (or another advanced agent) to install the kit for you by copying and pasting this prompt:
 
-> "Please install the Dasa Sradha Kit globally for me. Clone the repository at `https://github.com/TudeOrangBiasa/dasa-sradha-kit.git` into a temporary directory if needed, run the `./install.sh` script, and then initialize it in the current repository using the `/home/$USER/.gemini/scripts/dasa-init` script."
+> "Please install the Dasa Sradha Kit globally for me. Clone the repository at `https://github.com/TudeOrangBiasa/dasa-sradha-kit.git` into a temporary directory if needed, run the `npm install -g osgrep` prerequisite and the `./install.sh` script, and then initialize the kit in the current repository using the `/home/$USER/.gemini/scripts/dasa-init` script."
 
 ---
 

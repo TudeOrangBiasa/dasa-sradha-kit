@@ -37,10 +37,17 @@ check_deps() {
     local missing=()
     command -v python3 >/dev/null 2>&1 || missing+=("python3")
     command -v bash >/dev/null 2>&1 || missing+=("bash")
+    command -v node >/dev/null 2>&1 || missing+=("node")
+    command -v npm >/dev/null 2>&1 || missing+=("npm")
 
     if [[ ${#missing[@]} -gt 0 ]]; then
         error "Missing required dependencies: ${missing[*]}"
         exit 1
+    fi
+
+    if ! command -v osgrep >/dev/null 2>&1; then
+        warn "osgrep is not installed. Dasa Dwipa's Semantic Engine requires it."
+        warn "Please run: npm install -g osgrep"
     fi
 }
 
