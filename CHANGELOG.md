@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-02-21
+
+### Added
+- **V3 Max Power Architecture**: Introduced Minimax-inspired heuristics for Adaptive Thinking, Adversarial Self-Review, and Intellectual Honesty.
+- **Native Design Extractor**: Added `skills/dasa-widya/scripts/extract-design.py` for Widya to scrape and generate `.design-memory/tokens.json` without Playwright dependencies.
+- **Design Memory Integration**: Dasa Mpu and Dasa Nala firmly instructed to use `.design-memory/` for zero-hallucination UI development and Premium aesthetics.
+- **Community Skills Support**: `/dasa-init` now scaffolds an `external_skills` array in `dasa.config.yaml` to dynamically load `sickn33/antigravity-awesome-skills`.
+- **Vibe Coding Workflow**: Added `dasa.config.yaml` pro-tip enabling users to automatically generate configuration via AI interview (Gemini 1.5 Flash).
+- **Auto-Compaction Script**: Added `compact-session.sh` for Dasa Patih to manage token limits.
+
+### Changed
+- **Config Standardization**: Replaced `boulder.json` entirely with the centralized, strict `dasa.config.yaml` format.
+- **Architecture Documentation**: Refactored README to include collapsible UI tabs, Flowchart Diagrams, and Easy-Lang pseudocode (`HOW_IT_WORKS.md`).
+
 ## [1.0.0] - 2026-02-20
 
 ### Added
