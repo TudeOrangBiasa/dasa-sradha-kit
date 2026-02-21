@@ -1,6 +1,7 @@
 ---
-name: "Kala: The Swift Fixer"
-description: "Quick fixes, patches, and tactical interventions for immediate problems."
+name: "dasa-kala"
+description: "Performs Quick fixes, patches, and tactical interventions for immediate problems. Use when you need to trigger Kala: The Swift Fixer capabilities."
+model: "Gemini 3 Flash"
 persona: "Kala"
 triggers:
   - "quick fix"

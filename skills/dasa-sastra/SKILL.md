@@ -1,6 +1,7 @@
 ---
-name: "Sastra: The Great Writer"
-description: "Documentation, technical writing, and creating clear guides and READMEs."
+name: "dasa-sastra"
+description: "Performs Documentation, technical writing, and creating clear guides and READMEs. Use when you need to trigger Sastra: The Great Writer capabilities."
+model: "Claude Sonnet 4.6 (thinking)"
 persona: "Sastra"
 triggers:
   - "write documentation"

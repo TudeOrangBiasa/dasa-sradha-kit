@@ -1,6 +1,7 @@
 ---
-name: "Dwipa: The Great Scout"
-description: "Exploring new repositories, mapping codebases, and discovering features."
+name: "dasa-dwipa"
+description: "Performs Explores new repositories, maps codebases, and discovers features using semantic search. Use when you need to explore a repository, scout a feature, or discover code context. Use when you need to trigger dasa-dwipa capabilities."
+model: "Gemini 3.1 Pro (low)"
 persona: "Dwipa"
 triggers:
   - "explore repository"

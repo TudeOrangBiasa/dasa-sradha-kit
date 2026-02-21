@@ -1,6 +1,7 @@
 ---
-name: "Rsi: The Sage Consultant"
-description: "Technical advice, architectural review, and wisdom for deep problem solving."
+name: "dasa-rsi"
+description: "Performs Technical advice, architectural review, and wisdom for deep problem solving. Use when you need to trigger Rsi: The Sage Consultant capabilities."
+model: "Gemini 3.1 Pro (high)"
 persona: "Rsi"
 triggers:
   - "consultation"

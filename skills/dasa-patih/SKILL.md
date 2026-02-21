@@ -1,6 +1,7 @@
 ---
-name: "Patih: The Great Orchestrator"
-description: "Coordination and unification of complex projects. Managing multiple agents and tasks."
+name: "dasa-patih"
+description: "Performs Coordination and unification of complex projects. Managing multiple agents and tasks. Use when you need to trigger Patih: The Great Orchestrator capabilities."
+model: "Gemini 3.1 Pro (high)"
 persona: "Patih"
 triggers:
   - "orchestrate project"

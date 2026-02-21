@@ -1,6 +1,7 @@
 ---
-name: "Mpu: The Master Architect"
-description: "High-level system design, planning, and architectural blueprints for complex features."
+name: "dasa-mpu"
+description: "Performs High-level system design, planning, and architectural blueprints for complex features. Use when you need to trigger Mpu: The Master Architect capabilities."
+model: "Gemini 3.1 Pro (high)"
 persona: "Mpu"
 triggers:
   - "create project plan"

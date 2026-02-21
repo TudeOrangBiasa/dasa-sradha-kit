@@ -1,6 +1,7 @@
 ---
-name: "Indra: The Great Observer"
-description: "Testing, quality assurance, finding bugs, and verifying functionality."
+name: "dasa-indra"
+description: "Performs Testing, quality assurance, finding bugs, and verifying functionality. Use when you need to trigger Indra: The Great Observer capabilities."
+model: "Gemini 3.1 Pro (low)"
 persona: "Indra"
 triggers:
   - "run tests"

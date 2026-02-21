@@ -1,6 +1,7 @@
 ---
-name: "Widya: The Great Researcher"
-description: "Researching libraries, analyzing codebases, and finding complex patterns."
+name: "dasa-widya"
+description: "Performs Researching libraries, analyzing codebases, and finding complex patterns. Use when you need to trigger Widya: The Great Researcher capabilities."
+model: "Claude Sonnet 4.6 (thinking)"
 persona: "Widya"
 triggers:
   - "research library"
