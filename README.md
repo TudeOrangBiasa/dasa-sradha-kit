@@ -33,7 +33,7 @@ Running the `/dasa-init` slash command inside a repository creates the local fra
 
 ## ⚙️ How Dasa Works
 
-Dasa Sradha uses a **Persona-based Orchestration** model natively integrated with Antigravity IDE. It splits complex software workflows into 10 distinct personas (e.g., Architect, Implementer, Debugger, Reviewer) and defines clear, phase-gated slash commands governed by a strict `dasa.config.yaml` file.
+Dasa Sradha uses a **Persona-based Orchestration** model natively integrated with Antigravity IDE. It splits complex software workflows into 10 distinct personas (e.g., Architect, Implementer, Debugger, Reviewer) and defines clear, phase-gated slash commands governed by a strict `dasa.config.toon` file.
 
 👉 **[Read the Full Documentation & View the Flowchart in HOW_IT_WORKS.md](HOW_IT_WORKS.md)**
 
@@ -56,7 +56,7 @@ Dasa Sradha is built on advanced heuristic principles to prevent AI hallucinatio
 
 | Slash Command | File | Description |
 |---------------|------|-------------|
-| `/dasa-init` | `dasa-init.md` | Bootstraps the current repository with `.artifacts/`, `.agent/`, and `dasa.config.yaml`. |
+| `/dasa-init` | `dasa-init.md` | Bootstraps the current repository with `.artifacts/`, `.agent/`, and `dasa.config.toon`. |
 | `/dasa-plan` | `dasa-plan.md` | Generates a structured `.artifacts/implementation_plan.md` and pauses for user review. |
 | `/dasa-start-work` | `dasa-start-work.md` | **The Auto-Routing Orchestrator**: Automatically reads the plan, breaks it into tasks, assumes the correct Persona (Nala, Mpu, Indra, etc.) based on the domain, reads their native rules, and executes the code autonomously. |
 | `/dasa-status` | `dasa-status.md` | Displays the current progress and active task state from the plan. |
@@ -93,20 +93,20 @@ You can ask Antigravity (or another advanced agent) to install the kit for you b
 ---
 
 ## ⚡ "Vibe Coding" the Architecture (Pro Tip)
-Instead of manually typing out your `dasa.config.yaml` file, you can "vibe code" it by asking a fast, cheap model (like Gemini Flash) to interview you. 
+Instead of manually typing out your `dasa.config.toon` file, you can "vibe code" it by asking a fast, cheap model (like Gemini Flash) to interview you. 
 
 Run `/dasa-init` and then ask your AI:
-> "I want to build a new SaaS app. Ask me questions one-by-one to figure out my ideal frontend/backend stack, and then automatically populate the `.agent/dasa.config.yaml` file for the Dasa Sradha Personas."
+> "I want to build a new SaaS app. Ask me questions one-by-one to figure out my ideal frontend/backend stack, and then automatically populate the `.agent/dasa.config.toon` file for the Dasa Sradha Personas."
 
 ## 🧩 Installing Community Awesome Skills
 Dasa Sradha is built to be a zero-dependency powerhouse natively, but you can absolutely augment it with community skills from the [antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) repository!
 
 **How to Integrate:**
 1. Use `npx` or manually clone the `antigravity-awesome-skills` repository into your desired location.
-2. Add the paths of the skills you want to use directly into your `dasa.config.yaml` file under an `external_skills` array.
+2. Add the paths of the skills you want to use directly into your `dasa.config.toon` file under an `external_skills` array.
 3. If Dasa Mpu or Dasa Sastra see those skills defined in your config, they are permitted to read those files before writing their code.
 
-Example `dasa.config.yaml` addition:
+Example `dasa.config.toon` addition:
 ```yaml
 external_skills:
   - "/path/to/antigravity-awesome-skills/skills/nextjs-expert"

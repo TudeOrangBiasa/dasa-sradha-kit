@@ -1,6 +1,6 @@
 # How Dasa Sradha Works
 
-Dasa Sradha uses a **Persona-based Orchestration** model natively integrated with Antigravity IDE. It splits complex software workflows into 10 distinct personas and defines clear, phase-gated slash commands governed by a strict `dasa.config.yaml` file.
+Dasa Sradha uses a **Persona-based Orchestration** model natively integrated with Antigravity IDE. It splits complex software workflows into 10 distinct personas and defines clear, phase-gated slash commands governed by a strict `dasa.config.toon` file.
 
 ## 🗺️ Orchestration Flowchart
 
@@ -8,7 +8,7 @@ Here is how the automated lifecycle works from request to completion:
 
 ```mermaid
 graph TD
-    A([User Request]) --> B{Is dasa.config.yaml initialized?}
+    A([User Request]) --> B{Is dasa.config.toon initialized?}
     B -- No --> C["/dasa-init scaffolding"]
     B -- Yes --> D["/dasa-plan"]
     
@@ -34,13 +34,13 @@ graph TD
 
 ```text
 // Step 1: Initialize the brain
-IF project NOT HAS "dasa.config.yaml":
+IF project NOT HAS "dasa.config.toon":
     RUN /dasa-init
     CREATE folder ".artifacts/" AND ".agent/memory/"
 
 // Step 2: The Planning Phase
 ON USER RUN "/dasa-plan request":
-    READ "dasa.config.yaml" rules
+    READ "dasa.config.toon" rules
     GENERATE "implementation_plan.md"
     PAUSE and WAIT FOR USER APPROVAL
 
