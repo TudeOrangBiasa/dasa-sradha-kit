@@ -1,6 +1,6 @@
 # Dasa Sradha Kit
 
-Multi-agent orchestration framework on Linux. Uses a workflows-only architecture for task planning, strict continuation, and Indonesian persona-based skill routing.
+Multi-agent orchestration framework Uses a workflows-only architecture for task planning, strict continuation, and Indonesian persona-based skill routing.
 
 ---
 
