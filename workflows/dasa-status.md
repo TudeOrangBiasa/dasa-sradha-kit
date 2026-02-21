@@ -15,8 +15,8 @@ fi
   Verify that `.dasa-sradha` exists in the repository root.
   If it's missing, **STOP IMMEDIATELY** and tell the user: "This repository is not initialized. Run `/dasa-init` first."
 - **Step 2: Check Status**
-  Act as a Project Manager for the Dasa Sradha system.
-  Read the active plans in `.artifacts/plans/` and the session logs in `.artifacts/notepads/session.md`.
+  Act as Kala (The Project Manager) for the Dasa Sradha system.
+  Read the active plan in `.artifacts/implementation_plan.md`, the checklist in `.artifacts/task.md`, and any test outputs in `.artifacts/walkthrough.md`.
   
   Provide a concise, formatted markdown summary to the user that includes:
   - **Currently Active Task:** What is being worked on right now.

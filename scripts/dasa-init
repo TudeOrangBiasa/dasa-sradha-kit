@@ -125,8 +125,8 @@ create_marker() {
   fi
 }
 
-create_boulder_json() {
-  local marker_path="$1/boulder.json"
+create_dasa_config() {
+  local marker_path="$1/dasa.config.yaml"
   local existed="false"
   if [ -f "$marker_path" ]; then
     existed="true"
@@ -147,11 +147,34 @@ create_boulder_json() {
   fi
 
   cat <<'EOF' > "$marker_path"
-{
-  "system_prompts": [
-    "You are an expert engineer and the user's primary AI assistant."
-  ]
-}
+# ============================================================================
+# Dasa Sradha Master Project Configuration
+# ============================================================================
+# This file is mandatory for Dasa Sradha Personas. They will read this 
+# configuration before executing any tasks to prevent hallucinations and 
+# ensure strict compliance with your project's technology stack.
+# ============================================================================
+
+project:
+  name: "My Awesome Project"
+  domain: "Web Application"
+  strict_mode: true
+
+stack:
+  frontend: "HTML, Vanilla CSS, JS"
+  backend: "Node.js"
+  database: "None"
+
+skills:
+  auto_fetch: false
+  allowed_awesome_skills:
+    # Add names of Antigravity global skills the agent is permitted to use
+    # e.g., "prisma-expert", "tailwind-guru"
+    - ""
+
+context_rules:
+  - "Always prioritize clean, readable code over clever one-liners."
+  - "Do not hallucinate third-party libraries not defined in the stack."
 EOF
   if [ "$existed" = "true" ]; then
     print_action "overwrite" "$marker_path"
@@ -258,7 +281,7 @@ main() {
   ensure_dir "$plans_dir" || exit $?
   
   create_marker "$root" || exit $?
-  create_boulder_json "$root" || exit $?
+  create_dasa_config "$root" || exit $?
 
   for wf in "${WORKFLOW_FILES[@]}"; do
     local src="$MASTER_WORKFLOWS_DIR/$wf"
