@@ -231,8 +231,10 @@ print_gitignore_guidance() {
   cat <<'EOF'
 ACTION=info PATH=.artifacts/
 ACTION=info PATH=.agent/workflows/
+ACTION=info PATH=.design-memory/mockups/
 
 INFO=.artifacts/ contains evidence and plan outputs.
+INFO=.design-memory/mockups/ contains raw PNG design files.
 INFO=Add the above entries to .gitignore if not already ignored.
 EOF
 }
@@ -285,10 +287,14 @@ main() {
   local workflows_dir="$root/.agent/workflows"
   local artifacts_dir="$root/.artifacts"
   local plans_dir="$root/.artifacts/plans"
+  local design_dir="$root/.design-memory"
+  local mockups_dir="$root/.design-memory/mockups"
 
   ensure_dir "$workflows_dir" || exit $?
   ensure_dir "$artifacts_dir" || exit $?
   ensure_dir "$plans_dir" || exit $?
+  ensure_dir "$design_dir" || exit $?
+  ensure_dir "$mockups_dir" || exit $?
   
   create_marker "$root" || exit $?
   create_dasa_config "$root" || exit $?
@@ -308,8 +314,14 @@ main() {
     else
       print_action "skip_existing" "Already found /.artifacts/ in .gitignore"
     fi
+    if ! grep -q "^/.design-memory/mockups/" "$gitignore" 2>/dev/null; then
+      echo "/.design-memory/mockups/" >> "$gitignore"
+      print_action "create_file" "Added /.design-memory/mockups/ to .gitignore"
+    else
+      print_action "skip_existing" "Already found /.design-memory/mockups/ in .gitignore"
+    fi
   else
-    print_action "create_file" "Would add /.artifacts/ to .gitignore"
+    print_action "create_file" "Would add /.artifacts/ and /.design-memory/mockups/ to .gitignore"
   fi
   print_gitignore_guidance
 }
