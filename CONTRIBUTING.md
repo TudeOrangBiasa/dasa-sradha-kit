@@ -26,8 +26,8 @@ graph TD
     end
     
     subgraph DasaSradhaGlobal ["Dasa Sradha Global (~/.gemini/)"]
-    W("workflows/dasa-*.md")
-    S("skills/dasa-*/SKILL.md")
+    W("antigravity/global_workflows/dasa-*.md")
+    S("antigravity/skills/dasa-*/SKILL.md")
     E("scripts/dasa-init")
     end
 
@@ -45,9 +45,9 @@ graph TD
 ### Component Breakdown
 | Component | Path | Function |
 | :--- | :--- | :--- |
-| **Workflows** | `workflows/` | The global Slash Commands (e.g., `/dasa-e2e`). These tell Antigravity *when* to trigger an action. |
-| **Skills** | `skills/` | The Persona rulesets (e.g., `dasa-mpu/SKILL.md`). These tell Antigravity *how* to behave. |
-| **Bootstrapper** | `scripts/dasa-init` | The local initializer. It copies workflows into the current directory. |
+| **Workflows** | `antigravity/global_workflows/` | The global Slash Commands (e.g., `/dasa-e2e`). These tell Antigravity *when* to trigger an action. |
+| **Skills** | `antigravity/skills/` | The Persona rulesets (e.g., `dasa-mpu/SKILL.md`). These tell Antigravity *how* to behave. |
+| **Bootstrapper** | `scripts/dasa-init` | The local initializer. It copies configuration into the active repository workspace. |
 
 ---
 
@@ -81,7 +81,7 @@ sequenceDiagram
    - If adding a Workflow: Create `workflows/dasa-my-feature.md`. You **must** also add it to the `WORKFLOW_FILES` array in `scripts/dasa-init` so it gets installed for end-users.
    - If adding a Skill: Create `skills/dasa-my-persona/SKILL.md`. Ensure it defines allowed native tools (e.g., `browser_subagent`).
 3. **Local Testing**:
-   - Run `./install.sh` from your cloned root. This forcefully injects your code into `~/.gemini/skills/` and `~/.gemini/workflows/`.
+   - Run `./install.sh` from your cloned root. This forcefully injects your code into `~/.gemini/antigravity/skills/` and `~/.gemini/antigravity/global_workflows/`.
    - Open a test folder, run `/dasa-init`, and ensure your changes propagate correctly.
 4. **Pull Request**: Submit to the `master` branch. Dasa Rsi will automatically review it if a maintainer runs `/dasa-pr`.
 

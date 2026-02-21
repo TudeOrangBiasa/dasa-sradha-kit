@@ -81,7 +81,10 @@ This generates your `dasa.config.toon` file and builds the `.artifacts/` folder.
 ### Directory Structure (Inside Antigravity `~/.gemini/`)
 
 ```
-├── workflows/                # Global Slash Commands
+├── scripts/                  # Bootstrapping Executables
+│   ├── dasa-init
+│   └── dasa-uninstall
+├── antigravity/global_workflows/ # Global Slash Commands
 │   ├── dasa-assimilate.md    # Codebase Assimilation Protocol
 │   ├── dasa-commit.md        # Atomic Checkpoints & QA
 │   ├── dasa-docs.md          # Collaborative API Documentation
@@ -95,7 +98,7 @@ This generates your `dasa.config.toon` file and builds the `.artifacts/` folder.
 │   ├── dasa-status.md        # Progress Tracking
 │   ├── dasa-sync.md          # Infinite Memory Compaction
 │   └── dasa-uninstall.md     # Kit Removal
-├── skills/                   # The 10 Personas
+├── antigravity/skills/       # The 10 Personas
 │   ├── dasa-dwipa/           # The Scout (Semantic Search / Context Gathering)
 │   ├── dasa-patih/           # The Mastermind (Task Planning)
 │   ├── dasa-mpu/             # The Architect (Backend / Data Modeling)

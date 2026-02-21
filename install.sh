@@ -17,7 +17,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Target directories
 SKILLS_DIR="${HOME}/.gemini/antigravity/skills"
 SCRIPTS_DIR="${HOME}/.gemini/scripts"
-WORKFLOWS_DIR="${HOME}/.gemini/antigravity/workflows/dasa-sradha-kit"
+WORKFLOWS_DIR="${HOME}/.gemini/antigravity/global_workflows"
 
 # Colors (if terminal supports it)
 RED='\033[0;31m'
@@ -72,10 +72,10 @@ do_install() {
         chmod +x "$SCRIPTS_DIR/${script}"
     done
 
-    info "Installing master workflow templates to ${WORKFLOWS_DIR}/"
+    info "Installing global workflows to ${WORKFLOWS_DIR}/"
     mkdir -p "$WORKFLOWS_DIR"
-    for workflow in dasa-init.md dasa-plan.md dasa-start-work.md dasa-status.md dasa-uninstall.md; do
-        cp "${SCRIPT_DIR}/workflows/${workflow}" "$WORKFLOWS_DIR/"
+    for workflow in "${SCRIPT_DIR}/workflows/"*.md; do
+        cp "$workflow" "$WORKFLOWS_DIR/"
     done
 
     info "Installing persona skills to ${SKILLS_DIR}/"
@@ -90,9 +90,9 @@ do_install() {
     echo "    ${SCRIPTS_DIR}/dasa-init"
     echo "    ${SCRIPTS_DIR}/dasa-uninstall"
     echo ""
-    echo "  Master workflow templates:"
+    echo "  Global workflows installed:"
     echo "    ${WORKFLOWS_DIR}/"
-    echo "    (5 workflows: init, plan, start-work, status, uninstall)"
+    echo "    (All workflows copied)"
     echo ""
     echo "  Persona skills installed (folders):"
     echo "    ${SKILLS_DIR}/dasa-*/SKILL.md (10 total)"
