@@ -17,6 +17,7 @@ WORKFLOW_FILES=(
   "dasa-sync.md"
   "dasa-commit.md"
   "dasa-assimilate.md"
+  "dasa-docs.md"
 )
 
 ROOT=""
@@ -156,6 +157,7 @@ create_dasa_config() {
   cat <<'EOF' > "$marker_path"
 {
   "project": { "name": "App", "domain": "Web", "strict": true },
+  "workspaces": { "frontend": "./", "backend": "./" },
   "stack": { "fe": ["HTML", "CSS", "JS"], "be": ["Node"], "db": [] },
   "skills": [],
   "rules": [

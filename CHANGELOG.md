@@ -15,7 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Design Memory Integration**: Dasa Mpu and Dasa Nala firmly instructed to use `.design-memory/` for zero-hallucination UI development and Premium aesthetics.
 - **Auto-Scaffolding**: `/dasa-init` now automatically generates the `.design-memory/mockups/` directory and safely adds it to `.gitignore`.
 - **Auto-Routing Orchestrator**: Redesigned `/dasa-start-work` to autonomously select the appropriate Persona (Nala, Mpu, Indra, etc.) based on task domain, eliminating manual `@persona` handoffs.
-- **The Assimilation Protocol**: Added `/dasa-assimilate` to autonomously map forked/existing codebases, detect DDEV vs native `fnm` environments, and dynamically rewrite `dasa.config.yaml`.
+- **The Assimilation Protocol**: Added `/dasa-assimilate` to autonomously map forked/existing codebases, detect DDEV vs native `fnm` environments, and dynamically rewrite `dasa.config.toon`.
+- **API Documentator**: Added `/dasa-docs`, a 3-Persona collaborative workflow (Dwipa sweeps, Mpu analyzes, Sastra formats) to autonomously generate precise Postman Collections or OpenAPI/Swagger specs.
+- **Meta-Project Routing**: `dasa-init` now scaffolds a `workspaces` key. The Auto-Routing Orchestrator will seamlessly `cd` into disparate Git repositories (e.g. `frontend/` vs `backend/`) within the same parent folder before executing commands.
 - **TOON Architecture Migration**: Aggressively upgraded the `dasa-init` config generator and all Kit workflows to output `.toon` (Token Optimized Object Notation) files instead of verbose markdown/YAML, saving thousands of LLM context window tokens.
 - **The Killer Features**: Added `/dasa-fix` (Auto-Healing Orchestrator), `/dasa-sync` (Infinite Memory Vault Compactor), and `/dasa-commit` (Atomic QA Checkpoints) explicitly into the bootstrap workflow.
 - **Community Skills Support**: `/dasa-init` now scaffolds an `external_skills` array in `dasa.config.yaml` to dynamically load `sickn33/antigravity-awesome-skills`.

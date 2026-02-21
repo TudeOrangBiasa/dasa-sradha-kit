@@ -28,4 +28,9 @@ fi
 
   **CRITICAL GUARDRAIL:** Before you write a single line of code for this task, you MUST silently read the exact `SKILL.md` rules corresponding to your chosen persona (e.g. `~/.gemini/antigravity/skills/dasa-nala/SKILL.md`) to apply their specific Max Power heuristics!
   
-  Proceed to execute the task fully as that persona.
+- **Step 3: Workspace Routing (Meta-Project Support)**
+  Check `.agent/dasa.config.toon` for the `"workspaces"` key (e.g., `{"frontend": "./web", "backend": "./api"}`). 
+  If the task you are executing is frontend-related, you MUST `cd` into the frontend workspace path. If backend, navigate to the backend path. Do this *before* you run any scripts or git commits.
+
+- **Step 4: Execute**
+  Proceed to execute the task fully as that persona within the correct workspace.
