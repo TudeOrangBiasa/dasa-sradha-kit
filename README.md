@@ -60,6 +60,9 @@ Dasa Sradha is built on advanced heuristic principles to prevent AI hallucinatio
 | `/dasa-plan` | `dasa-plan.md` | Generates a structured `.artifacts/implementation_plan.md` and pauses for user review. |
 | `/dasa-start-work` | `dasa-start-work.md` | **The Auto-Routing Orchestrator**: Automatically reads the plan, breaks it into tasks, assumes the correct Persona (Nala, Mpu, Indra, etc.) based on the domain, reads their native rules, and executes the code autonomously. |
 | `/dasa-status` | `dasa-status.md` | Displays the current progress and active task state from the plan. |
+| `/dasa-fix` | `dasa-fix.md` | **The Auto-Heal Orchestrator**: Accepts compiler or terminal errors (`/dasa-fix "error text"`) and autonomously dispatches Dasa Rsi to surgically patch the code without breaking the main plan. |
+| `/dasa-sync` | `dasa-sync.md` | **Infinite Memory Session Compaction**: Aggressively compresses today's `.artifacts/` and chats into a dense `.agent/memory/architecture-state.md` vault, allowing you to close your IDE and safely restore 100% project context in a fresh chat tomorrow. |
+| `/dasa-commit` | `dasa-commit.md` | **Atomic Checkpoints & QA**: Triggers Dasa Dwipa & Dharma to pre-scan the `git diff` for AI slop and leaked secrets before autonomously executing a Conventional Git Commit. |
 | `/dasa-uninstall` | `dasa-uninstall.md` | Removes all local marker files, configuration, and workflows from the repository. |
 
 ---

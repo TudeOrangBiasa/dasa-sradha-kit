@@ -13,6 +13,9 @@ WORKFLOW_FILES=(
   "dasa-start-work.md"
   "dasa-status.md"
   "dasa-uninstall.md"
+  "dasa-fix.md"
+  "dasa-sync.md"
+  "dasa-commit.md"
 )
 
 ROOT=""
