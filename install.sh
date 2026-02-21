@@ -17,7 +17,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Target directories
 SKILLS_DIR="${HOME}/.gemini/antigravity/skills"
 SCRIPTS_DIR="${HOME}/.gemini/scripts"
-WORKFLOWS_DIR="${SCRIPTS_DIR}/dasa-sradha-kit/workflows"
+WORKFLOWS_DIR="${HOME}/.gemini/antigravity/workflows/dasa-sradha-kit"
 
 # Colors (if terminal supports it)
 RED='\033[0;31m'
@@ -72,8 +72,8 @@ do_install() {
     done
 
     info "Installing persona skills to ${SKILLS_DIR}/"
-    for skill in dasa-patih.md dasa-mpu.md dasa-nala.md dasa-rsi.md dasa-sastra.md dasa-widya.md dasa-indra.md dasa-dharma.md dasa-kala.md dasa-dwipa.md; do
-        cp "${SCRIPT_DIR}/skills/${skill}" "${SKILLS_DIR}/"
+    for skill in dasa-patih dasa-mpu dasa-nala dasa-rsi dasa-sastra dasa-widya dasa-indra dasa-dharma dasa-kala dasa-dwipa; do
+        cp -r "${SCRIPT_DIR}/skills/${skill}" "${SKILLS_DIR}/"
     done
 
     echo ""
@@ -87,8 +87,8 @@ do_install() {
     echo "    ${WORKFLOWS_DIR}/"
     echo "    (5 workflows: init, plan, start-work, status, uninstall)"
     echo ""
-    echo "  Persona skills installed (flat):"
-    echo "    ${SKILLS_DIR}/dasa-patih.md ... dasa-dwipa.md (10 total)"
+    echo "  Persona skills installed (folders):"
+    echo "    ${SKILLS_DIR}/dasa-*/SKILL.md (10 total)"
     echo ""
     echo "  To activate in a project:"
     echo "    cd <your-project> && ${SCRIPTS_DIR}/dasa-init"
@@ -114,10 +114,10 @@ do_uninstall() {
         fi
     done
 
-    for skill in dasa-patih.md dasa-mpu.md dasa-nala.md dasa-rsi.md dasa-sastra.md dasa-widya.md dasa-indra.md dasa-dharma.md dasa-kala.md dasa-dwipa.md; do
+    for skill in dasa-patih dasa-mpu dasa-nala dasa-rsi dasa-sastra dasa-widya dasa-indra dasa-dharma dasa-kala dasa-dwipa; do
         target="${SKILLS_DIR}/${skill}"
-        if [[ -f "$target" ]]; then
-            rm "$target"
+        if [[ -d "$target" ]]; then
+            rm -rf "$target"
             info "Removed skill: $skill"
         fi
     done

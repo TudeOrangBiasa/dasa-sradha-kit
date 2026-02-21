@@ -24,3 +24,7 @@ fi
   3. **Acceptance Criteria:** A checklist of what defines done.
   
   Make sure the filenames are descriptive and timestamped or versioned appropriately (e.g., `plan-auth-refactor-v1.md`).
+
+- **Step 3: Review Handover**
+  **STOP IMMEDIATELY POST-PLANNING**. Crucially, you must explicitly instruct the user to ask the appropriate persona (e.g., `@dasa-mpu` / `/dasa-mpu`) to review the plan or ask for their manual approval.
+  DO NOT START WRITING ANY CODE OR EXECUTING TASKS. You must wait for the user to invoke the persona and get their go-ahead.

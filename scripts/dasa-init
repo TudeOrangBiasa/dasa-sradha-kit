@@ -125,6 +125,41 @@ create_marker() {
   fi
 }
 
+create_boulder_json() {
+  local marker_path="$1/boulder.json"
+  local existed="false"
+  if [ -f "$marker_path" ]; then
+    existed="true"
+  fi
+
+  if [ "$existed" = "true" ] && [ "$FORCE" = "false" ]; then
+    print_action "skip_existing" "$marker_path"
+    return 0
+  fi
+
+  if [ "$DRY_RUN" = "true" ]; then
+    if [ "$existed" = "true" ]; then
+      print_action "overwrite" "$marker_path"
+    else
+      print_action "create_file" "$marker_path"
+    fi
+    return 0
+  fi
+
+  cat <<'EOF' > "$marker_path"
+{
+  "system_prompts": [
+    "You are an expert engineer and the user's primary AI assistant."
+  ]
+}
+EOF
+  if [ "$existed" = "true" ]; then
+    print_action "overwrite" "$marker_path"
+  else
+    print_action "create_file" "$marker_path"
+  fi
+}
+
 walk_git_root() {
   local start="$1" current="$1"
   while :; do
@@ -215,9 +250,15 @@ main() {
   root=$(detect_root) || exit 2
 
   local workflows_dir="$root/.agent/workflows"
+  local artifacts_dir="$root/.artifacts"
+  local plans_dir="$root/.artifacts/plans"
 
   ensure_dir "$workflows_dir" || exit $?
+  ensure_dir "$artifacts_dir" || exit $?
+  ensure_dir "$plans_dir" || exit $?
+  
   create_marker "$root" || exit $?
+  create_boulder_json "$root" || exit $?
 
   for wf in "${WORKFLOW_FILES[@]}"; do
     local src="$MASTER_WORKFLOWS_DIR/$wf"
