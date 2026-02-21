@@ -33,9 +33,81 @@ Running the `/dasa-init` slash command inside a repository creates the local fra
 
 ## ⚙️ How Dasa Works
 
-Dasa Sradha uses a **Persona-based Orchestration** model natively integrated with Antigravity IDE. It splits complex software workflows into 10 distinct personas (e.g., Architect, Implementer, Debugger, Reviewer) and defines clear, phase-gated slash commands. 
+Dasa Sradha uses a **Persona-based Orchestration** model natively integrated with Antigravity IDE. It splits complex software workflows into 10 distinct personas (e.g., Architect, Implementer, Debugger, Reviewer) and defines clear, phase-gated slash commands governed by a strict `dasa.config.yaml` file.
 
-All actions are tracked and synchronized using `.artifacts/` and `boulder.json`. Work is explicitly planned via the `/dasa-plan` workflow, automatically paused for review by the operating persona (like `@dasa-mpu` or `@dasa-patih`), and then executed sequentially via `/dasa-start-work`. This guarantees high fidelity in code generation and structured planning over spontaneous, unorganized AI edits.
+<details open>
+<summary><strong>🧠 The "Max Power" Architecture (V3)</strong></summary>
+
+Dasa Sradha is built on advanced heuristic principles to prevent AI hallucination and "slop":
+
+*   **Adaptive Thinking:** Personas scale their effort. Simple tasks are executed instantly; complex tasks require deep planning and adversarial self-review.
+*   **Design Memory:** Dasa Nala cannot hallucinate UI. It strictly reads a `.design-memory/` dictionary established by Dasa Mpu to ensure premium layout consistency.
+*   **Infinite Memory:** Cross-session architecture decisions are permanently stored in an `.agent/memory/` version-controlled vault, preventing LLM amnesia.
+*   **Context Compaction:** Long-running sessions are automatically condensed into dense summaries by native scripts to prevent token overflow.
+*   **Native Tools:** Personas possess direct, executable scripts (e.g., semantic web searchers, static vulnerability scanners, and workspace mappers).
+
+</details>
+
+<details>
+<summary><strong>🗺️ Orchestration Flowchart</strong></summary>
+
+Here is how the automated lifecycle works from request to completion:
+
+```mermaid
+graph TD
+    A([User Request]) --> B{Is dasa.config.yaml initialized?}
+    B -- No --> C["/dasa-init scaffolding"]
+    B -- Yes --> D["/dasa-plan"]
+    
+    C --> D
+    
+    D --> E["Task breakdown into .artifacts/task.md"]
+    E -- AUTOMATIC PAUSE --> F["User reviews and tags a Persona (e.g., @dasa-nala)"]
+    
+    F --> G["/dasa-start-work"]
+    G --> H[Persona executes tasks using Native Tools & SKILL.md heuristics]
+    
+    H --> I["/dasa-status update"]
+    I --> J{Are All Tasks Complete?}
+    
+    J -- No --> G
+    J -- Yes --> K(["Session compaction & Memory storage"])
+    
+    classDef init fill:#f9f,stroke:#333,stroke-width:2px;
+    class C init;
+```
+</details>
+
+<details>
+<summary><strong>💻 Execution Pseudo-Code (Easy Lang)</strong></summary>
+
+```text
+// Step 1: Initialize the brain
+IF project NOT HAS "dasa.config.yaml":
+    RUN /dasa-init
+    CREATE folder ".artifacts/" AND ".agent/memory/"
+
+// Step 2: The Planning Phase
+ON USER RUN "/dasa-plan request":
+    READ "dasa.config.yaml" rules
+    GENERATE "implementation_plan.md"
+    PAUSE and WAIT FOR USER APPROVAL
+
+// Step 3: The Execution Phase
+ON USER RUN "/dasa-start-work":
+    LOOP over tasks in "task.md":
+        READ "max-power-core.md" heuristics
+        CHECK if "task" needs Design Memory OR Web Search 
+        EXECUTE single task natively
+        RUN local tests / linting
+        CHECK task off in "task.md"
+
+    // Step 4: Infinite Memory
+    IF Context Window > SAFE_LIMIT:
+        RUN compact-session.sh
+        SAVE learned rules to ".agent/memory/decisions.md"
+```
+</details>
 
 ---
 
@@ -214,41 +286,7 @@ function executeDasaWorkflow(userRequest, currentPlan) {
 }
 ```
 
----
 
-## 🗺️ Dasa Execution Flowchart
-
-The following flowchart illustrates the lifecycle of a task within the Dasa Sradha framework.
-
-```mermaid
-graph TD
-    A([User Request]) --> B{Is Repo Initialized?}
-    B -- No --> C["/dasa-init"]
-    C --> D[".artifacts & boulder.json created"]
-    B -- Yes --> E["/dasa-plan"]
-    D --> E
-    
-    E --> F["Generate Implementation Plan in .artifacts/plans/"]
-    F -- AUTOMATIC HALT --> G["User Tags Persona for Review e.g., @dasa-mpu"]
-    
-    G --> H{Does Persona Approve Plan?}
-    H -- No --> I[Revise Plan]
-    I --> G
-    
-    H -- Yes --> J["/dasa-start-work"]
-    
-    J --> K[Persona Executes Tasks using specialized skills]
-    K --> L["/dasa-status update"]
-    
-    L --> M{Are All Tasks Complete?}
-    M -- No --> J
-    M -- Yes --> N(["Task Finished / Tag @dasa-dwipa to Verify"])
-    
-    classDef init fill:#f9f,stroke:#333,stroke-width:2px;
-    class C init;
-```
-
----
 
 ## 🎭 The 10 Personas (Dasa Sradha)
 
