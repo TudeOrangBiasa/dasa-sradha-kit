@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Auto-Scaffolding**: `/dasa-init` now automatically generates the `.design-memory/mockups/` directory and safely adds it to `.gitignore`.
 - **Auto-Routing Orchestrator**: Redesigned `/dasa-start-work` to autonomously select the appropriate Persona (Nala, Mpu, Indra, etc.) based on task domain, eliminating manual `@persona` handoffs.
 - **Community Skills Support**: `/dasa-init` now scaffolds an `external_skills` array in `dasa.config.yaml` to dynamically load `sickn33/antigravity-awesome-skills`.
-- **Vibe Coding Workflow**: Added `dasa.config.yaml` pro-tip enabling users to automatically generate configuration via AI interview (Gemini 1.5 Flash).
+- **Vibe Coding Workflow**: Added `dasa.config.yaml` pro-tip enabling users to automatically generate configuration via AI interview (Even with Gemini 3 Flash).
 - **Auto-Compaction Script**: Added `compact-session.sh` for Dasa Patih to manage token limits.
 
 ### Changed
