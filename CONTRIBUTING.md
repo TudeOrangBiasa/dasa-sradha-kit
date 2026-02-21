@@ -21,14 +21,14 @@ graph TD
     classDef default fill:#2d333b,stroke:#6d5dfc,stroke-width:2px,color:#e6edf3;
     classDef sub fill:#161b22,stroke:#30363d,stroke-width:1px,color:#e6edf3;
 
-    subgraph User Workspace
-    U(User Input: /slash-command)
+    subgraph UserWorkspace ["User Workspace"]
+    U("User Input: /slash-command")
     end
     
-    subgraph Dasa Sradha Global (~/.gemini/)
-    W(workflows/dasa-*.md)
-    S(skills/dasa-*/SKILL.md)
-    E(scripts/dasa-init)
+    subgraph DasaSradhaGlobal ["Dasa Sradha Global (~/.gemini/)"]
+    W("workflows/dasa-*.md")
+    S("skills/dasa-*/SKILL.md")
+    E("scripts/dasa-init")
     end
 
     U -->|1. Triggers| W
@@ -36,8 +36,8 @@ graph TD
     E -->|3. Bootstraps| U
 
     %% Apply Subgraph Styles
-    class User Workspace sub;
-    class Dasa Sradha Global sub;
+    class UserWorkspace sub;
+    class DasaSradhaGlobal sub;
     
     linkStyle default stroke:#8b949e,stroke-width:2px;
 ```
