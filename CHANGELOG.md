@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Design Memory Integration**: Dasa Mpu and Dasa Nala firmly instructed to use `.design-memory/` for zero-hallucination UI development and Premium aesthetics.
 - **Auto-Scaffolding**: `/dasa-init` now automatically generates the `.design-memory/mockups/` directory and safely adds it to `.gitignore`.
 - **Auto-Routing Orchestrator**: Redesigned `/dasa-start-work` to autonomously select the appropriate Persona (Nala, Mpu, Indra, etc.) based on task domain, eliminating manual `@persona` handoffs.
+- **The Killer Features**: Added `/dasa-fix` (Auto-Healing Orchestrator), `/dasa-sync` (Infinite Memory Vault Compactor), and `/dasa-commit` (Atomic QA Checkpoints) explicitly into the bootstrap workflow.
 - **Community Skills Support**: `/dasa-init` now scaffolds an `external_skills` array in `dasa.config.yaml` to dynamically load `sickn33/antigravity-awesome-skills`.
 - **Vibe Coding Workflow**: Added `dasa.config.yaml` pro-tip enabling users to automatically generate configuration via AI interview (Even with Gemini 3 Flash).
 - **Auto-Compaction Script**: Added `compact-session.sh` for Dasa Patih to manage token limits.
