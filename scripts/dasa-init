@@ -16,6 +16,7 @@ WORKFLOW_FILES=(
   "dasa-fix.md"
   "dasa-sync.md"
   "dasa-commit.md"
+  "dasa-assimilate.md"
 )
 
 ROOT=""
