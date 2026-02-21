@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-02-22
+
+### Added
+- **Native E2E Testing (`/dasa-e2e`)**: Upgraded Dasa Indra's `SKILL.md` to autonomously operate Antigravity's native `browser_subagent`. Indra can now execute complex UI tests and record WebP sessions directly to `.artifacts/walkthrough.md` without requiring Playwright/Cypress.
+- **Autonomous Database Seeder (`/dasa-seed`)**: Added a 3-agent orchestration workflow. Dwipa maps the project's native schema, Mpu generates a massive JSON payload of highly realistic fixtures, and Nala injects them into the local database for instant UI testing.
+- **GitHub Auto-PR Reviewer (`/dasa-pr`)**: Natively integrated the GitHub CLI (`gh`). Dasa Rsi now reads `gh pr diff`, executes deep adversarial security heuristics on the active branch, and posts the report to remote repositories using `gh pr comment`.
+
 ## [2.0.0] - 2026-02-21
 
 ### Added

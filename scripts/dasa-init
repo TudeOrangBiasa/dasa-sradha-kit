@@ -18,6 +18,9 @@ WORKFLOW_FILES=(
   "dasa-commit.md"
   "dasa-assimilate.md"
   "dasa-docs.md"
+  "dasa-e2e.md"
+  "dasa-seed.md"
+  "dasa-pr.md"
 )
 
 ROOT=""
