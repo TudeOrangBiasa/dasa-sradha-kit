@@ -85,26 +85,26 @@ The following flowchart illustrates the lifecycle of a task within the Dasa Srad
 ```mermaid
 graph TD
     A([User Request]) --> B{Is Repo Initialized?}
-    B -- No --> C[/dasa-init]
-    C --> D[.artifacts & boulder.json created]
-    B -- Yes --> E[/dasa-plan]
+    B -- No --> C["/dasa-init"]
+    C --> D[".artifacts & boulder.json created"]
+    B -- Yes --> E["/dasa-plan"]
     D --> E
     
-    E --> F[Generate Implementation Plan in .artifacts/plans/]
-    F -- AUTOMATIC HALT --> G[User Tags Persona for Review e.g., @dasa-mpu]
+    E --> F["Generate Implementation Plan in .artifacts/plans/"]
+    F -- AUTOMATIC HALT --> G["User Tags Persona for Review e.g., @dasa-mpu"]
     
     G --> H{Does Persona Approve Plan?}
     H -- No --> I[Revise Plan]
     I --> G
     
-    H -- Yes --> J[/dasa-start-work]
+    H -- Yes --> J["/dasa-start-work"]
     
     J --> K[Persona Executes Tasks using specialized skills]
-    K --> L[/dasa-status update]
+    K --> L["/dasa-status update"]
     
     L --> M{Are All Tasks Complete?}
     M -- No --> J
-    M -- Yes --> N([Task Finished / Tag @dasa-dwipa to Verify])
+    M -- Yes --> N(["Task Finished / Tag @dasa-dwipa to Verify"])
     
     classDef init fill:#f9f,stroke:#333,stroke-width:2px;
     class C init;
