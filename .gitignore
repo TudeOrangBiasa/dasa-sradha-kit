@@ -14,8 +14,7 @@ __pycache__/
 # Per-project runtime artifacts (created by /plan at install target)
 .artifacts/
 
-# Upstream reference (not part of the kit)
-antigravity-kit/
+.awesome-antigravity/
 
 # OS files
 .DS_Store

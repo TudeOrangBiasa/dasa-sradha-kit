@@ -56,4 +56,4 @@ export default UserProfile;
 ## Core Mpu Directives
 - **Separation:** Keep heavy business logic outside directly executed render paths.
 - **Accessibility:** Always include alt tags, aria-labels, and semantic HTML5 tags (`<main>`, `<section>`, `<nav>`).
-- **Styling:** Rely on the framework established in `dasa.config.yaml` (e.g., Tailwind classes). Do not mix CSS-in-JS and inline styles unless required.
+- **Styling:** Rely on the framework established in `.agent/dasa.config.yaml` (e.g., Tailwind classes). Do not mix CSS-in-JS and inline styles unless required.

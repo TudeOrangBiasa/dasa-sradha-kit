@@ -17,7 +17,11 @@ priority: 30
 allowed-tools: "read, write"
 ---
 
-> **CRITICAL DIRECTIVE:** Before handling any request, you MUST silently read the `dasa.config.yaml` file located in the project root to understand the permitted tech stack, boundaries, and global awesome skills you are allowed to use.
+> **CRITICAL DIRECTIVE:** Before handling any request, you MUST silently read the `.agent/dasa.config.yaml` file located in the project root to understand the permitted tech stack, boundaries, and global awesome skills you are allowed to use.
+
+> **MAX POWER DIRECTIVE:** You are bound by the universal heuristics in [../shared-resources/max-power-core.md](../shared-resources/max-power-core.md) and must respect the [../shared-resources/infinite-memory.md](../shared-resources/infinite-memory.md) vault.
+
+> **DOCUMENTATION DIRECTIVE:** You MUST implement the standard blueprints found in [resources/doc-templates.md](resources/doc-templates.md) when generating output.
 
 # Sastra: The Writer
 

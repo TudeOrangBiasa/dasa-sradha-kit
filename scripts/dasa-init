@@ -126,7 +126,8 @@ create_marker() {
 }
 
 create_dasa_config() {
-  local marker_path="$1/dasa.config.yaml"
+  local agent_dir="$1/.agent"
+  local marker_path="$agent_dir/dasa.config.yaml"
   local existed="false"
   if [ -f "$marker_path" ]; then
     existed="true"
@@ -167,13 +168,10 @@ stack:
 
 skills:
   auto_fetch: false
-  allowed_awesome_skills:
-    # Add names of Antigravity global skills the agent is permitted to use
-    # e.g., "prisma-expert", "tailwind-guru"
-    - ""
 
 context_rules:
   - "Always prioritize clean, readable code over clever one-liners."
+  - "Prevent AI slop: enforce strict typing, component-based UI, and layered BE architecture."
   - "Do not hallucinate third-party libraries not defined in the stack."
 EOF
   if [ "$existed" = "true" ]; then
@@ -289,6 +287,18 @@ main() {
     copy_file "$src" "$dst"
   done
 
+  # Process .gitignore logic
+  local gitignore="$root/.gitignore"
+  if [ "$DRY_RUN" != "true" ]; then
+    if ! grep -q "^/.artifacts/" "$gitignore" 2>/dev/null; then
+      echo "/.artifacts/" >> "$gitignore"
+      print_action "create_file" "Added /.artifacts/ to .gitignore"
+    else
+      print_action "skip_existing" "Already found /.artifacts/ in .gitignore"
+    fi
+  else
+    print_action "create_file" "Would add /.artifacts/ to .gitignore"
+  fi
   print_gitignore_guidance
 }
 
