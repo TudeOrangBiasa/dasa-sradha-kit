@@ -82,9 +82,19 @@ This generates your `dasa.config.toon` file and builds the `.artifacts/` folder.
 
 ```
 ├── workflows/                # Global Slash Commands
-│   ├── dasa-init.md          # Project initialization
-│   ├── dasa-e2e.md           # Automated Browser Testing
-│   └── dasa-pr.md            # Auto-PR review
+│   ├── dasa-assimilate.md    # Codebase Assimilation Protocol
+│   ├── dasa-commit.md        # Atomic Checkpoints & QA
+│   ├── dasa-docs.md          # Collaborative API Documentation
+│   ├── dasa-e2e.md           # Native Browser Automation
+│   ├── dasa-fix.md           # Auto-Heal Orchestrator
+│   ├── dasa-init.md          # Project Initialization
+│   ├── dasa-plan.md          # Architectural Planning
+│   ├── dasa-pr.md            # GitHub Auto-Reviewer
+│   ├── dasa-seed.md          # Database Fixture Generation
+│   ├── dasa-start-work.md    # Core Execution Engine
+│   ├── dasa-status.md        # Progress Tracking
+│   ├── dasa-sync.md          # Infinite Memory Compaction
+│   └── dasa-uninstall.md     # Kit Removal
 ├── skills/                   # The 10 Personas
 │   ├── dasa-dwipa/           # The Scout (Semantic Search / Context Gathering)
 │   ├── dasa-patih/           # The Mastermind (Task Planning)
