@@ -20,12 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Meta-Project Routing**: `dasa-init` now scaffolds a `workspaces` key. The Auto-Routing Orchestrator will seamlessly `cd` into disparate Git repositories (e.g. `frontend/` vs `backend/`) within the same parent folder before executing commands.
 - **TOON Architecture Migration**: Aggressively upgraded the `dasa-init` config generator and all Kit workflows to output `.toon` (Token Optimized Object Notation) files instead of verbose markdown/YAML, saving thousands of LLM context window tokens.
 - **The Killer Features**: Added `/dasa-fix` (Auto-Healing Orchestrator), `/dasa-sync` (Infinite Memory Vault Compactor), and `/dasa-commit` (Atomic QA Checkpoints) explicitly into the bootstrap workflow.
-- **Community Skills Support**: `/dasa-init` now scaffolds an `external_skills` array in `dasa.config.yaml` to dynamically load `sickn33/antigravity-awesome-skills`.
-- **Vibe Coding Workflow**: Added `dasa.config.yaml` pro-tip enabling users to automatically generate configuration via AI interview (Even with Gemini 3 Flash).
+- **Community Skills Support**: `/dasa-init` now scaffolds an `external_skills` array in `dasa.config.toon` to dynamically load `sickn33/antigravity-awesome-skills`.
+- **Vibe Coding Workflow**: Added `dasa.config.toon` pro-tip enabling users to automatically generate configuration via AI interview (Even with Gemini 3 Flash).
 - **Auto-Compaction Script**: Added `compact-session.sh` for Dasa Patih to manage token limits.
 
 ### Changed
-- **Config Standardization**: Replaced `boulder.json` entirely with the centralized, strict `dasa.config.yaml` format.
+- **Config Standardization**: Replaced `boulder.json` entirely with the centralized, strict `dasa.config.toon` format.
 - **Architecture Documentation**: Refactored README to include collapsible UI tabs, Flowchart Diagrams, and Easy-Lang pseudocode (`HOW_IT_WORKS.md`).
 
 ## [1.0.0] - 2026-02-20
