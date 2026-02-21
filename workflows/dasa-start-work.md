@@ -14,11 +14,18 @@ fi
 - **Step 1: Guard Check**
   Verify that `.dasa-sradha` exists in the repository root.
   If it's missing, **STOP IMMEDIATELY** and tell the user: "This repository is not initialized. Run `/dasa-init` first."
-- **Step 2: Initialize Session**
+- **Step 2: Auto-Routing Session**
   Review the active planning document at `.artifacts/implementation_plan.md`. 
-  Based on the requested `$ARGUMENTS`:
-  - Act as Nala (The Orchestrator).
-  - Explicitly use the `write_to_file` tool with `IsArtifact` set to `true` to generate or update `.artifacts/task.md`.
-  - Break down the implementation plan into granular, checkable `[ ]` subtasks inside the `task.md` file.
+  If `.artifacts/task.md` does not exist, use the `write_to_file` tool (with `IsArtifact: true`) to generate it, breaking the plan down into granular `[ ]` subtasks.
   
-  If `$ARGUMENTS` is empty, prompt the user for what feature from the plan they want to break down into tasks.
+  Read the next uncompleted `[ ]` task in `task.md`. Based on the task's domain, you MUST automatically assume the identity of the most relevant Persona:
+  - **Frontend / UI / Styling:** Assume **Dasa Nala**.
+  - **Architecture / Backend / Complex Logic:** Assume **Dasa Mpu**.
+  - **Testing / QA / CI:** Assume **Dasa Indra**.
+  - **Security / Dependency Config:** Assume **Dasa Dharma**.
+  - **Documentation / README:** Assume **Dasa Sastra**.
+  - **Data Collection / Web Search:** Assume **Dasa Widya**.
+
+  **CRITICAL GUARDRAIL:** Before you write a single line of code for this task, you MUST silently read the exact `SKILL.md` rules corresponding to your chosen persona (e.g. `~/.gemini/antigravity/skills/dasa-nala/SKILL.md`) to apply their specific Max Power heuristics!
+  
+  Proceed to execute the task fully as that persona.

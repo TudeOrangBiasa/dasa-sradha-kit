@@ -56,9 +56,9 @@ Dasa Sradha is built on advanced heuristic principles to prevent AI hallucinatio
 
 | Slash Command | File | Description |
 |---------------|------|-------------|
-| `/dasa-init` | `dasa-init.md` | Bootstraps the current repository with `.artifacts/`, `.agent/`, and `boulder.json`. |
-| `/dasa-plan` | `dasa-plan.md` | Generates a structured execution plan. **Stops automatically** for Persona review. |
-| `/dasa-start-work` | `dasa-start-work.md` | Executes the next task on the plan using the chosen persona's specific abilities. |
+| `/dasa-init` | `dasa-init.md` | Bootstraps the current repository with `.artifacts/`, `.agent/`, and `dasa.config.yaml`. |
+| `/dasa-plan` | `dasa-plan.md` | Generates a structured `.artifacts/implementation_plan.md` and pauses for user review. |
+| `/dasa-start-work` | `dasa-start-work.md` | **The Auto-Routing Orchestrator**: Automatically reads the plan, breaks it into tasks, assumes the correct Persona (Nala, Mpu, Indra, etc.) based on the domain, reads their native rules, and executes the code autonomously. |
 | `/dasa-status` | `dasa-status.md` | Displays the current progress and active task state from the plan. |
 | `/dasa-uninstall` | `dasa-uninstall.md` | Removes all local marker files, configuration, and workflows from the repository. |
 
@@ -134,17 +134,6 @@ Before anything begins, ask the Investigator to map the current codebase and fin
 </details>
 
 <details>
-<summary><strong>2. Risk Analysis (Widya)</strong></summary>
-
-Ask the Risk Analyst to evaluate potential pitfalls with third-party payment APIs:
-```text
-@dasa-widya analyze potential edge cases and API rate-limiting risks for Stripe integration.
-```
-</details>
-
-<details>
-<summary><strong>3. Architecture & Planning (Patih)</strong></summary>
-
 With research complete, ask the Architect to draft the technical plan:
 ```text
 /dasa-plan "Create a new Payment Gateway module using Stripe, considering Indra and Widya's findings."
@@ -152,113 +141,6 @@ With research complete, ask the Architect to draft the technical plan:
 *Once the plan is generated, the workflow halts.*
 </details>
 
-<details>
-<summary><strong>4. Orchestration & Delegation (Nala)</strong></summary>
-
-Tag the Orchestrator to review the plan and prepare the execution order:
-```text
-@dasa-nala review the plan in .artifacts/plans/ and outline the task priorities. /dasa-start-work
-```
-</details>
-
-<details>
-<summary><strong>5. Scheduling & Dependency Management (Kala)</strong></summary>
-
-Before coding, ensure database migrations happen before API endpoints:
-```text
-@dasa-kala review the dependencies and ensure the database schema task is executed first.
-```
-</details>
-
-<details>
-<summary><strong>6. Library & Documentation Prep (Sastra)</strong></summary>
-
-Gather external documentation for the implementer:
-```text
-@dasa-sastra please fetch the latest Stripe Node.js SDK documentation and save it to .artifacts/
-```
-</details>
-
-<details>
-<summary><strong>7. Implementation & Coding (Mpu)</strong></summary>
-
-When it's time to write the actual code, tag the Implementer:
-```text
-@dasa-mpu please execute the coding tasks outlined in the plan using the Stripe SDK docs. /dasa-start-work
-```
-</details>
-
-<details>
-<summary><strong>8. Debugging (Rsi)</strong></summary>
-
-If a web-hook test fails during implementation:
-```text
-@dasa-rsi the Stripe webhook signature verification is failing. Please analyze the logs and fix the root cause.
-```
-</details>
-
-<details>
-<summary><strong>9. Code Review & QA (Dwipa)</strong></summary>
-
-Once coding and debugging are complete, bring in the QA reviewer:
-```text
-@dasa-dwipa please verify the code quality, unit tests, and coverage for the payment gateway.
-```
-</details>
-
-<details>
-<summary><strong>10. Security Audit & Ethics (Dharma)</strong></summary>
-
-Finally, ensuring PCI-compliance and security:
-```text
-@dasa-dharma please audit the new payment implementation for security vulnerabilities and ensure no sensitive data is logged.
-```
-</details>
-
----
-
-### 💻 Pseudocode Logic
-
-To understand how the Dasa Sradha system natively routes tasks without external Python scripts, here is pseudo-code modeling the prompt logic and execution flow governed by `boulder.json` and `.artifacts`:
-
-```javascript
-function executeDasaWorkflow(userRequest, currentPlan) {
-    // 1. Guard Check
-    if (!fileExists(".dasa-sradha")) {
-        return FAIL("Repository not initialized. Run /dasa-init");
-    }
-
-    // 2. Identify Persona Command
-    const taggedPersona = extractMentions(userRequest); // e.g., "@dasa-mpu"
-    
-    // 3. Load State
-    let taskState = loadArtifact(".artifacts/boulder.json");
-    
-    // 4. Route to Skill Context
-    let personaPrompt = null;
-    switch (taggedPersona) {
-        case "dasa-patih": personaPrompt = loadSkill("High-Level Architect"); break;
-        case "dasa-mpu":   personaPrompt = loadSkill("Feature Implementer"); break;
-        case "dasa-rsi":   personaPrompt = loadSkill("Root Cause Debugger"); break;
-        case "dasa-dwipa": personaPrompt = loadSkill("QA Code Reviewer"); break;
-        // ... (routes for all 10 personas)
-        default:           personaPrompt = loadSkill("General Assistant"); break;
-    }
-
-    // 5. Context Injection & Execution
-    let systemPrompt = merge(personaPrompt, taskState, currentPlan);
-    let output = LLM.generate(systemPrompt, userRequest);
-    
-    // 6. State Persistence
-    if (workflow === "/dasa-plan") {
-        saveArtifact(".artifacts/plans/", output);
-        return HALT_FOR_USER_REVIEW(output);
-    } else {
-        updateBoulderJson(output.newProgress);
-        return output;
-    }
-}
-```
 
 
 

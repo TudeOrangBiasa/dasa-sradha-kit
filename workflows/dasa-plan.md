@@ -26,6 +26,7 @@ fi
   2. **Scope/Steps:** What exactly needs to be done?
   3. **Verification Plan:** A checklist of what defines done.
 
-- **Step 3: Review Handover**
-  **STOP IMMEDIATELY POST-PLANNING**. Crucially, you must explicitly instruct the user to ask the appropriate persona (e.g., `@dasa-mpu` / `/dasa-mpu`) to review the plan or ask for their manual approval.
-  DO NOT START WRITING ANY CODE OR EXECUTING TASKS. You must wait for the user to invoke the persona and get their go-ahead.
+- **Step 3: Auto-Routing Handover**
+  **STOP IMMEDIATELY POST-PLANNING**. Present the plan to the user for review. 
+  Crucially, you must explicitly instruct the user: "If the plan looks good, simply run `/dasa-start-work` and the Orchestrator will automatically route these tasks to the correct Personas for execution."
+  DO NOT START WRITING ANY CODE OR EXECUTING TASKS. Wait for the user to invoke `/dasa-start-work`.
