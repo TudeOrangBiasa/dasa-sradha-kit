@@ -110,6 +110,16 @@ external_skills:
 
 ---
 
+## 🎨 Free Figma Alternative (Batch Mockups)
+If you have a massive Figma file (e.g., a 30-page dashboard) but don't want to pay for external Figma MCP tools, Dasa Sradha has a **zero-cost native alternative**.
+
+**How to use Visual Mockups:**
+1. Export your Figma screens as high-resolution `.png` or `.jpg` files.
+2. Drop them all into the `.design-memory/mockups/` folder inside your project.
+3. Automatically, **Dasa Nala (The Builder)** will use Antigravity's native Vision capabilities to "look" at those images before writing any UI code. It will perfectly replicate the layout, padding, and visual hierarchy directly from your images.
+
+---
+
 ### 📖 Full Workflow Example (All 10 Personas)
 
 Here is an advanced end-to-end lifecycle demonstrating how **all 10 personas** seamlessly hand off tasks to one another for a massive feature like a new "Payment Gateway":
