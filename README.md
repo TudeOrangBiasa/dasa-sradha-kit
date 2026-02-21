@@ -74,20 +74,47 @@ You can ask Antigravity (or another advanced agent) to install the kit for you b
 
 ---
 
-### Using the Workflows
+### 📖 Full Workflow Example
 
-1. **Plan Your Work:** Ask the system to create a plan for your feature:
-   ```text
-   /dasa-plan "Refactor the authentication module to use JWT"
-   ```
-2. **Assign a Persona:** Once the plan is generated, it will pause. Tag the appropriate persona to review and execute it:
-   ```text
-   @dasa-mpu please review the plan and /dasa-start-work
-   ```
-3. **Check Status:** Keep track of what's happening or resume a paused workflow:
-   ```text
-   /dasa-status
-   ```
+Here is a typical end-to-end lifecycle demonstrating how different personas seamlessly hand off tasks to one another:
+
+<details open>
+<summary><strong>1. Architecture & Planning (Patih)</strong></summary>
+
+Ask the system to create an architectural plan:
+```text
+/dasa-plan "We need a new JWT authentication module."
+```
+*Once the plan is generated, the workflow automatically halts.*
+</details>
+
+<details open>
+<summary><strong>2. Review & Delegation (Nala)</strong></summary>
+
+Tag the orchestrator to review the plan and prepare for execution:
+```text
+@dasa-nala please review the plan in .artifacts/plans/ and /dasa-start-work
+```
+</details>
+
+<details open>
+<summary><strong>3. Implementation & Coding (Mpu)</strong></summary>
+
+When it's time to write the actual code, tag the implementer:
+```text
+@dasa-mpu please execute the coding tasks outlined in the plan and /dasa-start-work
+```
+</details>
+
+<details open>
+<summary><strong>4. Code Review & Security Audit (Dwipa & Dharma)</strong></summary>
+
+Once coding is complete, bring in the QA reviewer and the security guardian to verify the work before it's merged:
+```text
+@dasa-dwipa please verify the code quality and test coverage.
+@dasa-dharma please audit the JWT implementation for security vulnerabilities.
+```
+</details>
 
 ---
 
