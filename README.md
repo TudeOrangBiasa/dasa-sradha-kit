@@ -1,6 +1,6 @@
 # Dasa Sradha Kit
 
-Multi-agent orchestration framework for [Antigravity Desktop IDE](https://github.com/vudovn/antigravity-kit) on Linux. Uses a workflows-only architecture for task planning, strict continuation, and Indonesian persona-based skill routing.
+Multi-agent orchestration framework on Linux. Uses a workflows-only architecture for task planning, strict continuation, and Indonesian persona-based skill routing.
 
 ---
 
@@ -53,6 +53,8 @@ All actions are tracked and synchronized using `.artifacts/` and `boulder.json`.
 
 ## 🚀 How to Use It
 
+### Option A: Manual Installation
+
 1. **Install Globally:**
    ```bash
    git clone https://github.com/TudeOrangBiasa/dasa-sradha-kit.git
@@ -63,15 +65,26 @@ All actions are tracked and synchronized using `.artifacts/` and `boulder.json`.
    ```text
    /dasa-init
    ```
-3. **Plan Your Work:** Ask the system to create a plan for your feature:
+
+### Option B: AI Agent Installation (Recommended)
+
+You can ask Antigravity (or another advanced agent) to install the kit for you by copying and pasting this prompt:
+
+> "Please install the Dasa Sradha Kit globally for me. Clone the repository at `https://github.com/TudeOrangBiasa/dasa-sradha-kit.git` into a temporary directory if needed, run the `./install.sh` script, and then initialize it in the current repository using the `/home/$USER/.gemini/scripts/dasa-init` script."
+
+---
+
+### Using the Workflows
+
+1. **Plan Your Work:** Ask the system to create a plan for your feature:
    ```text
    /dasa-plan "Refactor the authentication module to use JWT"
    ```
-4. **Assign a Persona:** Once the plan is generated, it will pause. Tag the appropriate persona to review and execute it:
+2. **Assign a Persona:** Once the plan is generated, it will pause. Tag the appropriate persona to review and execute it:
    ```text
    @dasa-mpu please review the plan and /dasa-start-work
    ```
-5. **Check Status:** Keep track of what's happening or resume a paused workflow:
+3. **Check Status:** Keep track of what's happening or resume a paused workflow:
    ```text
    /dasa-status
    ```
