@@ -53,6 +53,22 @@ auto_routing_engine:
   logic_gate: "Prompt -> Intent_Detection -> Auto_Workflow_Execution"
 
   scenarios:
+    A_INITIALIZATION_INTERVIEW:
+      intent_pattern: ["make me an app", "start a project"]
+      auto_workflow:
+        - STEP_1: "Pause and interview user about tech stack and project goal."
+        - STEP_2: "Dasa Dwipa searches for relevant community skills via skill_search.py."
+        - STEP_3: "Populate dasa.config.toon."
+      goal: "Prevent hallucinated tech stacks by dynamically gathering context."
+
+    B_CODEBASE_ASSIMILATION:
+      intent_pattern: ["add a feature", "explain this app"]
+      auto_workflow:
+        - STEP_1: "Trigger /dasa-assimilate silently."
+        - STEP_2: "Dasa Dwipa uses workspace-mapper.py and arch_mapper.py to analyze the codebase."
+        - STEP_3: "Auto-populate dasa.config.toon."
+      goal: "Instantly adapt to a foreign, undocumented codebase without annoying the user."
+
     C_FEATURE_ACCELERATOR:
       intent_pattern: ["add", "build", "create", "implement", "make a feature"]
       auto_workflow: 

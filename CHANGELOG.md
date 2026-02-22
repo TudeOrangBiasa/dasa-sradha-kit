@@ -4,6 +4,13 @@ All notable changes to the Dasa Sradha Kit will be documented in this file.
 
 ---
 
+## [5.1.3] - 2026-02-22
+
+### 🐛 Fixed
+- **Cheat-Sheet Auto-Routing Engine:** Added missing Scenarios A (Initialization Interview) and B (Codebase Assimilation) to the `.artifacts/dasa-cheat-sheet.toon` master template so the AI correctly understands the early-stage branching logic.
+
+---
+
 ## [5.1.2] - 2026-02-22
 
 ### ✨ New
