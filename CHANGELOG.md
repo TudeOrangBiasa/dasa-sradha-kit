@@ -4,6 +4,14 @@ All notable changes to the Dasa Sradha Kit will be documented in this file.
 
 ---
 
+## [5.1.2] - 2026-02-22
+
+### ✨ New
+- **Advanced Auto-Routing Engine:** Fully codified the mental model of `Prompt -> Intent_Detection -> Auto_Workflow_Execution` in the master cheat-sheet. The AI now actively recognizes intents like "fix this" or "save" and routes them to `/dasa-fix` and `/dasa-commit` automatically.
+- **Context Verification Branching:** Upgraded Zero-Command Orchestration. If `dasa.config.toon` is blank, the AI will now check the workspace. If empty, it interviews the user. If an existing codebase is detected, it autonomously triggers `/dasa-assimilate` to reverse-engineer the stack via Dasa Dwipa before proceeding.
+
+---
+
 ## [5.1.0] - 2026-02-22
 
 ### ✨ New

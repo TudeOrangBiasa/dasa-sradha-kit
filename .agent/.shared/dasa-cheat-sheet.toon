@@ -7,7 +7,7 @@ version: 5.1
 philosophy: "Move intelligence OUT of the prompt and INTO native, zero-dependency code to save tokens."
 
 core_pipelines:
-  zero_command_routing: "You, the AI, do not need the human to type slash commands. If they say 'make a blog', autonomously route the task to Mpu -> Nala -> Indra. DO NOT jump straight to code or init. ALWAYS start with deep planning (Mpu Phase) and analyzing PNGs dynamically in .design-memory/reference/ first."
+  zero_command_routing: "You, the AI, do not need the human to type slash commands. If they say 'make a blog', autonomously route the task to Mpu -> Nala -> Indra."
   agile_handoff:
     phase_1: "Mpu (Architect) generates architecture-state.toon. Nala is blocked until this exists."
     phase_2: "Nala (Builder) implements the code based on Mpu's design. All methods < 10 lines."
@@ -43,3 +43,60 @@ scripts (zero-dependency python):
   - "compact_memory.py: Merges chat chunks into a dense 5-sector TOON structure."
   - "design_engine.py: Generates strict UI rules (spacing scale, border-radiuses) so Nala doesn't hallucinate."
   - "skill_search.py: Local semantic search across ~/.gemini/.../skills/."
+
+# ─────────────────────────────────────────────────────────
+# Dasa Sradha Kit — Auto-Routing Logic (TOON)
+# ─────────────────────────────────────────────────────────
+# OBJECTIVE: Eliminate slash commands. Enable proactive orchestration.
+
+auto_routing_engine:
+  logic_gate: "Prompt -> Intent_Detection -> Auto_Workflow_Execution"
+
+  scenarios:
+    C_FEATURE_ACCELERATOR:
+      intent_pattern: ["add", "build", "create", "implement", "make a feature"]
+      auto_workflow: 
+        - STEP_1: "Silent execute /dasa-plan to generate implementation_plan.md."
+        - STEP_2: "Auto-transition to /dasa-start-work pipeline (Mpu -> Nala -> Indra)."
+      goal: "User says 'Add login', AI immediately starts coding."
+
+    D_AUTONOMOUS_HOTFIX:
+      intent_pattern: ["fix this", "error in terminal", "broken", "why is this failing"]
+      auto_workflow: 
+        - STEP_1: "Kala intercepts terminal stderr/linter logs."
+        - STEP_2: "Internal route to /dasa-fix for surgical patching via Rsi guidelines."
+      goal: "Zero-effort debugging when the compiler screams."
+
+    E_SEAMLESS_SYNCHRONIZATION:
+      intent_pattern: ["bye", "see you tomorrow", "done for today", "context is full"]
+      auto_workflow:
+        - STEP_1: "Patih triggers /dasa-sync to compress session into .agent/memory/."
+        - STEP_2: "Sastra updates architecture-state.toon for next-session reload."
+      goal: "Infinite memory without user manually saving state."
+
+    F_INTELLIGENT_DOCUMENTOR:
+      intent_pattern: ["how does this work", "docs", "explain the api", "generate postman"]
+      auto_workflow:
+        - STEP_1: "Internal route to /dasa-docs."
+        - STEP_2: "Mpu + Sastra sync routes to OpenAPI/Swagger artifacts."
+      goal: "Documentation that writes itself as the code changes."
+
+    G_GUARDIAN_COMMIT:
+      intent_pattern: ["save", "push", "commit this", "done with the task"]
+      auto_workflow:
+        - STEP_1: "Dharma runs security_scan.py (Check .env leaks)."
+        - STEP_2: "Indra runs qa_gate.py (Enforce 10-line rule)."
+        - STEP_3: "Auto-execute /dasa-commit with Conventional Commit format."
+      goal: "Enterprise-grade safety on every git push."
+
+    H_VISUAL_ORCHESTRATOR:
+      intent_pattern: ["check design", "match this image", "look at the mockup"]
+      auto_workflow:
+        - STEP_1: "Mpu analyzes .design-memory/reference/ assets."
+        - STEP_2: "Auto-generate UI components using design_engine.py rules."
+      goal: "Pixel-perfect UI from a drag-and-drop action."
+
+# ─────────────────────────────────────────────────────────
+# ARCHITECTURAL RULE: 
+# If 'dasa.config.toon' is blank, Scenario A (Interview) or B (Assimilate) 
+# must precede any of the above routing.
