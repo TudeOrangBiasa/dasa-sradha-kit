@@ -38,11 +38,23 @@ personas:
   widya: "Researcher, library analysis."
 
 scripts (zero-dependency python):
-  - "qa_gate.py: Scans code against the Engineering Failures Bible."
-  - "context_mapper.py: AST parser for codebase context without osgrep."
+  - "api_validator.py: Validates REST/GraphQL API payloads and contracts."
+  - "arch_mapper.py: Reads folder structures to auto-detect system architectures."
   - "compact_memory.py: Merges chat chunks into a dense 5-sector TOON structure."
+  - "complexity_scorer.py: Analyzes code files for cyclomatic complexity and warns if > 10."
+  - "context_mapper.py: AST parser for codebase context without osgrep."
   - "design_engine.py: Generates strict UI rules (spacing scale, border-radiuses) so Nala doesn't hallucinate."
+  - "design_memory_sync.py: Compresses vision OCR UI parameters into a vision_bridge.toon."
+  - "lint_fixer.py: Auto-heals trivial ESLint/Prettier or Flake8 errors."
+  - "qa_gate.py: Scans code against the Engineering Failures Bible."
+  - "security_scan.py: Checks for exposed secrets (.env) and blatant SSRF/SQLi patterns."
+  - "semantic-scan.py: Fast grep fallback if osgrep is missing."
   - "skill_search.py: Local semantic search across ~/.gemini/.../skills/."
+  - "status_parser.py: Parses git status and branch data cleanly for Dasa Patih."
+  - "test_runner.py: Executes Jest/PyTest/Go tests and returns concise TOON passes/fails."
+  - "validate_env.py: Checks if .env matches .env.example definitions."
+  - "web_scraper.py: Fetches external API docs if a library changes unexpectedly."
+  - "workspace-mapper.py: Maps dependencies from package.json/go.mod for Assimilation."
 
 # ─────────────────────────────────────────────────────────
 # Dasa Sradha Kit — Auto-Routing Logic (TOON)

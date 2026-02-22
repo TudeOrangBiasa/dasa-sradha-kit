@@ -4,6 +4,13 @@ All notable changes to the Dasa Sradha Kit will be documented in this file.
 
 ---
 
+## [5.1.4] - 2026-02-22
+
+### 🐛 Fixed
+- **Cheat-Sheet Scripts List:** Documented all 17 native Python scripts within the `.artifacts/dasa-cheat-sheet.toon` template. Previously, only 5 scripts were visible to the LLM, causing blind spots during execution.
+
+---
+
 ## [5.1.3] - 2026-02-22
 
 ### 🐛 Fixed
