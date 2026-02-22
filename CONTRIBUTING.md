@@ -50,6 +50,16 @@ model: "Gemini 3.1 Pro"
 
 ---
 
+## Adding an Auto-Routing Scenario
+
+To teach the AI to trigger a new action automatically without a slash command:
+1. Open `.agent/.shared/dasa-cheat-sheet.toon`.
+2. Locate the `auto_routing_engine.scenarios` object.
+3. Add a new Scenario (e.g., `I_NEW_SCENARIO_NAME`).
+4. Define the `intent_pattern` (natural language triggers), the `auto_workflow` steps, and the `goal`.
+
+---
+
 ## Adding a New Workflow
 
 1. Create `.agent/workflows/dasa-<name>.md` with this template:

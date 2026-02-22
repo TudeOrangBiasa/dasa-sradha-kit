@@ -4,6 +4,15 @@ All notable changes to the Dasa Sradha Kit will be documented in this file.
 
 ---
 
+## [5.1.7] - 2026-02-22
+
+### 📚 Documentation Sync
+- **Core Markdown Documents Updated:** Synchronized `ARCHITECTURE.md`, `HOW_IT_WORKS.md`, and `CONTRIBUTING.md` with the massive V5.1 Auto-Routing updates. 
+- **Pipeline Mental Model:** Explicitly documented the difference between the **Routing Pipeline** (Prompt -> Intent -> Workflow) and the **Execution Pipeline** (Mpu -> Nala -> Indra).
+- **Tooling Parity:** Ensured all 17 native Python scripts and 16 Workflows are accurately listed across all repository tables.
+
+---
+
 ## [5.1.6] - 2026-02-22
 
 ### 🐛 Fixed

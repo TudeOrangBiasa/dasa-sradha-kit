@@ -13,11 +13,18 @@ You do **not** need to memorize or explicitly type slash commands like `/dasa-pl
 If you simply type:
 > *"Build me a blog website with Astro and Express. The design mockups are in .design-memory/reference/"*
 
-The baseline IDE agent (restricted by `.agent/rules/GEMINI.md`) will **autonomously intercept your intent** and bootstrap the Dasa Sradha workflow on its own. It will:
-1. Ensure `dasa.config.toon` exists.
-2. Read `.artifacts/dasa-cheat-sheet.toon`.
-3. Populate `.artifacts/task.toon`.
-4. Run the Pipeline natively.
+The baseline IDE agent (restricted by `.agent/rules/GEMINI.md`) will **autonomously intercept your intent** and bootstrap the Dasa Sradha workflow on its own. 
+
+### Context Verification Branching
+
+If `dasa.config.toon` is blank (missing frontend/backend definitions), the AI will evaluate the workspace before proceeding:
+- **Scenario A (Empty Folder):** The AI pauses and interviews you ("What tech stack are we using?"). Once answered, Dasa Dwipa fetches the necessary community skills.
+- **Scenario B (Existing Codebase):** If files like `package.json` exist, the AI silently triggers `/dasa-assimilate`, allowing Dasa Dwipa to map the architecture and auto-populate the config without bothering you.
+
+Once the context is secure, the AI will:
+1. Generate the plan into `.artifacts/task.toon` via the **Mpu Phase**.
+2. Compress visual tokens using `design_memory_sync.py` if Figma PNGs exist.
+3. Automatically trigger the `Mpu -> Nala -> Indra` Agile Pipeline.
 
 ## 3. The Agile Pipeline (Strict Multi-Agent Handoff)
 
@@ -73,22 +80,22 @@ All scripts are **zero-dependency** (standard library only) and **cross-platform
 
 | Script | Owner | Purpose |
 |:---|:---|:---|
-| `qa_gate.py` | Indra | Engineering failure pattern scanner |
-| `context_mapper.py` | Patih | AST-based codebase context generator |
-| `skill_search.py` | Dwipa | Local skill semantic indexer |
-| `design_engine.py` | Mpu/Nala | Strict TOON design system generator |
-| `compact_memory.py` | Patih | 5-sector TOON memory compactor |
-| `security_scan.py` | Dharma | Pre-commit secret/key leak detection |
-| `validate_env.py` | Patih | Environment gatekeeper |
-| `test_runner.py` | Indra | Universal test framework wrapper |
-| `lint_fixer.py` | Nala | Auto-formatter dispatcher |
 | `api_validator.py` | Sastra | OpenAPI/Postman JSON validator |
 | `arch_mapper.py` | Mpu | Dependency graph cartographer |
-| `status_parser.py` | Kala | Task progress JSON aggregator |
-| `web_scraper.py` | Widya | HTML-to-Markdown URL extractor |
-| `complexity_scorer.py` | Rsi | Cyclomatic complexity hotspot finder |
+| `compact_memory.py` | Patih | 5-sector TOON memory compactor |
+| `complexity_scorer.py` | Rsi | Cyclomatic complexity hotspot finder (> 10 warning) |
+| `context_mapper.py` | Patih | Native AST-based codebase context generator |
+| `design_engine.py` | Mpu/Nala | Strict TOON design system generator |
 | `design_memory_sync.py` | Nala | Figma-to-TOON design bridge |
-| `semantic-scan.py` | Dwipa | osgrep wrapper (optional) |
+| `lint_fixer.py` | Nala | Auto-formatter dispatcher |
+| `qa_gate.py` | Indra | Engineering failure pattern scanner (~800 patterns) |
+| `security_scan.py` | Dharma | Pre-commit secret/key leak detection |
+| `semantic-scan.py` | Dwipa | Fast grep fallback if osgrep is missing |
+| `skill_search.py` | Dwipa | Local skill semantic indexer |
+| `status_parser.py` | Kala | Task progress JSON aggregator |
+| `test_runner.py` | Indra | Universal test framework wrapper |
+| `validate_env.py` | Patih | Environment gatekeeper |
+| `web_scraper.py` | Widya | HTML-to-Markdown URL extractor |
 | `workspace-mapper.py` | Dwipa | Visual workspace tree generator |
 
 ---
