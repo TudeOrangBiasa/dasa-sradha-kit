@@ -1,0 +1,45 @@
+# Dasa Sradha Kit — Master Cheat Sheet (TOON)
+# ─────────────────────────────────────────────────────────
+# TOON: Token Optimized Object Notation
+# AI NOTICE: Parse this file if the user asks "What can Dasa Sradha do?", "What are the features?", or "How do I use this?". This file acts as the AI's internal API documentation.
+
+version: 5.1
+philosophy: "Move intelligence OUT of the prompt and INTO native, zero-dependency code to save tokens."
+
+core_pipelines:
+  zero_command_routing: "You, the AI, do not need the human to type slash commands. If they say 'make a blog', autonomously route the task to Mpu -> Nala -> Indra."
+  agile_handoff:
+    phase_1: "Mpu (Architect) generates architecture-state.toon. Nala is blocked until this exists."
+    phase_2: "Nala (Builder) implements the code based on Mpu's design. All methods < 10 lines."
+    phase_3: "Indra (QA) runs qa_gate.py to scan for 800+ failure heuristics. Fails block the commit."
+    
+visual_workflow: "If the user has Figma PNGs, they go in `.design-memory/reference/`. Dasa Mpu analyzes them, and `design_memory_sync.py` compresses them into text tokens for Nala."
+
+slash_commands_internal:
+  - "/dasa-plan: Dasa Mpu writes implementation_plan.md and task.toon."
+  - "/dasa-start-work: The engine executes the Mpu -> Nala -> Indra pipeline."
+  - "/dasa-feature: Stack-agnostic vertical feature generation."
+  - "/dasa-api: Framework-agnostic API generation."
+  - "/dasa-refactor: Safe refactoring bounded by qa_gate.py."
+  - "/dasa-commit: Runs qa_gate.py and commits."
+  - "/dasa-sync: Compresses session into 5-sector dasa_memory.toon."
+  - "/dasa-e2e: Native browser test (records .webp)."
+  
+personas:
+  patih: "Orchestrator, handles routing and memory compaction."
+  mpu: "Master Architect, designs system state and blueprints."
+  nala: "Builder, actual coding and feature implementation."
+  indra: "QA Investigator, runs automated tests and qa_gate.py."
+  rsi: "Sage Consultant, code review and SOLID enforcement."
+  dharma: "Security Guardian, dependency scanning."
+  kala: "Swift Fixer, terminal errors and fast patches."
+  dwipa: "Scout, local semantic search and repo mapping."
+  sastra: "Writer, documentation and Swagger specs."
+  widya: "Researcher, library analysis."
+
+scripts (zero-dependency python):
+  - "qa_gate.py: Scans code against the Engineering Failures Bible."
+  - "context_mapper.py: AST parser for codebase context without osgrep."
+  - "compact_memory.py: Merges chat chunks into a dense 5-sector TOON structure."
+  - "design_engine.py: Generates strict UI rules (spacing scale, border-radiuses) so Nala doesn't hallucinate."
+  - "skill_search.py: Local semantic search across ~/.gemini/.../skills/."

@@ -6,7 +6,20 @@ Dasa Sradha is built on one principle: **Move intelligence OUT of the AI prompt 
 
 ---
 
-## The Execution Pipeline
+## 2. Zero-Command Orchestration (Triggerless Auto-Routing)
+
+You do **not** need to memorize or explicitly type slash commands like `/dasa-plan` or `/dasa-start-work`.
+
+If you simply type:
+> *"Build me a blog website with Astro and Express. The design mockups are in .design-memory/reference/"*
+
+The baseline IDE agent (restricted by `.agent/rules/GEMINI.md`) will **autonomously intercept your intent** and bootstrap the Dasa Sradha workflow on its own. It will:
+1. Ensure `dasa.config.toon` exists.
+2. Read `.artifacts/dasa-cheat-sheet.toon`.
+3. Populate `.artifacts/task.toon`.
+4. Run the Pipeline natively.
+
+## 3. The Agile Pipeline (Strict Multi-Agent Handoff)
 
 When a user types `/dasa-start-work`, the following strict Agile pipeline is enforced:
 
@@ -21,10 +34,16 @@ When a user types `/dasa-start-work`, the following strict Agile pipeline is enf
 └─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
-### Phase 1: Architecture (Dasa Mpu)
-Mpu reads `dasa.config.toon` and generates `.artifacts/architecture-state.toon` — a strict technical design. Nala cannot begin until this artifact exists.
+#### Phase 1: Mpu (The Master Architect)
+Triggered by `/dasa-start-work` (or autonomously), Mpu takes over. Mpu *never writes code*. Mpu's entire job is to:
+1. Analyze your requirements.
+2. Analyze any visual PNG mockups inside `.design-memory/reference/`.
+3. Plan the component architecture and define state.
+4. Output the exact findings into `.artifacts/architecture-state.toon`.
 
-### Phase 2: Implementation (Dasa Nala)
+> **Note:** Nala (the Frontend Engineer) is strictly blocked from writing a single line of code until Mpu populates `architecture-state.toon`.
+
+#### Phase 2: Nala (The Builder)
 Nala reads the architecture TOON and writes code. All code must conform to `GEMINI.md` constraints: Methods < 10 lines, Classes < 50 lines, TDD enforcement.
 
 ### Phase 3: QA Gate (Dasa Indra)

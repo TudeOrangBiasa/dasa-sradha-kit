@@ -184,6 +184,21 @@ gutter: 16px
             info(`  Created .design-memory/${file}`);
         }
     }
+
+    // 3. .design-memory/reference/ — For Figma PNG exports
+    const referenceDir = path.join(designDir, "reference");
+    if (!fs.existsSync(referenceDir)) {
+        fs.mkdirSync(referenceDir, { recursive: true });
+        info("  Created .design-memory/reference/");
+    }
+
+    // 4. Copy Master Cheat Sheet to .artifacts/
+    const cheatSheetSrc = path.join(dest, ".agent", ".shared", "dasa-cheat-sheet.toon");
+    const cheatSheetDest = path.join(artifactsDir, "dasa-cheat-sheet.toon");
+    if (fs.existsSync(cheatSheetSrc) && !fs.existsSync(cheatSheetDest)) {
+        fs.copyFileSync(cheatSheetSrc, cheatSheetDest);
+        info("  Scaffolded .artifacts/dasa-cheat-sheet.toon");
+    }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

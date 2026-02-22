@@ -4,7 +4,9 @@ The **Dasa Sradha Kit** is a native, zero-dependency agentic framework designed 
 
 ## Key Features
 
-- **10 Persona-Based Orchestration**: Distinct AI agents (Scout, Architect, Builder, etc.) with strict Agile handoffs via the `npx dasa-cli` dashboard.
+- **Zero-Command Orchestration**: No need to memorize slash commands. Just prompt naturally (e.g., *"Build me a blog"*), and the P0 GEMINI.md constraints will intercept and autonomously route the task into the Dasa pipeline.
+- **Visual-to-Code Workflow**: Drop Figma mockups or PNGs into `.design-memory/reference/`. Dasa Mpu analyzes them, and local native scripts compress the visual data into text tokens for Dasa Nala to build.
+- **10 Persona-Based Orchestration**: Distinct AI agents (Scout, Architect, Builder, etc.) with strict Agile handoffs.
 - **Zero-Dependency Native Execution**: Uses Antigravity's built-in `browser_subagent` for E2E testing and `run_command` for execution. No Playwright, no heavy NPM packages.
 - **5-Sector TOON Long-Term Memory**: Compresses chat histories into `episodic`, `semantic`, `procedural`, `emotional`, and `reflective` vaults for infinite context without token bloat.
 - **17 Native Python Scripts**: Cross-platform tooling for QA gates, AST-based context mapping, security scanning, and design system generation — all zero-dependency.

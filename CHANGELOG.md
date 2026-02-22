@@ -4,6 +4,18 @@ All notable changes to the Dasa Sradha Kit will be documented in this file.
 
 ---
 
+## [5.1.0] - 2026-02-22
+
+### ✨ New
+- **Zero-Command Orchestration:** Injected P0 `GEMINI.md` constraints so baseline AIs autonomously parse natural language and self-start the `Mpu -> Nala -> Indra` pipeline without requiring explicit slash commands.
+- **Visual-to-Code Workflow:** Formally defined `.design-memory/reference/` as the drop-zone for Figma exports and mockups. Dasa Mpu now analyzes visual assets before Nala builds.
+- **AI Cheat-Sheet:** `dasa-sradha init` now scaffolds `.artifacts/dasa-cheat-sheet.toon`. This provides instant read-access to AI models regarding the framework's capabilities, eliminating context hallucination.
+
+### 🐛 Fixed
+- Expanded `bin/cli.js` to fully scaffold the `.artifacts` and `.design-memory` TOON templates.
+
+---
+
 ## [5.0.1] - 2026-02-22
 
 ### Fixed
