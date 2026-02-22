@@ -1,0 +1,218 @@
+#!/usr/bin/env node
+/**
+ * dasa - The Dasa Sradha Kit CLI
+ * Cross-platform: Windows, macOS, Linux
+ *
+ * Usage:
+ *   dasa init            Initialize Dasa Sradha in current workspace
+ *   dasa install-skills  Install awesome-antigravity skills globally
+ *   dasa --version, -v   Show version
+ *   dasa --help, -h      Show help
+ */
+
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
+
+const pkg = require("../package.json");
+const TEMPLATE_DIR = path.join(__dirname, "..", ".agent");
+const GLOBAL_SKILLS_DIR = path.join(
+    process.env.HOME || process.env.USERPROFILE,
+    ".gemini",
+    "antigravity",
+    "skills"
+);
+
+const cmd = process.argv[2];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────────────────────────────────────
+const green = (s) => `\x1b[32m${s}\x1b[0m`;
+const yellow = (s) => `\x1b[33m${s}\x1b[0m`;
+const red = (s) => `\x1b[31m${s}\x1b[0m`;
+const bold = (s) => `\x1b[1m${s}\x1b[0m`;
+
+function info(msg) { console.log(`${green("[+]")} ${msg}`); }
+function warn(msg) { console.log(`${yellow("[!]")} ${msg}`); }
+function error(msg) { console.error(`${red("[x]")} ${msg}`); }
+
+function printHelp() {
+    console.log(`
+${bold("dasa")} — Dasa Sradha Kit v${pkg.version}
+AI orchestration for Antigravity IDE. 10 Personas. Cross-platform.
+
+${bold("USAGE")}
+  dasa <command> [options]
+
+${bold("COMMANDS")}
+  init              Initialize .agent/ in the current workspace
+  install-skills    Install awesome-antigravity skills globally
+                    (into ~/.gemini/antigravity/skills/)
+
+${bold("OPTIONS")}
+  -v, --version     Print version
+  -h, --help        Print this help
+
+${bold("EXAMPLES")}
+  cd my-project && dasa init
+  dasa install-skills
+`);
+}
+
+function checkOsgrep() {
+    try {
+        execSync("osgrep --version", { stdio: "ignore" });
+        info("osgrep detected. Semantic search capabilities enabled.");
+    } catch {
+        warn("osgrep not detected. Install it for semantic search:");
+        warn("  npm install -g osgrep");
+    }
+}
+
+function scaffoldConfig(dest) {
+    const configPath = path.join(dest, "dasa.config.toon");
+    if (fs.existsSync(configPath)) {
+        warn("dasa.config.toon already exists. Skipping config scaffold.");
+        return;
+    }
+
+    const config = `# Dasa Sradha Kit — Workspace Configuration (TOON Format)
+# ─────────────────────────────────────────────────────────
+# TOON: Token Optimized Object Notation. Dense key-value config.
+# Personas will read this FIRST before any task.
+
+project:
+  name: "my-project"
+  language: "en"        # en | id (output language for personas)
+
+stack:
+  frontend: ""          # e.g. next.js | vue | react
+  backend: ""           # e.g. laravel | nestjs | express
+  database: ""          # e.g. postgresql | mysql | mongodb
+  runtime: ""           # e.g. node | python | php
+
+workspaces:             # Multi-repo / Monorepo mapping
+  frontend: ""          # e.g. ./frontend
+  backend: ""           # e.g. ./backend
+
+semantic_search:
+  engine: "osgrep"      # osgrep | none
+  enabled: true
+
+external_skills: []     # Absolute paths to community skills to activate
+                        # e.g. - "~/.gemini/antigravity/skills/nextjs-react-expert"
+`;
+    fs.writeFileSync(configPath, config, "utf8");
+    info(`Created dasa.config.toon`);
+}
+
+function scaffoldArtifactDirs(dest) {
+    const dirs = [".artifacts", ".design-memory"];
+    const gitkeep = "# Dasa Sradha — Managed Directory\n";
+
+    for (const dir of dirs) {
+        const dirPath = path.join(dest, dir);
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath, { recursive: true });
+            fs.writeFileSync(path.join(dirPath, ".gitkeep"), gitkeep);
+            info(`Created ${dir}/`);
+        }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Commands
+// ─────────────────────────────────────────────────────────────────────────────
+function runInit() {
+    const cwd = process.cwd();
+    const destAgent = path.join(cwd, ".agent");
+
+    console.log(`\n${bold("Dasa Sradha Kit")} v${pkg.version} — Initializing workspace...\n`);
+
+    // Guard: check if root looks like an actual project
+    if (!fs.existsSync(path.join(cwd, "package.json")) &&
+        !fs.existsSync(path.join(cwd, ".git")) &&
+        !fs.existsSync(path.join(cwd, "go.mod")) &&
+        !fs.existsSync(path.join(cwd, "composer.json"))) {
+        warn("No recognized project root found (package.json, .git, go.mod, composer.json).");
+        warn("Make sure you are running this inside your project directory.");
+    }
+
+    // 1. Copy .agent/ template
+    if (fs.existsSync(destAgent)) {
+        warn(".agent/ already exists. Merging missing files only...");
+        fs.cpSync(TEMPLATE_DIR, destAgent, { recursive: true, force: false, errorOnExist: false });
+    } else {
+        info("Installing .agent/ (agents, rules, workflows, scripts, skills)...");
+        fs.cpSync(TEMPLATE_DIR, destAgent, { recursive: true });
+    }
+
+    // 2. Scaffold workspace directories
+    scaffoldArtifactDirs(cwd);
+
+    // 3. Generate dasa.config.toon
+    scaffoldConfig(cwd);
+
+    // 4. Check osgrep
+    checkOsgrep();
+
+    console.log(`
+${green("✔")} Dasa Sradha initialized successfully!
+
+${bold("NEXT STEPS")}
+  1. Open ${bold("dasa.config.toon")} and define your tech stack
+  2. Open Antigravity IDE in this workspace
+  3. Use slash commands: /dasa-plan, /dasa-start-work, /dasa-e2e, etc.
+
+${bold("DOCS")} → https://github.com/TudeOrangBiasa/dasa-sradha-kit
+`);
+}
+
+function runInstallSkills() {
+    console.log(`\n${bold("Installing awesome-antigravity skills globally...")}\n`);
+
+    const repoUrl = "https://github.com/sickn33/antigravity-awesome-skills";
+
+    if (!fs.existsSync(GLOBAL_SKILLS_DIR)) {
+        fs.mkdirSync(GLOBAL_SKILLS_DIR, { recursive: true });
+    }
+
+    const cloneTarget = path.join(GLOBAL_SKILLS_DIR, "_awesome-antigravity");
+
+    if (fs.existsSync(cloneTarget)) {
+        info("Updating existing awesome-antigravity skills...");
+        execSync(`git -C "${cloneTarget}" pull --rebase`, { stdio: "inherit" });
+    } else {
+        info(`Cloning 850+ community skills into ${GLOBAL_SKILLS_DIR}...`);
+        execSync(`git clone --depth=1 ${repoUrl} "${cloneTarget}"`, { stdio: "inherit" });
+    }
+
+    info("Done! Community skills are now available globally to all Dasa workspaces.");
+    console.log(`\n${bold("PATH")} → ${GLOBAL_SKILLS_DIR}\n`);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Entry point
+// ─────────────────────────────────────────────────────────────────────────────
+switch (cmd) {
+    case "init":
+        runInit();
+        break;
+    case "install-skills":
+        runInstallSkills();
+        break;
+    case "--version":
+    case "-v":
+        console.log(`dasa-sradha-kit v${pkg.version}`);
+        break;
+    case "--help":
+    case "-h":
+    case undefined:
+        printHelp();
+        break;
+    default:
+        error(`Unknown command: ${cmd}`);
+        printHelp();
+        process.exit(1);
+}

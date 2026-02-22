@@ -1,0 +1,36 @@
+{
+    "name": "dasa-sradha-kit",
+    "version": "4.0.0",
+    "description": "The Dasa Sradha 10-Persona Orchestration Framework for Antigravity IDE. Cross-platform CLI for setting up AI-assisted development workflows.",
+    "bin": {
+        "dasa": "./bin/cli.js"
+    },
+    "scripts": {
+        "test": "node bin/cli.js --version"
+    },
+    "files": [
+        "bin/",
+        ".agent/",
+        "README.md",
+        "LICENSE",
+        "CHANGELOG.md"
+    ],
+    "keywords": [
+        "antigravity",
+        "ai",
+        "agents",
+        "workflow",
+        "dasa-sradha",
+        "ai-kit"
+    ],
+    "author": "TudeOrangBiasa",
+    "license": "MIT",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TudeOrangBiasa/dasa-sradha-kit.git"
+    },
+    "homepage": "https://github.com/TudeOrangBiasa/dasa-sradha-kit#readme"
+}

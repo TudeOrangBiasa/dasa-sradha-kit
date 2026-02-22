@@ -4,17 +4,27 @@ __pycache__/
 *$py.class
 *.so
 
+# Node / NPM
+node_modules/
+
 # Tooling caches
 .osgrep/
 .ruff_cache/
 
-# Orchestration session state (not part of the kit)
-.sisyphus/
-
-# Per-project runtime artifacts (created by /plan at install target)
+# Per-project runtime artifacts (created by dasa init at install target)
+# .agent/ is tracked — it is the distributed template
 .artifacts/
+.design-memory/
 
+# Workspace-specific config (user-defined, not shipped)
+dasa.config.toon
+
+# Community skills
 .awesome-antigravity/
+
+# Local reference clones (not part of the Dasa Sradha Kit)
+ag-kit/
+awesome-antigravity/
 
 # OS files
 .DS_Store
