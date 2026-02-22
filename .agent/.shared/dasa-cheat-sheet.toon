@@ -7,7 +7,7 @@ version: 5.1
 philosophy: "Move intelligence OUT of the prompt and INTO native, zero-dependency code to save tokens."
 
 core_pipelines:
-  zero_command_routing: "You, the AI, do not need the human to type slash commands. If they say 'make a blog', autonomously route the task to Mpu -> Nala -> Indra."
+  zero_command_routing: "You, the AI, do not need the human to type slash commands. If they say 'make a blog', autonomously route the task to Mpu -> Nala -> Indra. DO NOT jump straight to code or init. ALWAYS start with deep planning (Mpu Phase) and analyzing PNGs dynamically in .design-memory/reference/ first."
   agile_handoff:
     phase_1: "Mpu (Architect) generates architecture-state.toon. Nala is blocked until this exists."
     phase_2: "Nala (Builder) implements the code based on Mpu's design. All methods < 10 lines."
