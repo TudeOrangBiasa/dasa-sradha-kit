@@ -53,6 +53,20 @@ This generates your `dasa.config.toon`, builds the `.agent/` mechanics folder, a
 
 ---
 
+## Orchestration Pipeline (Mental Model)
+
+The Dasa Sradha Kit operates on a strict left-to-right execution mental model. You do not need to memorize slash commands; the AI processes your prompt through this exact pipeline:
+
+**Prompt** ➔ **Rules** (`GEMINI.md`) + **Config** (`dasa.config.toon`) ➔ **Workflows** ➔ **Personas** ➔ **Scripts & Skills**
+
+1. **Prompt**: You type *"Build a login page"*.
+2. **Rules & Config**: The AI reads `GEMINI.md` (which forces it to act as an orchestrator) and checks your tech stack in `dasa.config.toon`.
+3. **Workflows**: The AI autonomously detects the intent and triggers workflows like `/dasa-plan` or `/dasa-start-work`.
+4. **Personas**: The task is rigidly routed to **Dasa Mpu** (for architecture) and then **Dasa Nala** (for coding).
+5. **Scripts**: The personas execute native Python scripts like `qa_gate.py` to guarantee quality.
+
+---
+
 ## Architecture Overview
 
 ```
