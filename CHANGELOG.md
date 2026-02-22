@@ -4,6 +4,13 @@ All notable changes to the Dasa Sradha Kit will be documented in this file.
 
 ---
 
+## [5.1.5] - 2026-02-22
+
+### 🐛 Fixed
+- **Cheat-Sheet Workflows List:** Documented the full list of 16 slash commands inside `.artifacts/dasa-cheat-sheet.toon`. The AI now has absolute context on every workflow available in the `.agent/workflows/` directory.
+
+---
+
 ## [5.1.4] - 2026-02-22
 
 ### 🐛 Fixed
