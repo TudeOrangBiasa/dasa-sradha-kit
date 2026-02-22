@@ -12,8 +12,7 @@ core_pipelines:
     phase_1: "Mpu (Architect) generates architecture-state.toon. Nala is blocked until this exists."
     phase_2: "Nala (Builder) implements the code based on Mpu's design. All methods < 10 lines."
     phase_3: "Indra (QA) runs qa_gate.py to scan for 800+ failure heuristics. Fails block the commit."
-    
-visual_workflow: "If the user has Figma PNGs, they go in `.design-memory/reference/`. Dasa Mpu analyzes them, and `design_memory_sync.py` compresses them into text tokens for Nala."
+  visual_workflow: "If the user has Figma PNGs, they go in `.design-memory/reference/`. Dasa Mpu analyzes them, and `design_memory_sync.py` compresses them into text tokens for Nala."
 
 slash_commands_internal:
   - "/dasa-api: Framework-agnostic API generation."

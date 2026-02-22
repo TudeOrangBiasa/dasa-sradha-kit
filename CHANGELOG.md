@@ -4,6 +4,13 @@ All notable changes to the Dasa Sradha Kit will be documented in this file.
 
 ---
 
+## [5.1.6] - 2026-02-22
+
+### 🐛 Fixed
+- **Cheat-Sheet YAML Structure:** Fixed an indentation error where `visual_workflow` was incorrectly parsed as an outer-scope key instead of acting as a sub-property of `core_pipelines`.
+
+---
+
 ## [5.1.5] - 2026-02-22
 
 ### 🐛 Fixed
