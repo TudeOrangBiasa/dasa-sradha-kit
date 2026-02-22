@@ -4,7 +4,50 @@ All notable changes to the Dasa Sradha Kit will be documented in this file.
 
 ---
 
-## [5.1.7] - 2026-02-22
+## [5.2.1] - 2026-02-23
+
+### 🛡️ Major Hardening Release: 53-Gap Vulnerability Seal (v5.2.1)
+
+#### Added
+- **Scenarios I (Preference Pivot) & J (Graceful Fallback)** in `dasa-cheat-sheet.toon` — natural language preference changes and catch-all routing.
+- **`.agent/VERSION`** file for version-aware migration detection (Gap 52).
+- **26+ P0 constraints** in `GEMINI.md` covering: Staleness Guard, Routing Recursion Guard, Freshness Guard, Write Integrity Guard, Escape Hatch, Model-Agnostic Authoring, Stdlib Whitelist, Argument Sanitization, Large File Handling, Concurrency & Isolation, Container-Aware Execution, Skill Trust Model, Memory & Portability, Observability, IDE & Environment guards.
+
+#### Changed
+- **`dasa-mpu.md`**: Added Effort-Gated Rsi Handoff, Side-Effect Manifest, Resource Locks, Architecture-Pinned Memory.
+- **`dasa-patih.md`**: Added Orchestration Trace, Resource Serialization, Git Hygiene, Version-Aware Migration.
+- **`dasa-indra.md`**: Added Local Linter Integration, Circuit Breaker (3-bounce max), Side-Effect Rollback, Design System Drift check, Import Validation.
+- **`dasa-nala.md`**: Added Design System Token Grounding.
+- **`dasa-dharma.md`**: Added Injection Audit, Secret Leak Scan, Git Hygiene Violation check.
+- **`dasa-cheat-sheet.toon`**: Updated Scenario B (staleness guard), Scenario G (two-layer QA + security checks).
+
+#### Security
+- Shell injection blocked at construction time (Gap 26).
+- Trace log masking for secrets — `sk-*`, `ghp_*`, `AKIA*`, `Bearer`, `DB_PASSWORD=` patterns auto-redacted (Gap 51).
+- Immutable hash ledger for skill trust (Gap 16).
+- Container credential detection and proactive warnings (Gap 27).
+
+#### Performance
+- Token budget guard: 80% warning, 100% hard stop (Gap 36).
+- 500-line AST-windowed reading for large files (Gap 28).
+- Architecture-pinned memories survive all shedding cycles (Gap 45).
+
+---
+
+## [5.2.0] - 2026-02-22
+
+### 🚀 Major Release: V5.2 Ecosystem Assimilation & Pipeline Rigidity
+
+#### Added
+- **Failures Bible Integration:** Natively assimilated the \`engineering-failures-bible\`. Dasa Indra (qa_gate.py) now dynamically parses and evaluates ~800 critical failure heuristics across Memory, Concurrency, and Security during every QA pass.
+- **Web Quality Skills:** Natively assimilated the \`web-quality-skills\` repository. Dasa Nala and Dasa Indra now check Core Web Vitals, A11y, and SEO metrics automatically during UI implementation.
+- **memU Continuous Active Learning:** Overhauled the Temporal Knowledge Graph (\`compact_memory.py\`). Memory items in the Procedural and Emotional sectors are now intelligently deduplicated and weighted, enabling Personas to be highly proactive across future sessions without blowing up context windows.
+- **Explicit Global Constraints:** All 10 Personas have been structurally rewritten to strictly adhere to \`dasa.config.toon\` boundaries. They are explicitly blocked from executing cross-domain tasks without routing through the proper Agile Pipeline (Mpu -> Nala -> Indra).
+
+#### Changed
+- \`qa_gate.py\` no longer relies on hardcoded string checks; it parses markdown natively.
+- \`compact_memory.py\` no longer uses naive arrays; it utilizes tagged, weighted dictionary objects.
+- Dasa Mpu now explicitly enforces Scenario H (Vision Extraction) by halting execution if the \`.design-memory/reference\` folder requires \`design_memory_sync.py\`.
 
 ### 📚 Documentation Sync
 - **Core Markdown Documents Updated:** Synchronized `ARCHITECTURE.md`, `HOW_IT_WORKS.md`, and `CONTRIBUTING.md` with the massive V5.1 Auto-Routing updates. 

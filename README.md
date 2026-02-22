@@ -8,10 +8,11 @@ The **Dasa Sradha Kit** is a native, zero-dependency agentic framework designed 
 - **Visual-to-Code Workflow**: Drop Figma mockups or PNGs into `.design-memory/reference/`. Dasa Mpu analyzes them, and local native scripts compress the visual data into text tokens for Dasa Nala to build.
 - **10 Persona-Based Orchestration**: Distinct AI agents (Scout, Architect, Builder, etc.) with strict Agile handoffs.
 - **Zero-Dependency Native Execution**: Uses Antigravity's built-in `browser_subagent` for E2E testing and `run_command` for execution. No Playwright, no heavy NPM packages.
-- **5-Sector TOON Long-Term Memory**: Compresses chat histories into `episodic`, `semantic`, `procedural`, `emotional`, and `reflective` vaults for infinite context without token bloat.
-- **17 Native Python Scripts**: Cross-platform tooling for QA gates, AST-based context mapping, security scanning, and design system generation — all zero-dependency.
+- **memU Continuous Active Learning**: Compresses chat histories into a 5-Sector TOON Long-Term Memory. Procedural and Emotional sectors are dynamically weighted and deduplicated so agents proactively recall past mistakes and preferences.
+- **Dynamic qa_gate.py Scanner**: Indra enforces a true QA gate by dynamically parsing over 1,000 engineering failure heuristics from the assimilated `engineering-failures-bible` and `web-quality-skills` repositories.
 - **Senior Engineer Constraints**: Hard limits enforcing Methods < 10 lines and Classes < 50 lines across all Personas.
 - **Stack-Agnostic Workflows**: Framework detection via `dasa.config.toon` — works with React, Go, Python, Rust, or any stack.
+- **53-Gap Defense-in-Depth**: 10 layers of security and reliability hardening covering architecture through git hygiene.
 
 ---
 
@@ -49,21 +50,23 @@ npm link
 dasa-sradha init
 ```
 
-This generates your `dasa.config.toon`, builds the `.agent/` mechanics folder, and creates the `.artifacts/` memory vault.
+This generates your `dasa.config.toon`, builds the `.agent/` mechanics folder, creates the `.artifacts/` memory vault, and configures `.gitignore` for ephemeral files.
 
 ---
 
 ## Orchestration Pipeline (Mental Model)
 
-The Dasa Sradha Kit operates on a strict left-to-right execution mental model. You do not need to memorize slash commands; the AI processes your prompt through this exact pipeline:
+The Dasa Sradha Kit operates on two strict pipelines:
 
-**Prompt** ➔ **Rules** (`GEMINI.md`) + **Config** (`dasa.config.toon`) ➔ **Workflows** ➔ **Personas** ➔ **Scripts & Skills**
+### 1. Auto-Routing Pipeline (Prompt → Action)
+**Prompt** ➔ **Rules** (`GEMINI.md`) + **Config** (`dasa.config.toon`) ➔ **Scenario Detection (A-J)** ➔ **Auto Workflow**
 
-1. **Prompt**: You type *"Build a login page"*.
-2. **Rules & Config**: The AI reads `GEMINI.md` (which forces it to act as an orchestrator) and checks your tech stack in `dasa.config.toon`.
-3. **Workflows**: The AI autonomously detects the intent and triggers workflows like `/dasa-plan` or `/dasa-start-work`.
-4. **Personas**: The task is rigidly routed to **Dasa Mpu** (for architecture) and then **Dasa Nala** (for coding).
-5. **Scripts**: The personas execute native Python scripts like `qa_gate.py` to guarantee quality.
+The AI detects intent from 10 scenarios (initialization, assimilation, feature building, hotfixing, sync, docs, commits, visuals, preference pivots, fallback) and auto-routes to the correct workflow.
+
+### 2. Execution Pipeline (Agile Handoff)
+**Mpu** (Architect) ➔ **Rsi** (Review, if complex) ➔ **Nala** (Builder) ➔ **Indra** (QA Gate)
+
+Strict chain of command. Nala is blocked until Mpu designs. Rsi review is effort-gated. Indra enforces a 3-bounce circuit breaker.
 
 ---
 
@@ -73,11 +76,18 @@ The Dasa Sradha Kit operates on a strict left-to-right execution mental model. Y
 <workspace-root>/
 ├── .agent/                    ← Read-Only Mechanics (installed by dasa-cli)
 │   ├── agents/                ← 10 Dasa Personas
-│   ├── rules/GEMINI.md        ← P0 global constraints (SOLID, TDD, Methods < 10)
+│   ├── rules/GEMINI.md        ← P0 global constraints (SOLID, TDD, 53-gap hardening)
 │   ├── skills/                ← Modular domain resources (engineering failures, etc.)
 │   ├── workflows/             ← 16 Slash Commands
-│   └── scripts/               ← 17 Python scripts (zero-dependency)
-├── .artifacts/                ← Read-Write Memory (active tasks, TOON vaults)
+│   ├── scripts/               ← 17 Python scripts (zero-dependency, stdlib only)
+│   ├── .shared/               ← Templates (cheat-sheet, skill trust ledger)
+│   └── VERSION                ← Kit semver for migration detection
+├── .artifacts/                ← Read-Write Memory
+│   ├── task.toon              ← (PORTABLE — committable)
+│   ├── architecture-state.toon← (PORTABLE — committable)
+│   ├── dasa_memory.toon       ← (EPHEMERAL — gitignored)
+│   ├── trace.toon             ← (EPHEMERAL — gitignored)
+│   └── generated-skills/      ← (EPHEMERAL — gitignored)
 ├── .design-memory/            ← Long-term UI specs
 ├── dasa.config.toon           ← Your tech stack configuration
 └── bin/
@@ -97,7 +107,7 @@ The Dasa Sradha Kit operates on a strict left-to-right execution mental model. Y
 | `/dasa-api` | Generate API endpoints (framework-agnostic via `dasa.config.toon`). |
 | `/dasa-refactor` | Safe refactoring with mandatory QA gate. |
 | `/dasa-status` | Display current progress. |
-| `/dasa-commit` | QA gate + atomic Conventional Commit. |
+| `/dasa-commit` | QA gate + security audit + atomic Conventional Commit. |
 | `/dasa-sync` | Compress session to 5-sector TOON memory vault. |
 | `/dasa-fix` | Auto-heal from terminal errors. |
 | `/dasa-pr` | Adversarial GitHub PR review via `gh`. |
@@ -113,16 +123,33 @@ The Dasa Sradha Kit operates on a strict left-to-right execution mental model. Y
 
 | Persona | Role |
 |:---|:---|
-| **Dasa Patih** | Orchestrator — routes tasks, compacts memory |
-| **Dasa Mpu** | Master Architect — system design, planning |
+| **Dasa Patih** | Orchestrator — routes tasks, compacts memory, trace logging |
+| **Dasa Mpu** | Master Architect — system design, planning, vision analysis |
 | **Dasa Rsi** | Sage Consultant — code review, SOLID enforcement |
-| **Dasa Nala** | Builder — frontend/backend implementation |
+| **Dasa Nala** | Builder — frontend/backend implementation, design token grounding |
 | **Dasa Sastra** | Writer — documentation, API specs |
 | **Dasa Widya** | Researcher — library analysis, data research |
 | **Dasa Dwipa** | Scout — codebase exploration, skill search |
-| **Dasa Indra** | QA Investigator — testing, `qa_gate.py` enforcement |
-| **Dasa Dharma** | Security Guardian — secret scanning, audits |
+| **Dasa Indra** | QA Investigator — testing, `qa_gate.py`, local linter, circuit breaker |
+| **Dasa Dharma** | Security Guardian — secret scanning, injection audit, git hygiene |
 | **Dasa Kala** | Swift Fixer — patches, quick tactical fixes |
+
+---
+
+## 10 Auto-Routing Scenarios
+
+| Scenario | Trigger | Action |
+|:---|:---|:---|
+| **A** | "make me an app" | Interview user about tech stack |
+| **B** | "onboard this repo" | Silent codebase assimilation |
+| **C** | "add", "build", "create" | Auto plan + build pipeline |
+| **D** | "fix this", "broken" | Kala/Rsi hotfix |
+| **E** | "bye", "done for today" | Compress session to memory |
+| **F** | "docs", "explain" | Auto documentation generation |
+| **G** | "commit", "push" | Security + QA gate + commit |
+| **H** | "check design" | Vision analysis + UI generation |
+| **I** | "changed my mind" | Preference pivot in memory |
+| **J** | *(catch-all)* | Present top 3 scenario matches |
 
 ---
 
@@ -149,3 +176,4 @@ external_skills:
 - [HOW_IT_WORKS.md](HOW_IT_WORKS.md) — Complete Architectural Manual
 - [CONTRIBUTING.md](CONTRIBUTING.md) — How to forge new Personas and Workflows
 - [CHANGELOG.md](CHANGELOG.md) — Latest updates
+- [docs/dasa-sradha-project-summary.toon](docs/dasa-sradha-project-summary.toon) — Full TOON summary for AI context

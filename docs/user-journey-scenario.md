@@ -1,5 +1,7 @@
 # Scenario: Building a Company Profile with Dasa Sradha Kit & Antigravity IDE
 
+> **Note:** This document describes the legacy V1/V3 architecture (`install.sh`, global scripts). For the modern V5 zero-dependency workflow (`npx dasa-sradha-kit init`), see `HOW_IT_WORKS.md` and the `README.md`.
+
 This guide demonstrates how a developer can use the **Dasa Sradha Kit** native workflows alongside external skills (like those from [antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills)) to build a 5-10 page Astro company profile entirely within the Antigravity IDE.
 
 ---

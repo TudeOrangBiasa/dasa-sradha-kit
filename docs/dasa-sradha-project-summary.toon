@@ -1,0 +1,388 @@
+# ═══════════════════════════════════════════════════════════════
+# DASA SRADHA KIT — COMPLETE PROJECT SUMMARY (TOON)
+# ═══════════════════════════════════════════════════════════════
+# PURPOSE: Dump this entire file into any AI chat to give it
+# complete architectural context of the Dasa Sradha Kit.
+# FORMAT: TOON (Token Optimized Object Notation)
+# VERSION: 5.2.1
+# DATE: 2026-02-23
+# AUTHOR: TudeOrangBiasa
+# REPO: https://github.com/TudeOrangBiasa/dasa-sradha-kit
+# NPM: npm install -g dasa-sradha-kit
+# ═══════════════════════════════════════════════════════════════
+
+identity:
+  name: "Dasa Sradha Kit"
+  tagline: "Zero-dependency agentic framework for Antigravity IDE"
+  philosophy: "Move intelligence OUT of the AI prompt and INTO native, zero-dependency code to save tokens."
+  language_strategy:
+    internal_reasoning: English
+    user_output: Bahasa Indonesia
+    code_and_comments: English
+
+# ─────────────────────────────────────────────────────────
+# SECTION 1: WHAT IS IT?
+# ─────────────────────────────────────────────────────────
+
+what_it_is:
+  summary: "A native AI orchestration framework that splits complex software workflows into 10 distinct AI Personas. It autonomously routes natural language prompts into strict Agile pipelines (Architect -> Builder -> QA) without requiring the user to memorize slash commands."
+  key_differentiators:
+    - "Zero-Command Orchestration: AI intercepts natural language and auto-routes to the correct pipeline."
+    - "10 Persona-Based Agents: Each agent has strict domain boundaries (Security, QA, Architecture, etc.)."
+    - "17 Native Python Scripts: All zero-dependency (stdlib only), cross-platform (Win/Mac/Linux)."
+    - "16 Slash Command Workflows: Stack-agnostic via dasa.config.toon."
+    - "Dynamic QA Gate: qa_gate.py parses 1,000+ engineering failure heuristics from assimilated knowledge bases."
+    - "memU Active Learning: compact_memory.py uses weighted, deduplicated 5-sector memory vaults."
+    - "Senior Engineer Constraints: Methods < 10 lines, Classes < 50 lines, TDD enforcement."
+    - "53-Gap Defense-in-Depth: 10 security/reliability layers covering architecture through hygiene."
+
+prerequisites:
+  - "Antigravity IDE (mandatory)"
+  - "Node.js 18+ (for CLI)"
+  - "Python 3.8+ (for scripts)"
+  - "Git (for version control)"
+
+install:
+  npx: "npx dasa-sradha-kit init"
+  global: "npm install -g dasa-sradha-kit && dasa-sradha init"
+
+# ─────────────────────────────────────────────────────────
+# SECTION 2: ARCHITECTURE
+# ─────────────────────────────────────────────────────────
+
+architecture:
+  workspace_layout:
+    read_only_mechanics:
+      path: ".agent/"
+      contents:
+        agents: "10 Persona definition files (dasa-*.md)"
+        rules: "GEMINI.md — P0 global constraints (always-on, SOLID, TDD, 53-gap hardening)"
+        skills: "Modular domain resources (engineering-failures-bible, web-quality-skills, etc.)"
+        workflows: "16 Slash Command definition files (dasa-*.md)"
+        scripts: "17 Cross-platform Python executables (no bash dependencies)"
+        shared: "Common templates (dasa-cheat-sheet.toon, skill_trust_ledger.json)"
+        version: ".agent/VERSION — Kit semver for migration detection"
+    read_write_memory:
+      artifacts_portable: ".artifacts/task.toon, architecture-state.toon, implementation_plan.md — COMMITTABLE"
+      artifacts_ephemeral: ".artifacts/dasa_memory.toon, trace.toon, merge_digest.toon, process_registry.toon, side-effects.toon, generated-skills/ — NEVER COMMIT"
+      design_memory: ".design-memory/ — Long-term: UI specs, architectural decisions, Figma references"
+      config: "dasa.config.toon — Workspace configuration (tech stack, paths, skills)"
+    cli:
+      cli_js: "bin/cli.js — dasa CLI entry point (init, install-skills)"
+      dasa_cli_js: "bin/dasa-cli.js — dasa-cli orchestrator dashboard (up, run)"
+
+  rules_priority:
+    P0: ".agent/rules/GEMINI.md (Always-on: SOLID, TDD, 53-Gap Hardening)"
+    P1: ".agent/agents/dasa-*.md (Per-persona overrides)"
+    P2: ".agent/skills/** (Domain-specific knowledge)"
+
+# ─────────────────────────────────────────────────────────
+# SECTION 3: THE 10 PERSONAS
+# ─────────────────────────────────────────────────────────
+
+personas:
+  dasa_patih:
+    role: "Orchestrator / Prime Minister"
+    domain: "Task routing, memory compaction, environment gating, trace logging"
+    scripts: ["compact_memory.py", "validate_env.py", "context_mapper.py"]
+    scenarios: ["E_SEAMLESS_SYNCHRONIZATION", "C_FEATURE_ACCELERATOR"]
+    v521_additions: ["Orchestration trace (Gap 35)", "Resource serialization (Gap 38)", "Git hygiene (Gap 49)", "Version-aware migration (Gap 52)"]
+
+  dasa_mpu:
+    role: "Master Architect"
+    domain: "System design, planning, vision analysis"
+    scripts: ["arch_mapper.py", "design_engine.py", "design_memory_sync.py"]
+    scenarios: ["H_VISUAL_ORCHESTRATOR"]
+    pipeline_phase: "Phase 1 (Architect) — generates architecture-state.toon"
+    v521_additions: ["Effort-gated Rsi handoff (Gap 2+4)", "Side-effect manifest (Gap 31)", "Resource locks (Gap 38)", "Architecture-pinned memory (Gap 45)"]
+
+  dasa_nala:
+    role: "The Builder"
+    domain: "Frontend/Backend implementation"
+    scripts: ["design_memory_sync.py", "lint_fixer.py"]
+    constraints: "BLOCKED until Mpu's architecture-state.toon exists. Must read .design-memory/style.md and .agent/skills/."
+    pipeline_phase: "Phase 2 (Builder) — implements code based on Mpu's design"
+    v521_additions: ["Design system token grounding (Gap 46)"]
+
+  dasa_indra:
+    role: "QA Investigator / E2E Tester"
+    domain: "Testing, qa_gate.py enforcement, browser E2E"
+    scripts: ["qa_gate.py", "test_runner.py"]
+    scenarios: ["G_GUARDIAN_COMMIT"]
+    pipeline_phase: "Phase 3 (QA Gate) — runs 1000+ heuristic scans. Bounces to Phase 2 on failure."
+    v521_additions: ["Local linter integration (Gap 43)", "Circuit breaker 3-bounce max (Gap 37)", "Side-effect rollback (Gap 31)", "Design system drift check (Gap 46)", "Import validation (Gap 53)"]
+
+  dasa_rsi:
+    role: "Sage Consultant / Reviewer"
+    domain: "Code review, SOLID enforcement, PR review"
+    scripts: ["complexity_scorer.py"]
+    scenarios: ["D_AUTONOMOUS_HOTFIX (advisory)"]
+    constraints: "Methods < 10 lines, Classes < 50 lines, Domain Primitives mandatory."
+
+  dasa_dharma:
+    role: "Security Guardian"
+    domain: "Secret scanning, dependency audit, security compliance"
+    scripts: ["security_scan.py"]
+    scenarios: ["G_GUARDIAN_COMMIT"]
+    v521_additions: ["Injection audit (Gap 26)", "Secret leak scan (Gap 51)", "Git hygiene violation (Gap 49)"]
+
+  dasa_kala:
+    role: "Swift Fixer"
+    domain: "Patches, quick tactical fixes, terminal error resolution"
+    scripts: ["status_parser.py"]
+    scenarios: ["D_AUTONOMOUS_HOTFIX"]
+
+  dasa_dwipa:
+    role: "Scout / Semantic Search"
+    domain: "Codebase exploration, skill search, repo mapping, assimilation"
+    scripts: ["workspace-mapper.py", "arch_mapper.py", "skill_search.py", "semantic-scan.py"]
+    scenarios: ["A_INITIALIZATION_INTERVIEW", "B_CODEBASE_ASSIMILATION"]
+
+  dasa_sastra:
+    role: "Documentation Writer"
+    domain: "Docs, API specs, READMEs, Swagger/OpenAPI generation"
+    scripts: ["api_validator.py"]
+    scenarios: ["F_INTELLIGENT_DOCUMENTOR"]
+
+  dasa_widya:
+    role: "Researcher"
+    domain: "Library research, external data analysis"
+    scripts: ["web_scraper.py"]
+
+# ─────────────────────────────────────────────────────────
+# SECTION 4: CORE PIPELINES
+# ─────────────────────────────────────────────────────────
+
+core_pipelines:
+  auto_routing_pipeline:
+    flow: "Prompt -> Intent Detection (Scenarios A-J) -> Auto Workflow Execution"
+    description: "User types in natural language. GEMINI.md intercepts, detects intent, and auto-routes to the correct workflow without needing slash commands."
+
+  agile_execution_pipeline:
+    flow: "Phase 1: Mpu (Architect) -> Phase 1.5: Rsi (Review, Deep/Exhaustive only) -> Phase 2: Nala (Builder) -> Phase 3: Indra (QA Gate)"
+    description: "Once a workflow is active, the strict Agile handoff chain applies. Mpu designs. Rsi reviews (if complex). Nala builds. Indra blocks commits until QA passes."
+
+  context_verification:
+    scenario_a: "If dasa.config.toon is blank AND folder is empty -> Interview user about tech stack."
+    scenario_b: "If dasa.config.toon is blank/stale (>7 days) BUT files exist -> Silently assimilate codebase via /dasa-assimilate."
+    staleness_guard: "If config is populated, 'explain' intents route to F. Explicit 're-analyze'/'onboard' or stale config -> offer both F and B."
+    rule: "Scenarios A/B must precede any of C-J."
+
+# ─────────────────────────────────────────────────────────
+# SECTION 5: AUTO-ROUTING SCENARIOS (A-J)
+# ─────────────────────────────────────────────────────────
+
+auto_routing_scenarios:
+  A_INITIALIZATION_INTERVIEW:
+    intent: ["make me an app", "start a project"]
+    action: "Pause. Interview user about tech stack. Dwipa fetches skills. Populate dasa.config.toon."
+
+  B_CODEBASE_ASSIMILATION:
+    intent: ["onboard this repo", "assimilate", "re-map codebase"]
+    precondition: "dasa.config.toon is blank OR stale (>7 days)"
+    action: "Silent /dasa-assimilate. Dwipa maps workspace. Auto-populate dasa.config.toon."
+
+  C_FEATURE_ACCELERATOR:
+    intent: ["add", "build", "create", "implement"]
+    action: "Silent /dasa-plan -> auto /dasa-start-work (Mpu -> Nala -> Indra)."
+
+  D_AUTONOMOUS_HOTFIX:
+    intent: ["fix this", "error in terminal", "broken"]
+    action: "Kala intercepts stderr. Route to /dasa-fix via Rsi guidelines."
+
+  E_SEAMLESS_SYNCHRONIZATION:
+    intent: ["bye", "done for today", "context is full"]
+    action: "Patih /dasa-sync. Compress session into .artifacts/dasa_memory.toon."
+
+  F_INTELLIGENT_DOCUMENTOR:
+    intent: ["docs", "explain the api", "generate postman", "how does this work"]
+    action: "Route to /dasa-docs. Mpu + Sastra sync to OpenAPI/Swagger artifacts."
+
+  G_GUARDIAN_COMMIT:
+    intent: ["save", "push", "commit this", "done with the task"]
+    action: "Dharma security_scan.py -> Indra qa_gate.py -> Indra local linter -> Dharma [INJECTION_RISK]/[SECRET_LEAK]/[GIT_HYGIENE] audit -> Auto /dasa-commit."
+
+  H_VISUAL_ORCHESTRATOR:
+    intent: ["check design", "match this image", "look at the mockup"]
+    action: "Mpu analyzes .design-memory/reference/ -> design_engine.py generates UI components."
+
+  I_PREFERENCE_PIVOT:
+    intent: ["I changed my mind about", "actually let's use", "forget what I said about", "pivot to"]
+    action: "Patih detects preference contradiction -> compact_memory.py deletes conflicting memory -> inserts new preference."
+
+  J_GRACEFUL_FALLBACK:
+    intent: ["_CATCH_ALL_"]
+    action: "If NO Scenario A-I matches, present 3 most likely Scenario matches. Ask user to confirm."
+
+# ─────────────────────────────────────────────────────────
+# SECTION 6: 17 NATIVE PYTHON SCRIPTS
+# ─────────────────────────────────────────────────────────
+
+scripts:
+  - "api_validator.py    | Sastra   | OpenAPI/Postman JSON validator"
+  - "arch_mapper.py      | Mpu      | Dependency graph cartographer"
+  - "compact_memory.py   | Patih    | 5-sector TOON memory compactor (memU active learning)"
+  - "complexity_scorer.py| Rsi      | Cyclomatic complexity hotspot finder"
+  - "context_mapper.py   | Patih    | Native AST-based codebase context generator"
+  - "design_engine.py    | Mpu/Nala | Strict TOON design system generator"
+  - "design_memory_sync.py| Nala    | Figma-to-TOON design bridge"
+  - "lint_fixer.py       | Nala     | Auto-formatter dispatcher"
+  - "qa_gate.py          | Indra    | Dynamic failure scanner (1,000+ heuristics)"
+  - "security_scan.py    | Dharma   | Pre-commit secret/key leak detection"
+  - "semantic-scan.py    | Dwipa    | Fast grep fallback if osgrep is missing"
+  - "skill_search.py     | Dwipa    | Local SKILL.md semantic indexer"
+  - "status_parser.py    | Kala     | Task progress JSON aggregator"
+  - "test_runner.py      | Indra    | Universal test framework wrapper"
+  - "validate_env.py     | Patih    | Environment gatekeeper (container detection, binary preflight, orphan cleanup)"
+  - "web_scraper.py      | Widya    | HTML-to-Markdown URL extractor"
+  - "workspace-mapper.py | Dwipa    | Visual workspace tree generator"
+
+# ─────────────────────────────────────────────────────────
+# SECTION 7: 16 SLASH COMMANDS
+# ─────────────────────────────────────────────────────────
+
+slash_commands:
+  - "/dasa-init        | Patih            | Initialize workspace config + git hygiene + VERSION migration"
+  - "/dasa-plan        | Mpu              | Create implementation_plan.md"
+  - "/dasa-start-work  | Mpu->Nala->Indra | Execute plan via strict Agile pipeline"
+  - "/dasa-feature     | Mpu->Nala->Indra | Implement a complete vertical feature"
+  - "/dasa-api         | Patih->Mpu->Sastra| API endpoint + docs (framework-agnostic)"
+  - "/dasa-refactor    | Rsi->Nala->Indra | Safe refactoring with mandatory QA gate"
+  - "/dasa-status      | Patih            | Report progress"
+  - "/dasa-commit      | Dwipa+Indra      | QA gate + security audit + atomic git commit"
+  - "/dasa-sync        | Patih->Sastra    | Compress session to 5-sector TOON memory"
+  - "/dasa-fix         | Rsi->Kala        | Auto-heal from terminal errors"
+  - "/dasa-pr          | Rsi              | Adversarial GitHub PR review"
+  - "/dasa-e2e         | Indra            | Native browser E2E test"
+  - "/dasa-seed        | Dwipa->Mpu->Nala | Realistic DB seed generation"
+  - "/dasa-docs        | Dwipa->Mpu->Sastra| API doc generation"
+  - "/dasa-assimilate  | Dwipa->Widya     | Onboard pre-existing codebase"
+  - "/dasa-uninstall   | Patih            | Remove .agent/ from workspace"
+
+# ─────────────────────────────────────────────────────────
+# SECTION 8: TOON MEMORY SYSTEM (memU Active Learning)
+# ─────────────────────────────────────────────────────────
+
+memory_system:
+  vault_path: ".artifacts/dasa_memory.toon"
+  format: "JSON with temporal metadata, tags, and proactive weights"
+  sectors:
+    episodic:
+      purpose: "Events (e.g., User asked to switch to SQLite)"
+      weight: 1
+    semantic:
+      purpose: "Facts (e.g., App runs on port 3000)"
+      weight: 1
+    procedural:
+      purpose: "Skills/Fixes (e.g., How to deploy to Railway)"
+      weight: 8
+      proactive: true
+    emotional:
+      purpose: "Preferences (e.g., User strictly hates Tailwind)"
+      weight: 10
+      proactive: true
+    reflective:
+      purpose: "Insights (e.g., We should use Postgres instead of MySQL next time)"
+      weight: 5
+      pinnable: true
+  deduplication: "Exact content match -> boost weight instead of duplicating"
+  sorting: "Procedural and Emotional sectors are sorted by weight DESC so agents see top rules first"
+  temporal_decay: "Memories with last_accessed > 7 days lose 1 weight per cycle. MAX_WEIGHT = 20."
+  pinned_memory: "Architecture-critical decisions (DB schema, framework choice) saved with pinned: true survive all shedding."
+  project_isolation: "Memory operations are scoped to current workspace .artifacts/. NEVER cross-project."
+
+# ─────────────────────────────────────────────────────────
+# SECTION 9: ASSIMILATED KNOWLEDGE BASES
+# ─────────────────────────────────────────────────────────
+
+assimilated_ecosystems:
+  engineering_failures_bible:
+    path: ".agent/skills/engineering-failures-*/"
+    languages: ["nodejs", "go", "rust", "java-springboot", "dotnet", "php"]
+    total_patterns: "~800 patterns across 12 domains per language"
+    domains: ["Memory", "Concurrency", "Security", "Data Integrity", "Resources", "Types", "Error Handling", "Performance", "API Design", "Testing", "Dependencies", "Monitoring"]
+    integration: "qa_gate.py dynamically parses rg patterns from these markdown files"
+
+  web_quality_skills:
+    path: ".agent/skills/"
+    skills: ["accessibility", "best-practices", "core-web-vitals", "performance", "seo", "web-quality-audit"]
+    integration: "Nala consults before UI coding. Indra checks during QA pass."
+
+  memu_principles:
+    integration: "compact_memory.py adopts continuous active learning via weighted tagging and deduplication."
+
+# ─────────────────────────────────────────────────────────
+# SECTION 10: GLOBAL CONSTRAINTS (GEMINI.md — 53-Gap Hardened)
+# ─────────────────────────────────────────────────────────
+
+global_constraints:
+  p0_rules:
+    - "Zero-Command Orchestration: AI auto-routes natural language to pipelines."
+    - "Context Verification: If dasa.config.toon is blank, Scenario A or B must precede."
+    - "Staleness Guard: Config older than 7 days triggers re-assimilation offer."
+    - "Vision OCR: If .design-memory/reference/ has images, Mpu must analyze first."
+    - "Deep Planning: Write implementation_plan.md BEFORE coding."
+    - "Execution Pipeline: Mpu -> (Rsi if Deep) -> Nala -> Indra strictly enforced."
+    - "Fallback Routing: If no Scenario matches, present top 3 matches (Scenario J)."
+    - "Routing Recursion Guard: Max 2 same-Scenario triggers per turn."
+  code_quality:
+    - "Methods strictly < 10 lines (3 exemptions/file max, 20 lines/exempt max)."
+    - "Classes strictly < 50 lines."
+    - "TDD: Red-Green-Refactor cycle. Tests BEFORE implementation."
+    - "Domain Primitives: Value Objects for IDs, emails, money."
+    - "Law of Demeter + Tell Don't Ask."
+    - "Model-Agnostic Authoring: Imperative language in all instructions."
+  safety:
+    - "StrReplace Safety: MUST view_file before editing. Never guess."
+    - "Freshness Guard: Re-read before write if >30s elapsed."
+    - "Write Integrity Guard: Verify EOF after every write."
+    - "Dynamic Version Verification: NEVER hardcode framework versions."
+    - "CLI-First Development: Use framework CLIs before manual configs."
+    - "Adversarial Self-Review on Deep/Exhaustive tasks."
+    - "Intellectual Honesty: Declare confidence (Certain/Likely/Uncertain)."
+  security:
+    - "Stdlib Whitelist: Scripts MUST use only whitelisted stdlib modules."
+    - "Argument Sanitization: NEVER interpolate raw user input into shell commands."
+    - "Skill Trust Model: SHA-256 hash-verified trust with immutable ledger."
+    - "Trace Log Masking: Secrets auto-redacted before writing to trace.toon."
+    - "Git Hygiene: Ephemeral files blocked from commits."
+    - "License Compliance: Copyleft skill in permissive project triggers advisory."
+  concurrency:
+    - "Write Isolation: Personas write to namespaced files."
+    - "Source File Ownership: Patih assigns explicit file locks."
+    - "Read-Barrier: Locked files unreadable until owner completes."
+    - "Merge-Broadcast: Read merge_digest.toon before each sub-task."
+    - "Token Budget Guard: max_tool_calls_per_task (default 100)."
+    - "Process Registry: Background commands tracked for orphan cleanup."
+  containers:
+    - "Runtime Context Detection: Auto-detect DDEV/Docker."
+    - "Path Resolution: Host-to-container path mapping."
+    - "Credential Status: Warn if container creds missing."
+    - "Long-Running Commands: Async polling with 300s timeout."
+  memory_management:
+    - "Temporal Decay: Weight loss after 7 days inactivity."
+    - "Project Isolation: Memory scoped to current workspace only."
+    - "Artifact Portability: Portable files committable, ephemeral files gitignored."
+    - "Architecture-Pinned Memory: Critical decisions survive shedding."
+
+# ─────────────────────────────────────────────────────────
+# SECTION 11: v5.2.1 DEFENSE LAYERS (53 Gaps)
+# ─────────────────────────────────────────────────────────
+
+defense_layers:
+  L1_architecture: "Gaps 1-6: Intent routing, pipeline, rules, QA, memory, security"
+  L2_meta_gaps: "Gaps 1-6 (dual): Second-order patch risks"
+  L3_infrastructure: "Gaps 7-11: Visual QA, races, monorepo, fallback, stdlib"
+  L4_deep_infra: "Gaps 12-15: Container, source locks, supply chain, bloat"
+  L5_meta_security: "Gaps 16-20: Immutable ledger, read-barrier, synthesis, a11y, broadcast"
+  L6_refinement: "Gaps 21-25: Path map, skill GC, plan drift, noise, shedding"
+  L7_security_plus: "Gaps 26-30: Shell injection, creds, legacy files, facts, IDE version"
+  L8_operational: "Gaps 31-40: Rollback, license, model drift, loops, trace, budget, circuit breaker, resources, versioning, binaries"
+  L9_practitioner: "Gaps 41-46: Dirty read, truncation, linter, sync, pins, design tokens"
+  L10_hygiene: "Gaps 47-53: Brain leak, zombies, git safety, portability, secret masking, migration, env pollution"
+
+# ═══════════════════════════════════════════════════════════════
+# END OF SUMMARY
+# To use: Copy this entire file and paste it into any AI chat.
+# The AI will have full architectural context of Dasa Sradha Kit.
+# ═══════════════════════════════════════════════════════════════

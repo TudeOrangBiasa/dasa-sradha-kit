@@ -19,13 +19,14 @@ Thank you for your interest in contributing! This guide explains how to add new 
 dasa-sradha-kit/
 ├── .agent/
 │   ├── agents/          ← 10 Persona definitions
-│   ├── rules/GEMINI.md  ← Global constraints (P0)
-│   ├── scripts/         ← 17 Python scripts
+│   ├── rules/GEMINI.md  ← Global constraints (P0, 53-gap hardened)
+│   ├── scripts/         ← 17 Python scripts (stdlib-only)
 │   ├── skills/          ← Modular domain resources
 │   ├── workflows/       ← 16 Slash Commands
-│   └── .shared/         ← Common templates
-├── bin/                 ← CLI entry points
-├── docs/                ← Additional documentation
+│   ├── .shared/         ← Common templates + skill trust ledger
+│   └── VERSION          ← Kit semver for migration detection
+├── bin/                 ← CLI entry points (cli.js, dasa-cli.js)
+├── docs/                ← Additional documentation + project summary TOON
 ├── package.json         ← NPM package definition
 └── README.md
 ```
@@ -46,7 +47,8 @@ model: "Gemini 3.1 Pro"
 
 2. Add sections: `Persona Description`, `Technical Implementation`, `Quality Control`.
 3. Register the persona in `bin/dasa-cli.js` PERSONAS array.
-4. All Personas MUST obey `.agent/rules/GEMINI.md` (SOLID, TDD, Methods < 10 lines).
+4. **Global Constraints:** All Personas MUST explicitly obey `.agent/rules/GEMINI.md` (SOLID, TDD, Methods < 10 lines). Additionally, you MUST inject the instruction to block execution unless they have read `dasa.config.toon`.
+5. **Model-Agnostic Authoring (Gap 33):** Use explicit, imperative language ('You MUST do X' not 'It would be good to do X'). Each rule MUST be self-contained.
 
 ---
 
@@ -55,8 +57,9 @@ model: "Gemini 3.1 Pro"
 To teach the AI to trigger a new action automatically without a slash command:
 1. Open `.agent/.shared/dasa-cheat-sheet.toon`.
 2. Locate the `auto_routing_engine.scenarios` object.
-3. Add a new Scenario (e.g., `I_NEW_SCENARIO_NAME`).
+3. Add a new Scenario (e.g., `K_NEW_SCENARIO_NAME`) after the existing A-J scenarios.
 4. Define the `intent_pattern` (natural language triggers), the `auto_workflow` steps, and the `goal`.
+5. Update `GEMINI.md` fallback routing to include your new scenario in the A-K range.
 
 ---
 
@@ -84,11 +87,12 @@ description: Short description. Example: /dasa-<name> "arguments"
 
 1. Create `.agent/scripts/<name>.py`.
 2. Scripts MUST be:
-   - **Zero-dependency**: Standard library only (`os`, `sys`, `re`, `ast`, `json`, `pathlib`).
+   - **Stdlib-only**: Use ONLY whitelisted modules: `os`, `sys`, `re`, `ast`, `json`, `pathlib`, `argparse`, `datetime`, `hashlib`, `shutil`, `subprocess`, `typing`, `collections`, `glob`, `textwrap`, `http.client`, `urllib.request`, `html.parser`. No pip packages.
    - **Cross-platform**: No bash, no Windows-only APIs.
    - **Executable**: Include `#!/usr/bin/env python3` shebang.
 3. Run `chmod +x .agent/scripts/<name>.py`.
 4. Document the script in `.agent/ARCHITECTURE.md`.
+5. **Import Validation (Gap 53):** Indra's QA gate will AST-parse your imports and block non-whitelisted ones.
 
 ---
 
@@ -96,10 +100,21 @@ description: Short description. Example: /dasa-<name> "arguments"
 
 All contributions MUST adhere to the constraints in `.agent/rules/GEMINI.md`:
 
-- **Methods**: Strictly < 10 lines
+- **Methods**: Strictly < 10 lines (3 exemptions/file max with `// COMPLEXITY_EXEMPT`)
 - **Classes**: Strictly < 50 lines
 - **TDD**: Write tests before implementation
 - **No hardcoded versions**: Always detect or query the latest
+- **Argument Sanitization**: Never interpolate raw input into shell commands
+
+---
+
+## Artifact Portability
+
+When adding new `.artifacts/` files:
+- **PORTABLE** (committable): `task.toon`, `architecture-state.toon`, `implementation_plan.md`
+- **EPHEMERAL** (gitignored): Memory vaults, traces, process registries, generated skills
+
+Ensure new ephemeral files are added to the `.gitignore` patterns in `dasa-patih.md`.
 
 ---
 

@@ -11,22 +11,22 @@ const { execSync } = require('child_process');
 
 // The 10 Dasa Personas mapping
 const PERSONAS = [
-    { id: 'patih', cmd: 'dasa-patih', role: 'Orchestrating workflows' },
-    { id: 'kala', cmd: 'dasa-kala', role: 'Project tracking' },
-    { id: 'widya', cmd: 'dasa-widya', role: 'Data research' },
-    { id: 'dharma', cmd: 'dasa-dharma', role: 'Security & secrets' },
+    { id: 'patih', cmd: 'dasa-patih', role: 'Orchestrating workflows, trace logging' },
+    { id: 'kala', cmd: 'dasa-kala', role: 'Project tracking, tactical fixes' },
+    { id: 'widya', cmd: 'dasa-widya', role: 'Data research, library analysis' },
+    { id: 'dharma', cmd: 'dasa-dharma', role: 'Security, injection audit, git hygiene' },
     { id: 'sastra', cmd: 'dasa-sastra', role: 'Docs & API specs' },
-    { id: 'dwipa', cmd: 'dasa-dwipa', role: 'Integrating external tools' },
-    { id: 'mpu', cmd: 'dasa-mpu', role: 'Backend architecture' },
-    { id: 'nala', cmd: 'dasa-nala', role: 'Frontend & UI matching' },
-    { id: 'indra', cmd: 'dasa-indra', role: 'Testing & QA verification' },
-    { id: 'rsi', cmd: 'dasa-rsi', role: 'Deep architectural consultation' }
+    { id: 'dwipa', cmd: 'dasa-dwipa', role: 'Codebase scouting, skill search' },
+    { id: 'mpu', cmd: 'dasa-mpu', role: 'Architecture, planning, vision' },
+    { id: 'nala', cmd: 'dasa-nala', role: 'Frontend & Backend, design token grounding' },
+    { id: 'indra', cmd: 'dasa-indra', role: 'QA, linter, circuit breaker' },
+    { id: 'rsi', cmd: 'dasa-rsi', role: 'Code review, SOLID enforcement' }
 ];
 
 function drawDashboard(activeWorkers) {
     console.clear();
     console.log("=====================================================");
-    console.log("   🕉️  Dasa Sradha Kit V5: Orchestration Matrix      ");
+    console.log("   🕉️  Dasa Sradha Kit V5.2.1: Orchestration Matrix  ");
     console.log("=====================================================\n");
 
     if (activeWorkers.length === 0) {

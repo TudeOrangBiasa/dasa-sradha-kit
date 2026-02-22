@@ -11,7 +11,7 @@ core_pipelines:
   agile_handoff:
     phase_1: "Mpu (Architect) generates architecture-state.toon. Nala is blocked until this exists."
     phase_2: "Nala (Builder) implements the code based on Mpu's design. All methods < 10 lines."
-    phase_3: "Indra (QA) runs qa_gate.py to scan for 800+ failure heuristics. Fails block the commit."
+    phase_3: "Indra (QA) runs qa_gate.py to dynamically scan for 1000+ failure heuristics. Fails block the commit."
   visual_workflow: "If the user has Figma PNGs, they go in `.design-memory/reference/`. Dasa Mpu analyzes them, and `design_memory_sync.py` compresses them into text tokens for Nala."
 
 slash_commands_internal:
@@ -47,13 +47,13 @@ personas:
 scripts (zero-dependency python):
   - "api_validator.py: Validates REST/GraphQL API payloads and contracts."
   - "arch_mapper.py: Reads folder structures to auto-detect system architectures."
-  - "compact_memory.py: Merges chat chunks into a dense 5-sector TOON structure."
+  - "compact_memory.py: Merges chat chunks into a dense 5-sector TOON structure with memU active learning."
   - "complexity_scorer.py: Analyzes code files for cyclomatic complexity and warns if > 10."
   - "context_mapper.py: AST parser for codebase context without osgrep."
   - "design_engine.py: Generates strict UI rules (spacing scale, border-radiuses) so Nala doesn't hallucinate."
   - "design_memory_sync.py: Compresses vision OCR UI parameters into a vision_bridge.toon."
   - "lint_fixer.py: Auto-heals trivial ESLint/Prettier or Flake8 errors."
-  - "qa_gate.py: Scans code against the Engineering Failures Bible."
+  - "qa_gate.py: Scans code against the Engineering Failures Bible & Web Quality (1000+ heuristics dynamically parsed)."
   - "security_scan.py: Checks for exposed secrets (.env) and blatant SSRF/SQLi patterns."
   - "semantic-scan.py: Fast grep fallback if osgrep is missing."
   - "skill_search.py: Local semantic search across ~/.gemini/.../skills/."
@@ -81,7 +81,8 @@ auto_routing_engine:
       goal: "Prevent hallucinated tech stacks by dynamically gathering context."
 
     B_CODEBASE_ASSIMILATION:
-      intent_pattern: ["add a feature", "explain this app"]
+      intent_pattern: ["onboard this repo", "assimilate", "re-map codebase"]
+      precondition: "dasa.config.toon is blank OR stale (>7 days since last assimilation)"
       auto_workflow:
         - STEP_1: "Trigger /dasa-assimilate silently."
         - STEP_2: "Dasa Dwipa uses workspace-mapper.py and arch_mapper.py to analyze the codebase."
@@ -121,7 +122,9 @@ auto_routing_engine:
       auto_workflow:
         - STEP_1: "Dharma runs security_scan.py (Check .env leaks)."
         - STEP_2: "Indra runs qa_gate.py (Enforce 10-line rule)."
-        - STEP_3: "Auto-execute /dasa-commit with Conventional Commit format."
+        - STEP_3: "Indra runs project-local linter (auto-detected or from lint_command in config)."
+        - STEP_4: "Dharma checks for [INJECTION_RISK], [SECRET_LEAK], [GIT_HYGIENE_VIOLATION]."
+        - STEP_5: "Auto-execute /dasa-commit with Conventional Commit format."
       goal: "Enterprise-grade safety on every git push."
 
     H_VISUAL_ORCHESTRATOR:
@@ -131,7 +134,22 @@ auto_routing_engine:
         - STEP_2: "Auto-generate UI components using design_engine.py rules."
       goal: "Pixel-perfect UI from a drag-and-drop action."
 
+    I_PREFERENCE_PIVOT:
+      intent_pattern: ["I changed my mind about", "actually let's use", "forget what I said about", "pivot to"]
+      auto_workflow:
+        - STEP_1: "Patih detects preference contradiction in Emotional sector."
+        - STEP_2: "Auto-execute compact_memory.py to delete the conflicting memory and insert the new preference."
+      goal: "Natural language preference changes without CLI overrides."
+
+    J_GRACEFUL_FALLBACK:
+      intent_pattern: ["_CATCH_ALL_"]
+      auto_workflow:
+        - STEP_1: "If NO Scenario A-I matches, present the 3 most likely Scenario matches."
+        - STEP_2: "Ask user to confirm which Scenario to execute."
+      goal: "Never silently revert to generic chat. Always route through Dasa."
+
 # ─────────────────────────────────────────────────────────
 # ARCHITECTURAL RULE: 
 # If 'dasa.config.toon' is blank, Scenario A (Interview) or B (Assimilate) 
 # must precede any of the above routing.
+

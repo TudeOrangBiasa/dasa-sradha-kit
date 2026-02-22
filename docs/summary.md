@@ -1,48 +1,62 @@
-# Session Summary: Dasa Sradha Kit - Public v1
+# Dasa Sradha Kit — Project Summary
 
-## 1. Project Context & Purpose
-This session focused on completing and preparing the **Dasa Sradha Kit (Public v1)** for wide release on Linux using the **Antigravity AI Desktop IDE**. 
+> **Current Version:** 5.2.1 | **Date:** 2026-02-23 | **53-Gap Hardened**
 
-The goal was to transform a legacy CLI/Python-based orchestration kit into a brilliant, "zero-learning-curve" native IDE experience. The kit provides 10 Indonesian-themed AI Personas (Skills) and structured execution Workflows that orchestrate project planning, feature implementation, QA, and documentation generation seamlessly within the IDE chat interface.
+## What Is It?
 
-## 2. Core Architecture (The "Option C" Global/Local Split)
-To solve the "chicken and egg" problem of initializing a new repository before the IDE knows the kit exists, a hybrid architecture was implemented:
+A native, zero-dependency AI orchestration framework for **Antigravity IDE**. 10 AI Personas split complex software workflows into strict Agile pipelines (Architect → Builder → QA) — all triggered by natural language prompts.
 
-1.  **Global Layer (Setup via `./install.sh`)**:
-    *   **Backend Scripts (`~/.gemini/scripts/`)**: Includes the agnostic `dasa-init` and `dasa-uninstall` bash scripts.
-    *   **Master Workflows (`~/.gemini/scripts/dasa-sradha-kit/workflows/`)**: The template markdown files that define the IDE slash commands.
-    *   **Skills Pack (`~/.gemini/antigravity/skills/dasa-*.md`)**: The 10 persona definition files, installed globally so the IDE can access them from any project.
+## Architecture at a Glance
 
-2.  **Repo-Local Layer (Activation via `dasa-init`)**:
-    *   **The Guard (`.dasa-sradha`)**: An empty marker file at the repo root.  
-    *   **Deployed Workflows (`.agent/workflows/dasa-*.md`)**: Active slash commands for the specific project.
-    *   **The Artifacts (`.artifacts/`)**: The folder where the IDE natively stores plans, logs, and evidence. (Migrated from `.sisyphus` to `.artifacts` to align perfectly with Antigravity defaults).
+| Layer | Path | Purpose |
+|:---|:---|:---|
+| **Read-Only Mechanics** | `.agent/` | 10 personas, 17 scripts, 16 workflows, P0 rules |
+| **Portable Artifacts** | `.artifacts/task.toon` etc. | Committable state (survives cross-device) |
+| **Ephemeral Artifacts** | `.artifacts/dasa_memory.toon` etc. | Session-scoped (gitignored) |
+| **Design Memory** | `.design-memory/` | Long-term UI specs, Figma references |
+| **Configuration** | `dasa.config.toon` | Tech stack, paths, skills |
 
-## 3. How Antigravity IDE Works with this Kit
-Antigravity IDE intercepts specific markdown files to augment the LLM's context:
+## Core Pipelines
 
-*   **Workflows (`.agent/workflows/`)**: When a user types a slash command (e.g., `/dasa-plan`), the IDE reads the corresponding markdown file. It follows the step-by-step instructions. We refactored these workflows away from executing dummy bash scripts inside the IDE, and instead wrote direct Native AI Instructions (e.g., *"Act as Mpu and write a plan inside `.artifacts/plans/`"*).
-*   **Skills (`~/.gemini/antigravity/skills/`)**: When a user tags an agent (e.g., `@dasa-nala`), the IDE injects that specific persona's background, scope, and rules into the context window for that single response.
-*   **Interoperability**: Because the kit uses the standard Antigravity directory structure, users can seamlessly combine Dasa Sradha workflows with third-party skill packs (like `antigravity-awesome-skills`, e.g., `@frontend-expert`).
+1. **Auto-Routing (A-J):** Prompt → Intent Detection → Auto Workflow
+2. **Execution (Agile):** Mpu → Rsi (if complex) → Nala → Indra (QA)
 
-## 4. The Language Strategy (English Instructions -> Bahasa Output)
-To maximize LLM token efficiency, logic adherence, and accuracy, we implemented a hybrid language strategy for the 10 Persona skills:
+## 10 Personas
 
-*   **The Backend Rules (English)**: The internal logic, responsibilities, and step-by-step approaches in the `dasa-*.md` skill files are written in strict, concise English. This prevents the tokenizer from exploding and ensures the AI flawlessly follows complex architectural demands.
-*   **The Frontend Output (Bahasa Indonesia)**: Every skill file ends with a firm override rule: 
-    > *"IMPORTANT COMMUNICATION RULE: While your internal reasoning and instructions are in English, you MUST always respond to the user and generate all output artifacts in Bahasa Indonesia. Maintain your persona."*
-    This retains the cultural identity of the kit effortlessly.
+| Persona | Domain |
+|:---|:---|
+| Patih | Orchestration, trace logging |
+| Mpu | Architecture, planning, vision |
+| Rsi | Code review, SOLID enforcement |
+| Nala | Frontend/Backend, design token grounding |
+| Indra | QA gate, linter, circuit breaker |
+| Dharma | Security, injection audit, git hygiene |
+| Dwipa | Scouting, skill search, assimilation |
+| Widya | Research, library analysis |
+| Sastra | Documentation, API specs |
+| Kala | Hotfixes, tactical patches |
 
-## 5. Security and Guardrails
-*   **`.dasa-sradha`**: Every workflow script and every skill persona explicitly checks for the existence of this file. If it is missing, the agent is instructed to **STOP IMMEDIATELY**. This prevents the kit from accidentally polluting non-initialized repositories.
-*   **`GEMINI.md` Cleanup**: The legacy `GEMINI.md` rule file was deprecated as an active guard and moved to `docs/GEMINI_V0.md` for historical reference, as the workflows and skills are now entirely self-contained.
+## v5.2.1 Highlights
 
-## 6. End-to-End QA Execution
-We successfully executed the full E2E QA sequence during this session:
-1.  Ran `install.sh` to populate global skills and workflows.
-2.  Initialized a test repo with `dasa-init`.
-3.  Simulated `/dasa-plan`, `/dasa-start-work`, and `/dasa-status` via the native AI workflow templates.
-4.  Ran `dasa-uninstall --force` to clean the local repo while preserving `.artifacts/`.
-5.  Ran `install.sh uninstall` to completely wipe the global system.
+- **53-gap defense-in-depth** across 10 security/reliability layers
+- **10 auto-routing scenarios** (A-J) including preference pivots and catch-all fallback
+- **Effort-gated Rsi review** (Phase 1.5) for Deep/Exhaustive tasks
+- **QA circuit breaker** (3-bounce max before Rsi escalation)
+- **Design system token grounding** (prevents framework default drift)
+- **Artifact portability model** (portable vs ephemeral classification)
+- **Shell injection prevention**, trace log masking, git hygiene enforcement
 
-The kit is stable, token-efficient, fully integrated with Antigravity IDE, and ready for publication.
+## Quick Start
+
+```bash
+npx dasa-sradha-kit init
+```
+
+## Deep Dives
+
+- [README.md](../README.md) — Overview + getting started
+- [HOW_IT_WORKS.md](../HOW_IT_WORKS.md) — Full architectural manual
+- [CONTRIBUTING.md](../CONTRIBUTING.md) — Contribution guide
+- [ARCHITECTURE.md](../.agent/ARCHITECTURE.md) — File-level architecture
+- [dasa-sradha-project-summary.toon](dasa-sradha-project-summary.toon) — Full TOON dump for AI context
+- [CHANGELOG.md](../CHANGELOG.md) — Release history

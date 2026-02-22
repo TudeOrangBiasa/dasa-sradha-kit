@@ -70,6 +70,35 @@ function checkOsgrep() {
     }
 }
 
+function scaffoldGitignore(dest) {
+    const gitignorePath = path.join(dest, ".gitignore");
+    const dasaPatterns = `
+# ═══ Dasa Sradha Kit — Ephemeral (NEVER commit) ═══
+.artifacts/dasa_memory.toon
+.artifacts/trace.toon
+.artifacts/merge_digest.toon
+.artifacts/process_registry.toon
+.artifacts/side-effects.toon
+.artifacts/generated-skills/
+.artifacts/*-*.toon
+.design-memory/compressed/
+*.webp
+`;
+
+    if (fs.existsSync(gitignorePath)) {
+        const existing = fs.readFileSync(gitignorePath, "utf8");
+        if (!existing.includes("Dasa Sradha Kit")) {
+            fs.appendFileSync(gitignorePath, dasaPatterns, "utf8");
+            info("Appended Dasa ephemeral patterns to .gitignore");
+        } else {
+            info(".gitignore already contains Dasa patterns. Skipping.");
+        }
+    } else {
+        fs.writeFileSync(gitignorePath, dasaPatterns.trimStart(), "utf8");
+        info("Created .gitignore with Dasa ephemeral patterns");
+    }
+}
+
 function scaffoldConfig(dest) {
     const configPath = path.join(dest, "dasa.config.toon");
     if (fs.existsSync(configPath)) {
@@ -237,13 +266,17 @@ function runInit() {
     // 4. Check osgrep
     checkOsgrep();
 
+    // 5. Scaffold .gitignore for ephemeral files
+    scaffoldGitignore(cwd);
+
     console.log(`
 ${green("✔")} Dasa Sradha initialized successfully!
 
 ${bold("NEXT STEPS")}
   1. Open ${bold("dasa.config.toon")} and define your tech stack
   2. Open Antigravity IDE in this workspace
-  3. Use slash commands: /dasa-plan, /dasa-start-work, /dasa-e2e, etc.
+  3. Just prompt naturally — the AI auto-routes via Scenarios A-J
+  4. Or use slash commands: /dasa-plan, /dasa-start-work, /dasa-e2e, etc.
 
 ${bold("DOCS")} → https://github.com/TudeOrangBiasa/dasa-sradha-kit
 `);
