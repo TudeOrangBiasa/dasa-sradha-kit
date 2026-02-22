@@ -1,84 +1,94 @@
 # Changelog
 
-All notable changes to Dasa Sradha Kit will be documented in this file.
+All notable changes to the Dasa Sradha Kit will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+---
 
-## [3.0.0] - 2026-02-22
+## [5.0.0] - 2026-02-22
+
+### 🚀 Major Release: V5 Zero-Dependency Ecosystem
+
+#### Added
+- **3 new stack-agnostic workflows**: `/dasa-feature`, `/dasa-api`, `/dasa-refactor` — all dynamically read `dasa.config.toon` instead of hardcoding frameworks.
+- **`qa_gate.py`**: Native Python engineering failures scanner with ~800 patterns assimilated from `engineering-failures-bible` (Memory, Concurrency, Security domains).
+- **`context_mapper.py`**: Zero-dependency AST-based codebase context generator. Replaces the need for `amdb` or external vector DBs.
+- **`skill_search.py`**: Native local skill indexer. Scans `.agent/skills/` and `~/.gemini/antigravity/skills/` using semantic text overlap.
+- **`design_engine.py`**: Strict TOON design system generator assimilating `ui-ux-pro-max-skill` and `design-rules-ai` logic.
+- **`compact_memory.py`**: 5-sector TOON memory compactor (episodic, semantic, procedural, emotional, reflective) imitating `OpenMemory`.
+- **Background persona spawning**: `npx dasa-cli run <persona>` spawns detached Node processes to keep the main chat token-free.
+- **Senior Engineer Constraints (SOLID)**: Methods < 10 lines, Classes < 50 lines, TDD enforcement, Value Objects — injected globally into `GEMINI.md`.
+- **Strict Agile Pipeline**: `/dasa-start-work` now enforces rigid `Mpu (Architect) → Nala (Dev) → Indra (QA)` handoffs. Nala is blocked until Mpu's architecture TOON exists.
+
+#### Changed
+- **`ARCHITECTURE.md`**: Completely rewritten for V5. Now documents all 10 agents, 16 workflows, and 17 scripts.
+- **`README.md`**: Completely rewritten for V5. Removed all V3 global-install legacy references.
+- **`HOW_IT_WORKS.md`**: Completely rewritten. Documents the strict Agile pipeline, TOON memory system, and token efficiency strategies.
+- **`CONTRIBUTING.md`**: Updated with V5 templates for adding Personas, Workflows, and Scripts.
+- **`package.json`**: Bumped from `4.0.0` to `5.0.0`.
+- **`infinite-memory.md`**: Updated to teach Personas the 5-sector TOON memory vault instead of legacy markdown files.
+- **`dasa-init.md`**: Updated to use `npx dasa-cli init` instead of the legacy bash wrapper.
+
+#### Removed
+- **`dasa-suta` phantom persona**: Removed from `dasa-cli.js` (no corresponding agent file existed).
+- **Empty `.agent/skills/` subdirectories**: Pruned all deprecated V3 skill folders.
+- **Legacy bash `scripts/` references**: All workflows now reference native Python or Node CLI tools.
+
+#### Ecosystem Research (Phase 2)
+Knowledge extracted and compressed into `.toon` files for 6 community repositories:
+- `runkids/skillshare` → `.artifacts/knowledge_skillshare.toon`
+- `harikrishna8121999/antigravity-workflows` → `.artifacts/knowledge_ag_workflows.toon`
+- `OleynikAleksandr/antigravity-subagents` → `.artifacts/knowledge_ag_subagents.toon`
+- `salacoste/antigravity-bmad-config` → `.artifacts/knowledge_bmad_config.toon`
+- `mduongvandinh/engineering-failures-bible` → `.artifacts/knowledge_failures_bible.toon`
+- `BETAER-08/amdb` → `.artifacts/knowledge_amdb.toon`
+
+---
+
+## [4.0.0] - 2026-02-21
+
+### 🏗️ V4: The Local Workspace Pivot
+
+#### Added
+- Cross-platform NPM CLI (`npx dasa-sradha-kit init`).
+- Hybrid Workspace Architecture: `.agent/` (read-only mechanics) + `.artifacts/` (read-write state).
+- `dasa.config.toon` workspace configuration format.
+- 11 cross-platform Python scripts replacing all bash logic.
+- `GEMINI.md` global constraints file with P0 priority.
+
+#### Changed
+- Migrated from global `~/.gemini/` install to local `.agent/` workspace pattern.
+- Migrated from bash scripts to Python 3 for Windows/macOS/Linux compatibility.
+- Restructured all 13 workflows to declarative markdown format.
+
+#### Removed
+- `install.sh` global installer (replaced by NPM CLI).
+- Root `scripts/`, `skills/`, `workflows/` directories (moved to `.agent/`).
+
+---
+
+## [3.0.0] - 2026-02-20
 
 ### Added
-- **Native E2E Testing (`/dasa-e2e`)**: Upgraded Dasa Indra's `SKILL.md` to autonomously operate Antigravity's native `browser_subagent`. Indra can now execute complex UI tests and record WebP sessions directly to `.artifacts/walkthrough.md` without requiring Playwright/Cypress.
-- **Autonomous Database Seeder (`/dasa-seed`)**: Added a 3-agent orchestration workflow. Dwipa maps the project's native schema, Mpu generates a massive JSON payload of highly realistic fixtures, and Nala injects them into the local database for instant UI testing.
-- **GitHub Auto-PR Reviewer (`/dasa-pr`)**: Natively integrated the GitHub CLI (`gh`). Dasa Rsi now reads `gh pr diff`, executes deep adversarial security heuristics on the active branch, and posts the report to remote repositories using `gh pr comment`.
+- Native E2E testing via Antigravity `browser_subagent`.
+- Database seeder workflow (`/dasa-seed`).
+- GitHub PR auto-reviewer (`/dasa-pr`).
+- `osgrep` semantic search integration for Dasa Dwipa.
 
-## [2.0.0] - 2026-02-21
+---
 
-### Added
-- **The Semantic Engine (OSGrep Integration)**: Dasa Sradha now requires `npm install -g osgrep`. This grants Dasa Dwipa (The Scout) native embedding-based semantic sight to discover abstract concepts across massive repositories without exploding LLM context limits.
-- **Native Semantic Wrapper**: Introduced `skills/dasa-dwipa/scripts/semantic-scan.sh` to seamlessly bridge Dwipa's `osgrep search` requests into his cognitive loop.
-
-### Added
-- **V3 Max Power Architecture**: Introduced Minimax-inspired heuristics for Adaptive Thinking, Adversarial Self-Review, and Intellectual Honesty.
-- **Native Design Extractor**: Added `skills/dasa-widya/scripts/extract-design.py` for Widya to scrape and generate `.design-memory/tokens.json` without Playwright dependencies.
-- **Design Memory Integration**: Dasa Mpu and Dasa Nala firmly instructed to use `.design-memory/` for zero-hallucination UI development and Premium aesthetics.
-- **Auto-Scaffolding**: `/dasa-init` now automatically generates the `.design-memory/mockups/` directory and safely adds it to `.gitignore`.
-- **Auto-Routing Orchestrator**: Redesigned `/dasa-start-work` to autonomously select the appropriate Persona (Nala, Mpu, Indra, etc.) based on task domain, eliminating manual `@persona` handoffs.
-- **The Assimilation Protocol**: Added `/dasa-assimilate` to autonomously map forked/existing codebases, detect DDEV vs native `fnm` environments, and dynamically rewrite `dasa.config.toon`.
-- **API Documentator**: Added `/dasa-docs`, a 3-Persona collaborative workflow (Dwipa sweeps, Mpu analyzes, Sastra formats) to autonomously generate precise Postman Collections or OpenAPI/Swagger specs.
-- **Meta-Project Routing**: `dasa-init` now scaffolds a `workspaces` key. The Auto-Routing Orchestrator will seamlessly `cd` into disparate Git repositories (e.g. `frontend/` vs `backend/`) within the same parent folder before executing commands.
-- **TOON Architecture Migration**: Aggressively upgraded the `dasa-init` config generator and all Kit workflows to output `.toon` (Token Optimized Object Notation) files instead of verbose markdown/YAML, saving thousands of LLM context window tokens.
-- **The Killer Features**: Added `/dasa-fix` (Auto-Healing Orchestrator), `/dasa-sync` (Infinite Memory Vault Compactor), and `/dasa-commit` (Atomic QA Checkpoints) explicitly into the bootstrap workflow.
-- **Community Skills Support**: `/dasa-init` now scaffolds an `external_skills` array in `dasa.config.toon` to dynamically load `sickn33/antigravity-awesome-skills`.
-- **Vibe Coding Workflow**: Added `dasa.config.toon` pro-tip enabling users to automatically generate configuration via AI interview (Even with Gemini 3 Flash).
-- **Auto-Compaction Script**: Added `compact-session.sh` for Dasa Patih to manage token limits.
-
-### Changed
-- **Config Standardization**: Replaced `boulder.json` entirely with the centralized, strict `dasa.config.toon` format.
-- **Architecture Documentation**: Refactored README to include collapsible UI tabs, Flowchart Diagrams, and Easy-Lang pseudocode (`HOW_IT_WORKS.md`).
-
-## [1.0.0] - 2026-02-20
+## [2.0.0] - 2026-02-19
 
 ### Added
-- **Workflows-only architecture**: Repo-local workflows in `.agent/workflows/` via bootstrap
-- **Bootstrap command**: `/dasa-init` copies master workflow templates into project
-- **10 Indonesian persona skills**: Flat structure in `~/.gemini/antigravity/skills/dasa-*.md`
-  - dasa-patih (Orchestrator), dasa-mpu (Architect), dasa-nala (Builder)
-  - dasa-rsi (Consultant), dasa-sastra (Writer), dasa-widya (Researcher)
-  - dasa-indra (Tester), dasa-dharma (Security), dasa-kala (Quick Fix), dasa-dwipa (Explorer)
-- **Activation guard**: `.dasa-sradha` marker file (empty) at repo root
-- **Backend scripts**: `dasa-init`, `dasa-uninstall` in `~/.gemini/scripts/`
-- **Master workflow templates**: Stored in `~/.gemini/scripts/dasa-sradha-kit/workflows/`
-- **Core workflows**: `/dasa-plan`, `/dasa-start-work`, `/dasa-status`, `/dasa-uninstall`
-- **Bilingual documentation**: English + Bahasa Indonesia README
-- **MIT License**: Open source release
+- Monorepo workspace routing.
+- API documentation workflow (`/dasa-docs`).
+- TOON format adoption for all state files.
 
-### Changed
-- **Install method**: Global install + per-repo bootstrap (Option C architecture)
-- **Skills structure**: Migrated from nested directories to flat file naming
-- **Activation mechanism**: `.dasa-sradha` marker replaces `GEMINI.md` guard
-- **Documentation**: Complete rewrite for workflows-only architecture
+---
 
-### Removed
-- **Legacy command system**: TOML manifests + Python wrappers (`commands/` directory)
-- **Boulder utilities**: Removed `boulder-*` scripts (future: native workflows implementation)
-- **Global workflows**: No longer assumes global workflow paths in Antigravity
-- **GEMINI.md guard**: Moved to `docs/` as historical reference only
+## [1.0.0] - 2026-02-18
 
-## Release Process
-
-### Creating a Release
-
-1. Update `CHANGELOG.md` with release date and notes
-2. Commit changes: `git add CHANGELOG.md && git commit -m "Release v1.0.0"`
-3. Create annotated tag: `git tag -a v1.0.0 -m "v1.0.0: Workflows-only public release"`
-4. Push with tags: `git push origin main --tags`
-
-### Version Numbering
-
-- **MAJOR**: Breaking changes to install/usage patterns
-- **MINOR**: New features, new personas, new workflows
-- **PATCH**: Bug fixes, documentation updates
-
-[Unreleased]: https://github.com/YOUR_USER/dasa-sradha-kit/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/YOUR_USER/dasa-sradha-kit/releases/tag/v1.0.0
+### Added
+- Initial release with 10 Dasa Personas.
+- 7 core slash commands.
+- `install.sh` global installer.
+- Bahasa Indonesia persona outputs.

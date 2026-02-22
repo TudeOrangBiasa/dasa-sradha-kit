@@ -23,18 +23,21 @@ $ARGUMENTS
 
 ---
 
-## 🛠️ Task Execution
+## 🛠️ Task Execution (The Strict Agile Pipeline)
 
-1. **Review Memory:** Read `.artifacts/implementation_plan.toon`. If a `.artifacts/task.toon` doesn't exist yet, generate it now by breaking the plan into highly granular, verifiable sub-tasks.
-2. **Select Target:** Identify the next uncompleted task from the list based on the user's `$ARGUMENTS`. If `$ARGUMENTS` is empty, pick the first uncompleted task.
-3. **Shift Persona:** 
-    - Frontend/UI → Assume **Dasa Nala**
-    - Backend/Arch → Assume **Dasa Mpu**
-    - Testing/QA → Assume **Dasa Indra**
-    - Security/Deps → Assume **Dasa Dharma**
-    - Docs/README → Assume **Dasa Sastra**
-    - Scouting/Search → Assume **Dasa Dwipa**
-4. **Execute:** Read the corresponding `.agent/agents/dasa-<name>.md` file silently. Adopt their principles, change into the correct workspace sub-directory, and execute the code changes.
+**CRITICAL:** You must follow this strict BMad-inspired pipeline. Personas CANNOT jump out of order.
+
+1. **Phase 1: Dasa Mpu (The Architect)**
+   - Patih must assign Mpu to generate `.artifacts/architecture-state.toon` containing the technical design for the active task.
+   - **BLOCK:** Dasa Nala cannot start until Mpu's artifact explicitly exists and is reviewed against `GEMINI.md` constraints.
+
+2. **Phase 2: Dasa Nala / Backend Devs (Execution)**
+   - Once the architecture TOON is approved, Patih spawns the developers to write the actual code.
+   - **Constraint:** Code must conform to Mpu's architecture.
+
+3. **Phase 3: Dasa Indra / Dasa Rsi (QA Gate & Failure Heuristics)**
+   - The task is **NOT** complete yet. Patih must execute `.agent/scripts/qa_gate.py` to run the engineering-failures-bible checks natively against the modified files.
+   - If tests or scans fail, bounce back to Phase 2.
 
 ---
 

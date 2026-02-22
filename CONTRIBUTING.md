@@ -1,106 +1,108 @@
----
-title: "Contributing to Dasa Sradha"
-description: "Guidelines and workflows for developing Personas, Slash Commands, and core infrastructure for the Dasa Sradha Kit."
----
+# Contributing to Dasa Sradha Kit
 
-# Contributing to the Dasa Sradha Kit
-
-Welcome! The **Dasa Sradha Kit** transforms the Antigravity IDE into a multi-agent orchestrated environment. We welcome community enhancements, provided they adhere to our strict **Zero-Dependency** and **TOON** architectural rules.
-
-This guide traces the actual execution paths (`install.sh`, `scripts/dasa-init`, etc.) so you understand exactly how your contributions wire into the core system.
+Thank you for your interest in contributing! This guide explains how to add new Personas, Workflows, and Scripts.
 
 ---
 
-## 🏗️ 1. Architecture Map
+## Prerequisites
 
-Before writing a new Persona or Workflow, you must understand how Antigravity executes these files.
+- Node.js 18+
+- Python 3.8+
+- Antigravity IDE
+- Git
 
-```mermaid
-graph TD
-    %% Node Styles
-    classDef default fill:#2d333b,stroke:#6d5dfc,stroke-width:2px,color:#e6edf3;
-    classDef sub fill:#161b22,stroke:#30363d,stroke-width:1px,color:#e6edf3;
+---
 
-    subgraph UserWorkspace ["User Workspace"]
-    U("User Input: /slash-command")
-    end
-    
-    subgraph DasaSradhaGlobal ["Dasa Sradha Global (~/.gemini/)"]
-    W("antigravity/global_workflows/dasa-*.md")
-    S("antigravity/skills/dasa-*/SKILL.md")
-    E("scripts/dasa-init")
-    end
+## Project Structure
 
-    U -->|1. Triggers| W
-    W -->|2. Assumes Identity| S
-    E -->|3. Bootstraps| U
-
-    %% Apply Subgraph Styles
-    class UserWorkspace sub;
-    class DasaSradhaGlobal sub;
-    
-    linkStyle default stroke:#8b949e,stroke-width:2px;
+```
+dasa-sradha-kit/
+├── .agent/
+│   ├── agents/          ← 10 Persona definitions
+│   ├── rules/GEMINI.md  ← Global constraints (P0)
+│   ├── scripts/         ← 17 Python scripts
+│   ├── skills/          ← Modular domain resources
+│   ├── workflows/       ← 16 Slash Commands
+│   └── .shared/         ← Common templates
+├── bin/                 ← CLI entry points
+├── docs/                ← Additional documentation
+├── package.json         ← NPM package definition
+└── README.md
 ```
 
-### Component Breakdown
-| Component | Path | Function |
-| :--- | :--- | :--- |
-| **Workflows** | `antigravity/global_workflows/` | The global Slash Commands (e.g., `/dasa-e2e`). These tell Antigravity *when* to trigger an action. |
-| **Skills** | `antigravity/skills/` | The Persona rulesets (e.g., `dasa-mpu/SKILL.md`). These tell Antigravity *how* to behave. |
-| **Bootstrapper** | `scripts/dasa-init` | The local initializer. It copies configuration into the active repository workspace. |
-
 ---
 
-## 🔄 2. The Contribution Lifecycle
+## Adding a New Persona
 
-We enforce a strict Git workflow to ensure changes do not break the 10-Persona orchestration loop.
+1. Create `.agent/agents/dasa-<name>.md` with this template:
 
-```mermaid
-sequenceDiagram
-    %% Node Styles
-    autonumber
-    
-    participant C as Contributor
-    participant L as Local Antigravity
-    participant PR as GitHub PR
-    participant Rsi as Dasa Rsi (Reviewer)
-
-    C->>L: Fork & Clone Repository
-    C->>L: Modify SKILL.md or workflow
-    L->>L: Run ./install.sh to apply locally
-    L->>L: Test workflow in dummy project
-    C->>PR: Push branch & Open PR
-    PR->>Rsi: Trigger /dasa-pr Auto-Review
-    Rsi-->>PR: Post Adversarial Security Report
-    Note right of PR: Maintainers merge after Rsi approves
+```yaml
+---
+name: dasa-<name>
+description: "What this persona does."
+model: "Gemini 3.1 Pro"
+---
 ```
 
-### Step-by-Step Guide
-1. **Fork & Branch**: Create a feature branch (`feature/my-new-persona`).
-2. **Develop**:
-   - If adding a Workflow: Create `workflows/dasa-my-feature.md`. You **must** also add it to the `WORKFLOW_FILES` array in `scripts/dasa-init` so it gets installed for end-users.
-   - If adding a Skill: Create `skills/dasa-my-persona/SKILL.md`. Ensure it defines allowed native tools (e.g., `browser_subagent`).
-3. **Local Testing**:
-   - Run `./install.sh` from your cloned root. This forcefully injects your code into `~/.gemini/antigravity/skills/` and `~/.gemini/antigravity/global_workflows/`.
-   - Open a test folder, run `/dasa-init`, and ensure your changes propagate correctly.
-4. **Pull Request**: Submit to the `master` branch. Dasa Rsi will automatically review it if a maintainer runs `/dasa-pr`.
+2. Add sections: `Persona Description`, `Technical Implementation`, `Quality Control`.
+3. Register the persona in `bin/dasa-cli.js` PERSONAS array.
+4. All Personas MUST obey `.agent/rules/GEMINI.md` (SOLID, TDD, Methods < 10 lines).
 
 ---
 
-## ⚖️ 3. Core Development Principles (NON-NEGOTIABLE)
+## Adding a New Workflow
 
-1. **Zero-Dependency Native Execution**
-   - **DO NOT** require `npm install -g something` unless explicitly approved (e.g., `osgrep`).
-   - Use Antigravity's built-in APIs (`browser_subagent`, `run_command`, `grep_search`).
-   - *(Citation: See `/dasa-e2e` for how we use native browsers instead of Playwright)*.
+1. Create `.agent/workflows/dasa-<name>.md` with this template:
 
-2. **TOON (Token Optimized Object Notation)**
-   - When generating internal state data, output raw JSON/YAML blocks.
-   - **DO NOT** use conversational filler ("Here is your data:"). It wastes expensive LLM context tokens.
-   - *(Citation: See `dasa.config.toon` generation in `/dasa-init`)*.
+```yaml
+---
+description: Short description. Example: /dasa-<name> "arguments"
+---
+```
 
-3. **Bahasa Indonesia Final Output**
-   - The internal reasoning in your `SKILL.md` must be written in English for maximum LLM comprehension.
-   - The final output presented to the user (e.g., updates in `.artifacts/walkthrough.md`) MUST instruct the Persona to reply in Bahasa Indonesia.
+2. Include these mandatory sections:
+   - **Guard Check**: Verify `dasa.config.toon` exists.
+   - **Stack Detection**: Read `dasa.config.toon` for framework info.
+   - **Execution Pipeline**: Define strict Persona handoffs.
+   - **Expected Output**: Define the success message format.
 
-Thank you for contributing to the native Antigravity ecosystem!
+3. All workflows MUST respect `dasa.config.toon` — never hardcode frameworks.
+
+---
+
+## Adding a New Script
+
+1. Create `.agent/scripts/<name>.py`.
+2. Scripts MUST be:
+   - **Zero-dependency**: Standard library only (`os`, `sys`, `re`, `ast`, `json`, `pathlib`).
+   - **Cross-platform**: No bash, no Windows-only APIs.
+   - **Executable**: Include `#!/usr/bin/env python3` shebang.
+3. Run `chmod +x .agent/scripts/<name>.py`.
+4. Document the script in `.agent/ARCHITECTURE.md`.
+
+---
+
+## Code Quality Rules
+
+All contributions MUST adhere to the constraints in `.agent/rules/GEMINI.md`:
+
+- **Methods**: Strictly < 10 lines
+- **Classes**: Strictly < 50 lines
+- **TDD**: Write tests before implementation
+- **No hardcoded versions**: Always detect or query the latest
+
+---
+
+## Submitting Changes
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feat/new-workflow`.
+3. Make your changes following the guidelines above.
+4. Test locally with `npx dasa-cli up`.
+5. Submit a Pull Request.
+
+---
+
+## License
+
+MIT — See [LICENSE](LICENSE).

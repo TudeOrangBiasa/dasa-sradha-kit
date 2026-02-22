@@ -23,7 +23,7 @@ $ARGUMENTS
 - **Step 1: Bootstrap Marker**
   Ensure the marker file `.dasa-sradha` exists. If it's missing, create it using: `touch .dasa-sradha`
 - **Step 2: Initialize Repository**
-  Execute the backend script: `~/.gemini/scripts/dasa-init $ARGUMENTS`
+  Execute the backend script: `npx dasa-cli init $ARGUMENTS`
   
 > [!NOTE]
 > If `$ARGUMENTS` is empty, the script will prompt you for the project name and description.

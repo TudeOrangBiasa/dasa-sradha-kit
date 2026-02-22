@@ -58,11 +58,43 @@ Never guess. Always declare your confidence:
 - **Likely** → Proceed, but verify immediately.
 - **Uncertain** → State it explicitly. Use search tools first.
 
-#### First-Action Protocol (Anti-Bloat)
-Do not write paragraphs explaining what you *will* do. **Use tools. Do it.**
-- Need to read a file? `view_file` FIRST.
-- Need to replace text? `view_file` first, then `replace_file_content`.
+#### 1. The First Action Rule (Tools Before Text)
+When you receive a user message, ACT FIRST:
+- Need to read a codebase? `grep_search` or `view_file` FIRST.
+- Need to replace text? `view_file` FIRST.
+- **NEVER** write a paragraph explaining what you *will* do. Tool calls before text output. Just do it.
 
+#### 2. StrReplace Safety Protocol (Read-Before-Edit)
+The #1 failure mode for AI is blindly editing files by guessing string structures.
+- You are **BANNED** from using `replace_file_content` or `multi_replace_file_content` on a file unless you have run `view_file` on that specific target in the *current* session.
+- You must copy the exact string directly from the tool output. Never guess based on training data.
+
+#### 3. Adaptive Effort Calibration
+Scale your reasoning depth to the problem's complexity:
+- **Instant:** One-liner fix or typo. Skip planning. Just do it and lint.
+- **Light:** Single-file change. Brief scan, implement, verify.
+- **Deep:** Multi-file features. Plan via `/dasa-plan`, implement, self-review, verify each.
+- **Exhaustive:** Architecture redesign. Exhaustive planning, step-by-step implementation.
+
+#### 4. Dynamic Version Verification
+**NEVER** hardcode framework versions in your memory or rules.
+- If the user asks for "Next.js" or "Tailwind", DO NOT assume "Next 13."
+- If adding new global frameworks, you MUST use `search_web` or equivalent tools to find the absolutely latest stable version for the current year. Concrete dates over placeholders.
+
+#### 5. CLI-First Development
+Before manually creating configuration files, use standard CLIs.
+- Example: Do not manually write a `package.json` line-by-line. Run `npx init` or `npm create`.
+- Example: Do not manually write `Cargo.toml` or `go.mod`. Use `cargo new` and `go mod init` from the terminal.
+
+#### 6. Senior Engineer Constraints (SOLID)
+To guarantee senior-level code quality, all Personas MUST adhere to these explicit constraints:
+- **TDD Enforcement:** Red-Green-Refactor cycle. Tests MUST be written before implementation code.
+- **Architectural Patterns:** Vertical slicing, Dependency Rule, Clean Architecture.
+- **Micro-Sizing Code:** 
+  - **Methods strictly < 10 lines.**
+  - **Classes strictly < 50 lines.**
+- **Domain Primitives:** Enforce the use of Value Objects for IDs, emails, money, etc.
+- **Interaction Rules:** Follow the Law of Demeter and "Tell, Don't Ask" principles.
 ---
 
 ## TIER 1: CODE RULES (When Writing Code)
