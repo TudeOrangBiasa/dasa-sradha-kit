@@ -1,6 +1,6 @@
 {
     "name": "dasa-sradha-kit",
-    "version": "5.0.1",
+    "version": "5.0.2",
     "description": "The Dasa Sradha 10-Persona Orchestration Framework for Antigravity IDE. Cross-platform CLI for setting up AI-assisted development workflows.",
     "bin": {
         "dasa-sradha": "bin/cli.js",
