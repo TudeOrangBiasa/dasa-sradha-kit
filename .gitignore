@@ -16,15 +16,12 @@ node_modules/
 .artifacts/
 .design-memory/
 
+
 # Workspace-specific config (user-defined, not shipped)
 dasa.config.toon
 
 # Community skills
-.awesome-antigravity/
-
-# Local reference clones (not part of the Dasa Sradha Kit)
-ag-kit/
-awesome-antigravity/
+temp/ 
 
 # OS files
 .DS_Store
