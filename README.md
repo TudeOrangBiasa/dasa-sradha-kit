@@ -35,7 +35,7 @@ npx dasa-sradha-kit init
 
 ```bash
 npm install -g dasa-sradha-kit
-dasa init
+dasa-sradha init
 ```
 
 ### Option C: Clone & Init
@@ -44,7 +44,7 @@ dasa init
 git clone https://github.com/TudeOrangBiasa/dasa-sradha-kit.git
 cd dasa-sradha-kit
 npm link
-dasa init
+dasa-sradha init
 ```
 
 This generates your `dasa.config.toon`, builds the `.agent/` mechanics folder, and creates the `.artifacts/` memory vault.
