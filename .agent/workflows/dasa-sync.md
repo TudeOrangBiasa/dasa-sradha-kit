@@ -2,14 +2,23 @@
 description: Automatically compacts today's active tasks and artifacts into a dense memory vault for tomorrow's session. Example: /dasa-sync
 ---
 
-```bash
-if [ ! -f .dasa-sradha ]; then
-  echo "This repository is not initialized. Run /dasa-init first."
-  exit 1
-fi
+# /dasa-sync
+
+```
+# USER REQUEST:
+$ARGUMENTS
 ```
 
-# Infinite Memory Compaction Workflow
+---
+
+## 🔴 CRITICAL RULES
+
+1. **Guard Check:** Look for `dasa.config.toon` in the root folder. If missing, tell the user to run `/dasa-init` and **stop immediately**.
+2. **Declarative Execution:** Follow the instructions below precisely, reporting back to the user upon completion.
+
+---
+
+## 🛠️ Execution
 
 - **Step 1: Patih & Sastra Initialization**
   You are now operating as **Dasa Patih** (The Orchestrator) and **Dasa Sastra** (The Writer).

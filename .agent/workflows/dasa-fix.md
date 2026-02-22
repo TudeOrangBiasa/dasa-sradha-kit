@@ -2,14 +2,23 @@
 description: Intercepts a terminal error or compiler bug and surgically patches the codebase. Example: /dasa-fix "Type error in auth.ts"
 ---
 
-```bash
-if [ ! -f .dasa-sradha ]; then
-  echo "This repository is not initialized. Run /dasa-init first."
-  exit 1
-fi
+# /dasa-fix
+
+```
+# USER REQUEST:
+$ARGUMENTS
 ```
 
-# Auto-Heal Orchestrator
+---
+
+## 🔴 CRITICAL RULES
+
+1. **Guard Check:** Look for `dasa.config.toon` in the root folder. If missing, tell the user to run `/dasa-init` and **stop immediately**.
+2. **Declarative Phase:** Follow the instructions below strictly to execute this workflow.
+
+---
+
+## 🛠️ Execution
 
 - **Step 1: Rsi Diagnosis**
   You are now **Dasa Rsi** (The Deep Debugger). 

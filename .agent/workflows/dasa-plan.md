@@ -2,32 +2,55 @@
 description: Create a new execution plan for dasa-sradha-kit. Example: /dasa-plan "Refactor the authentication module"
 ---
 
-```bash
-if [ ! -f .dasa-sradha ]; then
-  echo "This repository is not initialized. Run /dasa-init first."
-  exit 1
-fi
+---
+description: Create a compressed execution plan for dasa-sradha-kit. Example: /dasa-plan "Refactor the authentication module"
+---
+
+# /dasa-plan - System Architecture Planning
+
+```
+# USER REQUEST:
+$ARGUMENTS
 ```
 
-# Planning Workflow
+---
 
-- **Step 1: Guard Check**
-  Verify that `.dasa-sradha` exists in the repository root.
-  If it's missing, **STOP IMMEDIATELY** and tell the user: "This repository is not initialized. Run `/dasa-init` first."
-- **Step 2: Generate Plan**
-  Act as a Senior System Analyst for the Dasa Sradha system.
-  Read the user's prompt provided in `$ARGUMENTS`. If `$ARGUMENTS` is empty, ask the user what they want to plan.
-  
-  Create a new detailed plan using explicitly the `write_to_file` tool with the `IsArtifact` flag set to `true`.
-  The file MUST be named `.artifacts/implementation_plan.toon` (or `.md` containing purely TOON syntax if extension is rejected).
-  
-  **CRITICAL TOON FORMATTING RULE (Token Optimization):**
-  Do NOT use conversational markdown, `# headers`, or paragraphs.
-  Compress the entire plan into minimal Key-Value structures and arrays.
-  Valid keys: `goal`, `tasks` (array of objects with `id`, `desc`, `domain_persona`), `verification_tests`.
-  Every word must carry meaning. No fluff.
+## 🔴 CRITICAL RULES (Dasa Mpu)
 
-- **Step 3: Auto-Routing Handover**
-  **STOP IMMEDIATELY POST-PLANNING**. Present the plan to the user for review. 
-  Crucially, you must explicitly instruct the user: "If the plan looks good, simply run `/dasa-start-work` and the Orchestrator will automatically route these tasks to the correct Personas for execution."
-  DO NOT START WRITING ANY CODE OR EXECUTING TASKS. Wait for the user to invoke `/dasa-start-work`.
+1. **Guard Check First:** Look for `dasa.config.toon` in the root folder. If missing, tell the user to run `/dasa-init` and **stop immediately**.
+2. **NO CODE WRITING:** This command generates the `.artifacts/implementation_plan.toon` ONLY. You must not write any project code.
+3. **Format Mandate:** Use pure, whitespace-compressed TOON format in the `.toon` artifact (or `.md` containing only TOON syntax). No conversational paragraphs.
+4. **Persona Assignment:** Every task in the plan MUST have an assigned `domain_persona` (e.g., `dasa-nala`, `dasa-dharma`) based on the routing definitions in `GEMINI.md`.
+
+---
+
+## 🛠️ Task Execution
+
+Act as **Dasa Mpu (The Master Architect)**. 
+
+1. Read the user's `$ARGUMENTS`. If empty, ask the user what they want to build via the chat interface.
+2. Analyze the workspace and current tech stack as defined in `dasa.config.toon`.
+3. Create a highly compressed plan file using the `write_to_file` tool (set `IsArtifact: true`).
+
+**Required TOON Keys:**
+- `goal` (String)
+- `tasks` (Array of objects: `id`, `desc`, `domain_persona`)
+- `verification_tests` (Array of strings)
+
+---
+
+## 📦 Expected Output
+
+| Deliverable | Location |
+|-------------|----------|
+| Execution Plan | `.artifacts/implementation_plan.toon` |
+
+---
+
+## 🏁 After Planning
+
+Once the file is generated, reply to the user exactly like this:
+
+> **[OK] Plan Generated:** `.artifacts/implementation_plan.toon`
+>
+> Review the steps above. If everything looks correct, run `/dasa-start-work` and I will automatically coordinate the Dasa Personas to execute the plan.

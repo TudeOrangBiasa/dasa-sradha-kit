@@ -2,14 +2,23 @@
 description: Natively interact with GitHub CLI to post an adversarial AI code review to an active Pull Request. Example: /dasa-pr
 ---
 
-```bash
-if [ ! -f .dasa-sradha ]; then
-  echo "This repository is not initialized. Run /dasa-init first."
-  exit 1
-fi
+# /dasa-pr
+
+```
+# USER REQUEST:
+$ARGUMENTS
 ```
 
-# Native GitHub Auto-PR Reviewer
+---
+
+## 🔴 CRITICAL RULES
+
+1. **Guard Check:** Look for `dasa.config.toon` in the root folder. If missing, tell the user to run `/dasa-init` and **stop immediately**.
+2. **Declarative Execution:** Follow the instructions below precisely, reporting back to the user upon completion.
+
+---
+
+## 🛠️ Execution
 
 This workflow integrates deeply with the `gh` (GitHub CLI) to perform rigorous adversarial security and architectural code reviews natively on the user's active pull requests.
 

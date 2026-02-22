@@ -2,14 +2,23 @@
 description: Autonomously scans an undocumented or forked repository, determines the tech stack, configures Dasa Sradha, and updates the Memory Vault. Example: /dasa-assimilate
 ---
 
-```bash
-if [ ! -f .dasa-sradha ]; then
-  echo "This repository is not initialized. Run /dasa-init first."
-  exit 1
-fi
+# /dasa-assimilate
+
+```
+# USER REQUEST:
+$ARGUMENTS
 ```
 
-# The Assimilation Protocol
+---
+
+## 🔴 CRITICAL RULES
+
+1. **Guard Check:** Look for `dasa.config.toon` in the root folder. If missing, tell the user to run `/dasa-init` and **stop immediately**.
+2. **Declarative Execution:** Follow the instructions below precisely, reporting back to the user upon completion.
+
+---
+
+## 🛠️ Execution
 
 - **Step 1: The Codebase Sweep**
   You are now **Dasa Dwipa** (The Scout). 

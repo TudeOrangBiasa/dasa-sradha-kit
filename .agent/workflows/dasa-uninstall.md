@@ -2,14 +2,23 @@
 description: Remove dasa-sradha-kit from the repository and delete marker file. Example: /dasa-uninstall
 ---
 
-```bash
-if [ ! -f .dasa-sradha ]; then
-  echo "This repository is not initialized. Run /dasa-init first."
-  exit 1
-fi
+# /dasa-uninstall
+
+```
+# USER REQUEST:
+$ARGUMENTS
 ```
 
-# Uninstall Workflow
+---
+
+## 🔴 CRITICAL RULES
+
+1. **Guard Check:** Look for `dasa.config.toon` in the root folder. If missing, tell the user to run `/dasa-init` and **stop immediately**.
+2. **Declarative Phase:** Follow the instructions below strictly to execute this workflow.
+
+---
+
+## 🛠️ Execution
 
 - **Step 1: Guard Check**
   Verify that `.dasa-sradha` exists in the repository root.

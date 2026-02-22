@@ -2,14 +2,23 @@
 description: Autonomously generate realistic database fixtures and UI seed data. Example: /dasa-seed "Generate 50 realistic users and 200 blog posts"
 ---
 
-```bash
-if [ ! -f .dasa-sradha ]; then
-  echo "This repository is not initialized. Run /dasa-init first."
-  exit 1
-fi
+# /dasa-seed
+
+```
+# USER REQUEST:
+$ARGUMENTS
 ```
 
-# Native Database Seeder Workflow
+---
+
+## 🔴 CRITICAL RULES
+
+1. **Guard Check:** Look for `dasa.config.toon` in the root folder. If missing, tell the user to run `/dasa-init` and **stop immediately**.
+2. **Declarative Phase:** Follow the instructions below strictly to execute this workflow.
+
+---
+
+## 🛠️ Execution
 
 This workflow uses a 3-agent orchestration chain to generate highly realistic, production-ready fake data for local testing and UI development.
 
